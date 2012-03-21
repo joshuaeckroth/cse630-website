@@ -1,9 +1,0 @@
-#+SETUPFILE: setup.org
-#+TITLE: Logic
-
-* The problem of representation
-
-* AI researchers rediscover logic
-
-
-#+INCLUDE: footer.org

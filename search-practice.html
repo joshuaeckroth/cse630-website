@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Practice with searching</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Practice with searching"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-03-21 06:16:53 EDT"/>
+<meta name="author" content="Joshua Eckroth"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/worg.css" type="text/css" media="screen" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+<a href="index.html">Home</a> &nbsp; &nbsp;<a rel="nofollow" href="http://www.google.com/talk/service/badge/Start?tk=z01q6amlqlg7kp12a4mqolh0g8btlk39j7mmkg6borm4unn1veluvfdd6oirqdjn006fsb4gm8aoi99k43om4e6aivs0iahaas02jmg912qqferrcsqdn7ssud9l7iiiobiqbvkes9diokjvn9et76rrvr15q2gsiqpt07q86" target="_blank" title="Click here to chat with Josh">Chat with Josh</a><img style="padding:0 4px 0 4px;margin:0;border:none" src="http://www.google.com/talk/service/badge/Show?tk=z01q6amlqlg7kp12a4mqolh0g8btlk39j7mmkg6borm4unn1veluvfdd6oirqdjn006fsb4gm8aoi99k43om4e6aivs0iahaas02jmg912qqferrcsqdn7ssud9l7iiiobiqbvkes9diokjvn9et76rrvr15q2gsiqpt07q86&amp;w=9&amp;h=9" alt="" height="9" width="9"><img style="padding:0 0 0 0;margin:0;border:none" src="http://www.google.com/talk/service/resources/chaticon.gif" alt="" height="14" width="16">
+</div>
+
+<div id="content">
+<h1 class="title">Practice with searching</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Routing from Dreese Labs to Goodale Park</a>
+<ul>
+<li><a href="#sec-1-1">Map data</a>
+<ul>
+<li><a href="#sec-1-1-1">Road connections and distances</a></li>
+<li><a href="#sec-1-1-2">Longitude / latitude information</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-2">Uninformed searches</a>
+<ul>
+<li><a href="#sec-2-1">Random search</a></li>
+<li><a href="#sec-2-2">Breadth-first search</a></li>
+<li><a href="#sec-2-3">Depth-first search</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Informed searches</a>
+<ul>
+<li><a href="#sec-3-1">Finding a good heuristic</a></li>
+<li><a href="#sec-3-2">A* search</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Routing from Dreese Labs to Goodale Park</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Map data</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">Road connections and distances</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+<p>
+<a href="http://maps.google.com/maps?hl=en&amp;ll=39.989879,-82.99201&amp;spn=0.037483,0.038881&amp;sll=40.225024,-82.831421&amp;sspn=2.390592,2.488403&amp;t=m&amp;z=14">Google Maps link</a>
+</p>
+<p>
+<img src="./images/goodale-route.png" alt="Goodale parking lot routes" align="right" />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Start</th><th scope="col" class="left">End</th><th scope="col" class="right">Distance (mi)</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">High &amp; Goodale</td><td class="left">Goodale parking lot</td><td class="right">0.22</td></tr>
+<tr><td class="left">High &amp; 5th</td><td class="left">High &amp; Goodale</td><td class="right">0.93</td></tr>
+<tr><td class="left">I-71 5th offramp</td><td class="left">High &amp; 5th</td><td class="right">1.07</td></tr>
+<tr><td class="left">I-71 11th offramp</td><td class="left">I-71 5th offramp</td><td class="right">0.52</td></tr>
+<tr><td class="left">I-71 17th offramp</td><td class="left">I-71 11th offramp</td><td class="right">0.47</td></tr>
+<tr><td class="left">US-23 &amp; 17th</td><td class="left">I-71 17th offramp</td><td class="right">0.75</td></tr>
+<tr><td class="left">US-23 &amp; 15th</td><td class="left">US-23 &amp; 17th</td><td class="right">0.12</td></tr>
+<tr><td class="left">High &amp; 15th</td><td class="left">US-23 &amp; 15th</td><td class="right">0.49</td></tr>
+<tr><td class="left">High &amp; Woodruff</td><td class="left">High &amp; 15th</td><td class="right">0.26</td></tr>
+<tr><td class="left">Woodruff &amp; Tuttle</td><td class="left">High &amp; Woodruff</td><td class="right">0.46</td></tr>
+<tr><td class="left">Lane &amp; Tuttle</td><td class="left">Woodruff &amp; Tuttle</td><td class="right">0.17</td></tr>
+<tr><td class="left">SR-315 &amp; Lane</td><td class="left">Lane &amp; Tuttle</td><td class="right">0.74</td></tr>
+<tr><td class="left">SR-315 I-670 offramp</td><td class="left">SR-315 &amp; Lane</td><td class="right">2.05</td></tr>
+<tr><td class="left">Park &amp; Vine</td><td class="left">SR-315 I-670 offramp</td><td class="right">0.99</td></tr>
+<tr><td class="left">Park &amp; Goodale</td><td class="left">Park &amp; Vine</td><td class="right">0.15</td></tr>
+<tr><td class="left">Goodale parking lot</td><td class="left">Park &amp; Goodale</td><td class="right">0.13</td></tr>
+<tr><td class="left">US-23 &amp; Goodale</td><td class="left">US-23 &amp; 15th</td><td class="right">1.76</td></tr>
+<tr><td class="left">SR-315 &amp; King</td><td class="left">SR-315 &amp; Lane</td><td class="right">1.10</td></tr>
+<tr><td class="left">High &amp; King</td><td class="left">SR-315 &amp; King</td><td class="right">1.02</td></tr>
+<tr><td class="left">High &amp; 11th</td><td class="left">I-71 11th offramp</td><td class="right">1.15</td></tr>
+<tr><td class="left">US-23 &amp; Goodale</td><td class="left">Goodale parking lot</td><td class="right">0.41</td></tr>
+<tr><td class="left">High &amp; 15th</td><td class="left">High &amp; 11th</td><td class="right">0.37</td></tr>
+<tr><td class="left">High &amp; 11th</td><td class="left">High &amp; King</td><td class="right">0.31</td></tr>
+<tr><td class="left">High &amp; King</td><td class="left">High &amp; 5th</td><td class="right">0.21</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2">Longitude / latitude information</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Location</th><th scope="col" class="right">Lon (W°)</th><th scope="col" class="right">Lat (N°)</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">High &amp; Goodale</td><td class="right">83.00284</td><td class="right">39.97382</td></tr>
+<tr><td class="left">High &amp; 5th</td><td class="right">83.00554</td><td class="right">39.98707</td></tr>
+<tr><td class="left">I-71 5th offramp</td><td class="right">82.98537</td><td class="right">39.98635</td></tr>
+<tr><td class="left">I-71 11th offramp</td><td class="right">82.98514</td><td class="right">39.99382</td></tr>
+<tr><td class="left">I-71 17th offramp</td><td class="right">82.98454</td><td class="right">40.00070</td></tr>
+<tr><td class="left">US-23 &amp; 17th</td><td class="right">82.99977</td><td class="right">40.00137</td></tr>
+<tr><td class="left">US-23 &amp; 15th</td><td class="right">83.00004</td><td class="right">39.99967</td></tr>
+<tr><td class="left">High &amp; 15th</td><td class="right">83.00801</td><td class="right">40.00006</td></tr>
+<tr><td class="left">High &amp; Woodruff</td><td class="right">83.00882</td><td class="right">40.00370</td></tr>
+<tr><td class="left">Woodruff &amp; Tuttle</td><td class="right">83.01749</td><td class="right">40.00402</td></tr>
+<tr><td class="left">Lane &amp; Tuttle</td><td class="right">83.01688</td><td class="right">40.00633</td></tr>
+<tr><td class="left">SR-315 &amp; Lane</td><td class="right">83.03089</td><td class="right">40.00640</td></tr>
+<tr><td class="left">SR-315 I-670 offramp</td><td class="right">83.02119</td><td class="right">39.97765</td></tr>
+<tr><td class="left">Park &amp; Vine</td><td class="right">83.00465</td><td class="right">39.97148</td></tr>
+<tr><td class="left">Park &amp; Goodale</td><td class="right">83.00455</td><td class="right">39.97358</td></tr>
+<tr><td class="left">Goodale parking lot</td><td class="right">83.00702</td><td class="right">39.97372</td></tr>
+<tr><td class="left">US-23 &amp; Goodale</td><td class="right">82.99883</td><td class="right">39.97427</td></tr>
+<tr><td class="left">SR-315 &amp; King</td><td class="right">83.02518</td><td class="right">39.99084</td></tr>
+<tr><td class="left">High &amp; King</td><td class="right">83.00616</td><td class="right">39.99016</td></tr>
+<tr><td class="left">High &amp; 11th</td><td class="right">83.00700</td><td class="right">39.99477</td></tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Uninformed searches</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Random search</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Breadth-first search</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Depth-first search</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Informed searches</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Finding a good heuristic</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">A* search</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+
+
+<div style="font-size: 80%;">
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website">GitHub</a>.
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

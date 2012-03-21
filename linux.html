@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>linux</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="linux"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-03-09 16:51:56 EST"/>
+<meta name="author" content="Joshua Eckroth"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+<a href="index.html">Home</a> &nbsp; &nbsp;<a rel="nofollow" href="http://www.google.com/talk/service/badge/Start?tk=z01q6amlqlg7kp12a4mqolh0g8btlk39j7mmkg6borm4unn1veluvfdd6oirqdjn006fsb4gm8aoi99k43om4e6aivs0iahaas02jmg912qqferrcsqdn7ssud9l7iiiobiqbvkes9diokjvn9et76rrvr15q2gsiqpt07q86" target="_blank" title="Click here to chat with Josh">Chat with Josh</a><img style="padding:0 4px 0 4px;margin:0;border:none" src="http://www.google.com/talk/service/badge/Show?tk=z01q6amlqlg7kp12a4mqolh0g8btlk39j7mmkg6borm4unn1veluvfdd6oirqdjn006fsb4gm8aoi99k43om4e6aivs0iahaas02jmg912qqferrcsqdn7ssud9l7iiiobiqbvkes9diokjvn9et76rrvr15q2gsiqpt07q86&amp;w=9&amp;h=9" alt="" height="9" width="9"><img style="padding:0 0 0 0;margin:0;border:none" src="http://www.google.com/talk/service/resources/chaticon.gif" alt="" height="14" width="16">
+</div>
+
+<div id="content">
+<h1 class="title">linux</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">stdlinux programming languages</a>
+<ul>
+<li><a href="#sec-1-1">C</a></li>
+<li><a href="#sec-1-2">C++</a></li>
+<li><a href="#sec-1-3">Java</a></li>
+<li><a href="#sec-1-4">FORTRAN</a></li>
+<li><a href="#sec-1-5">Lisp</a></li>
+<li><a href="#sec-1-6">Scheme</a></li>
+<li><a href="#sec-1-7">Clojure</a></li>
+<li><a href="#sec-1-8">Matlab</a></li>
+<li><a href="#sec-1-9">Perl</a></li>
+<li><a href="#sec-1-10">Python</a></li>
+<li><a href="#sec-1-11">Ruby</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Other languages</a>
+<ul>
+<li><a href="#sec-2-1">Haskell</a></li>
+<li><a href="#sec-2-2">Prolog</a></li>
+<li><a href="#sec-2-3">Scala</a></li>
+<li><a href="#sec-2-4">OCaml</a></li>
+<li><a href="#sec-2-5">C#</a></li>
+<li><a href="#sec-2-6">F#</a></li>
+<li><a href="#sec-2-7">Visual Basic</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">stdlinux programming languages</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">C</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+gcc (v4.4.6)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">C++</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+<p>
+g++ (v4.4.6)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">Java</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+<p>
+java/javac (v1.6.0<sub>25</sub>)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">FORTRAN</h3>
+<div class="outline-text-3" id="text-1-4">
+
+
+<p>
+f95 (v4.4.6)
+</p>
+<p>
+f77 (v3.4.6)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">Lisp</h3>
+<div class="outline-text-3" id="text-1-5">
+
+
+<p>
+sbcl (v1.4.48)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6">Scheme</h3>
+<div class="outline-text-3" id="text-1-6">
+
+
+<p>
+scheme48 (v1.8)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7">Clojure</h3>
+<div class="outline-text-3" id="text-1-7">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-8" class="outline-3">
+<h3 id="sec-1-8">Matlab</h3>
+<div class="outline-text-3" id="text-1-8">
+
+
+<p>
+matlab (R2010b)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-9" class="outline-3">
+<h3 id="sec-1-9">Perl</h3>
+<div class="outline-text-3" id="text-1-9">
+
+
+<p>
+perl (v5.10.1)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-10" class="outline-3">
+<h3 id="sec-1-10">Python</h3>
+<div class="outline-text-3" id="text-1-10">
+
+
+<p>
+python (v2.6.6)
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-11" class="outline-3">
+<h3 id="sec-1-11">Ruby</h3>
+<div class="outline-text-3" id="text-1-11">
+
+
+<p>
+ruby (v1.9.2)
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Other languages</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Haskell</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Prolog</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Scala</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">OCaml</h3>
+<div class="outline-text-3" id="text-2-4">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5">C#</h3>
+<div class="outline-text-3" id="text-2-5">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6">F#</h3>
+<div class="outline-text-3" id="text-2-6">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7">Visual Basic</h3>
+<div class="outline-text-3" id="text-2-7">
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
