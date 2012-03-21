@@ -1,0 +1,6 @@
+#+SETUPFILE: setup.org
+#+TITLE: Beyond intelligent agents
+
+* Emergent intelligence
+
+#+INCLUDE: footer.org

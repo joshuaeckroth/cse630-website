@@ -1,0 +1,28 @@
+#+SETUPFILE: setup.org
+#+TITLE: Homework 1
+
+* Task (100 pts)
+
+Read [[./coffeehouse-conversation.html][A coffeehouse conversation]], and answer the following questions:
+
+  - Why is the "simulated hurricane" discussed so much? It is an
+    analogy, but an analogy for what?
+
+  - Why is it important that the definition of "hurricane" is a bit
+    elusive?
+
+  - Why is it relevant that we only know the nature of electrons and
+    quarks by performing experiments like "scattering accelerated
+    particles off a target and observing their behavior."
+
+  - Do you think the Turing test would effectively test for artificial
+    intelligence? Why or why not?
+
+* Extra credit (10 pts)
+
+Listen to the "Talking to machines" podcast near the bottom of the
+[[./turing-test.html][Turing test]] lecture notes, and answer the following questions:
+
+  - xyz
+
+#+INCLUDE: footer.org

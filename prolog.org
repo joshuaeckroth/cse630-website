@@ -1,0 +1,14 @@
+#+SETUPFILE: setup.org
+#+TITLE: Prolog
+
+* What is Prolog?
+
+* What does it do for us?
+
+* Basic programs
+
+* How Prolog works
+
+* More useful programs
+
+#+INCLUDE: footer.org

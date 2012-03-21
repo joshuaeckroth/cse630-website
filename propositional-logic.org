@@ -1,0 +1,10 @@
+#+SETUPFILE: setup.org
+#+TITLE: Propositional logic
+
+* Definition of propositional logic
+
+* Saying something with propositional logic
+
+* Finding satisfying assignments
+
+#+INCLUDE: footer.org

@@ -1,0 +1,62 @@
+#+SETUPFILE: setup.org
+#+TITLE: Informed search
+
+* Generic search algorithm
+Here is that algorithm again, first seen in the [[./uinformed-search.html][Uninformed search]]
+lecture notes.
+
+#+BEGIN_EXAMPLE
+1. create a list called "tocheck" of states to check
+   - put the initial state in this list
+2. create a list called "unexpanded" of states whose next states have
+   not been calculated
+   - put the initial state in this list
+3. loop:
+   a. if the "tocheck" list is empty:
+      i. if the "unexpanded" list is also empty:
+         - oh no! we have nothing left to check, and we never found a
+           goal state! we'll have to quit with "no solution"
+      ii. otherwise, pull a state from the "unexpanded" list
+         - find the next states accessible from this state
+         - put each next state that we haven't seen before in
+           the "tocheck" and "unexpanded" lists
+   b. otherwise, pull a state from the "tocheck" list
+      i. if this state is a goal state, we're done (return this state)
+      ii. otherwise, go back to the top of the loop
+#+END_EXAMPLE
+
+In the uninformed searches, the random search used no particular
+technique for choosing the next state to check or
+expand. Breadth-first search (BFS) checked/expanded the earliest
+expanded state, and depth-first search (DFS) checked/expanded the most
+recently expanded state.
+
+BFS is probably the right solution if the goal state is not deep in
+the expansion tree. DFS is probably the right solution if the opposite
+is the case. Naturally, random search is probably never a good idea.
+
+However, many problems do not fit simple descriptions like "the goal
+state is not deep in the expansion tree." The goal state may be
+anywhere, and in different occasions may be deep or shallow in the
+expansion tree.
+
+Rather than choose how to search based solely on breadth-first or
+depth-first, we can often come up with better /heuristics/. A
+heuristic is a "rule of thumb," or some kind of rule that's "usually a
+good idea." BFS and DFS have their own heuristics but their heuristics
+(how to choose the next states) do not change depending on the
+problem. Normally, we talk about heuristics as if they are more
+problem-specific.
+
+A heuristic we might try in the 8-puzzle is to choose states that are
+closest to the goal, in terms of the number of tokens that are out of
+place.
+
+...
+
+There are a variety of ways to use such a heuristic in our search
+algorithm. These lecture notes explore a few of these ways.
+
+* Hill-climbing search
+
+#+INCLUDE: footer.org

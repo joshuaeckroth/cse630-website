@@ -1,0 +1,103 @@
+#+SETUPFILE: setup.org
+#+TITLE: Prolog
+
+* Robot tutor
+
+Suppose we want to study for the Midterm Exam in this class. Wouldn't
+it be great to have a robot tutor? Let's try to build such a thing.
+
+We'll need to represent facts about the course material. Here is a
+start:
+
+#+BEGIN_SRC prolog
+type_of_search(breadth_first_search).
+type_of_search(depth_first_search).
+type_of_search(a_star_search).
+
+uses_heuristic(a_star_search).
+
+type_of_heuristic(euclidean_distance).
+
+admissible_heuristic(route_finding, euclidean_distance).
+
+guaranteed_best_solution(breadth_first_search, _, _).
+guaranteed_best_solution(depth_first_search, _, _).
+guaranteed_best_solution(Search, Problem, Heuristic) :-
+    type_of_search(Search),
+    uses_heuristic(Search),
+    type_of_heuristic(Heuristic),
+    admissible_heuristic(Problem, Heuristic).
+
+
+node(a).
+node(b).
+node(c).
+node(d).
+node(e).
+node(f).
+
+parent(a,b).
+parent(a,c).
+parent(a,d).
+parent(b,e).
+parent(b,f).
+
+visited(a).
+visited(b).
+visited(c).
+
+next_node(breadth_first_search, ThisNode, ThisNode) :-
+    node(ThisNode),
+    \+(parent(_, ThisNode)),
+    \+(visited(ThisNode)).
+
+next_node(breadth_first_search, ThisNode, Sibling) :-
+    node(ThisNode),
+    node(Sibling),
+    visited(ThisNode),
+    parent(Parent, ThisNode),
+    parent(Parent, Sibling),
+    \+(visited(Sibling)).
+
+next_node(breadth_first_search, ThisNode, Child) :-
+    node(ThisNode),
+    node(Child),
+    parent(ThisNode, Child),
+    visited(ThisNode),
+    \+(visited(Child)),
+    \+(parent(_, ThisNode)).
+
+next_node(breadth_first_search, ThisNode, Child) :-
+    node(ThisNode),
+    node(Child),
+    visited(ThisNode),
+    parent(ThisNode, Child),
+    \+(visited(Child)),
+    parent(Parent, ThisNode),
+    \+(next_node(breadth_first_search, Parent, _)).
+
+
+next_node(depth_first_search, ThisNode, ThisNode) :-
+    node(ThisNode),
+    \+(parent(_, ThisNode)),
+    \+(visited(ThisNode)).
+
+next_node(depth_first_search, ThisNode, Sibling) :-
+    node(ThisNode),
+    node(Sibling),
+    visited(ThisNode),
+    parent(ThisNode, Child),
+    parent(Parent, ThisNode),
+    parent(Parent, Sibling),
+    visited(Child),
+    \+(visited(Sibling)).
+
+next_node(depth_first_search, ThisNode, Child) :-
+    node(ThisNode),
+    node(Child),
+    visited(ThisNode),
+    \+(visited(Child)),
+    parent(ThisNode, Child).
+#+END_SRC
+
+#+INCLUDE: footer.org
