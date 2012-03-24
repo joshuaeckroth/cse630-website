@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Boolean logic"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-19 23:25:26 EDT"/>
+<meta name="generated" content="2012-03-21 18:21:37 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -94,6 +134,14 @@
 <div id="content">
 <h1 class="title">Boolean logic</h1>
 
+<p>The most basic, yet somewhat useful, form of logic is Boolean logic
+(named after George Boole, 1815-1864). In this logic, we have
+variables that can be true or false, and we have ways of &ldquo;connecting&rdquo;
+or &ldquo;relating&rdquo; these variables. In fact, Boole (and De Morgan)
+described an algebra over these variables and relations, so we have a
+variety of equivalences that allow us to translate one form into
+another.
+</p>
 
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -101,7 +149,7 @@
 <ul>
 <li><a href="#sec-1">Logical relations</a></li>
 <li><a href="#sec-2">Truth tables</a></li>
-<li><a href="#sec-3">DeMorgan&rsquo;s Laws</a></li>
+<li><a href="#sec-3">Boole&rsquo;s and De Morgan&rsquo;s Laws</a></li>
 <li><a href="#sec-4">Examples</a></li>
 </ul>
 </div>
@@ -112,6 +160,29 @@
 <div class="outline-text-2" id="text-1">
 
 
+<p>
+Besides variables (which, again, are just true or false), we have the
+following relations:
+</p>
+<ul>
+<li>\(\wedge\) which we call &ldquo;and&rdquo;
+
+</li>
+<li>\(\vee\) which we call &ldquo;or&rdquo;
+
+</li>
+<li>\(\neg\) which we call &ldquo;not&rdquo;
+</li>
+</ul>
+
+
+<p>
+\(\wedge\) and \(\vee\) relate two variables: \(x \wedge y\) and \(x \vee
+y\). \(\neg\) can be applied to one entity: \(\neg x\).
+</p>
+<p>
+This can all be composed, too: \(\neg (x \vee (y \wedge \neg z))\).
+</p>
 </div>
 
 </div>
@@ -121,13 +192,127 @@
 <div class="outline-text-2" id="text-2">
 
 
+<p>
+Having a bunch of symbols (regardless of what we call them) does not
+do much for us. We need a way of determining whether the value of a
+sentence is true or false. (A &ldquo;sentence&rdquo; is a composition of variables
+and relations.)
+</p>
+<p>
+The truth tables for the basic relations are so simple we&rsquo;ll just
+describe them: \(x \wedge y\) is true if and only if both \(x\) and \(y\)
+are true; \(x \vee y\) is true if and only if at least one of \(x\) or \(y\)
+is true; and \(\neg x\) is true only if \(x\) is false.
+</p>
+<p>
+Now, we can figure out the truth of a complicated sentence by finding
+the truth-value of each part. We build a table for this operation
+because we need to keep track of all the different values that the
+variable may hold.
+</p>
+<p>
+For what values of \(x\), \(y\), and \(z\) make this true? \(\neg (x \vee (y
+\wedge \neg z))\)
+
+We break the sentence into its main parts and put them all in the
+table.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">\(x\)</th><th scope="col" class="left">\(y\)</th><th scope="col" class="left">\(z\)</th><th scope="col" class="left">\(\neg z\)</th><th scope="col" class="left">\(y \wedge \neg z\)</th><th scope="col" class="left">\(x \vee (y \wedge \neg z)\)</th><th scope="col" class="left">\(\neg (x \vee (y \wedge \neg z))\)</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">T</td><td class="left">T</td><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">T</td><td class="left">F</td></tr>
+<tr><td class="left">T</td><td class="left">T</td><td class="left">F</td><td class="left">T</td><td class="left">T</td><td class="left">T</td><td class="left">F</td></tr>
+<tr><td class="left">T</td><td class="left">F</td><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">T</td><td class="left">F</td></tr>
+<tr><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">T</td><td class="left">F</td><td class="left">T</td><td class="left">F</td></tr>
+<tr><td class="left">F</td><td class="left">T</td><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">F</td><td class="left">T</td></tr>
+<tr><td class="left">F</td><td class="left">T</td><td class="left">F</td><td class="left">T</td><td class="left">T</td><td class="left">T</td><td class="left">F</td></tr>
+<tr><td class="left">F</td><td class="left">F</td><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">F</td><td class="left">T</td></tr>
+<tr><td class="left">F</td><td class="left">F</td><td class="left">F</td><td class="left">T</td><td class="left">F</td><td class="left">F</td><td class="left">T</td></tr>
+</tbody>
+</table>
+
+
+<p>
+We see that there are three variable assignements that make the whole
+expression true: \(x\) is false, \(y\) is true, and \(z\) is true; \(x\) is
+false, \(y\) is false, and \(z\) is true; and \(x\) is false, \(y\) is false,
+and \(z\) is false.
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">DeMorgan&rsquo;s Laws</h2>
+<h2 id="sec-3">Boole&rsquo;s and De Morgan&rsquo;s Laws</h2>
 <div class="outline-text-2" id="text-3">
+
+
+<ul>
+<li>\(\neg F \equiv T\)
+
+</li>
+<li>\(\neg T \equiv F\)
+
+</li>
+<li>\(x \vee \neg x \equiv T\)
+
+</li>
+<li>\(x \vee F \equiv x\)
+
+</li>
+<li>\(x \vee T \equiv T\)
+
+</li>
+<li>\(x \wedge T \equiv x\)
+
+</li>
+<li>\(x \wedge F \equiv F\)
+
+</li>
+<li>\(x \vee y \vee z \equiv x \vee (y \vee z) \equiv (x \vee y) \vee z\)
+
+</li>
+<li>\(x \wedge y \wedge z \equiv x \wedge (y \wedge z) \equiv (x \wedge y) \wedge z\)
+
+</li>
+<li>\(x \vee y \equiv y \vee x\)
+
+</li>
+<li>\(x \wedge y \equiv y \wedge x\)
+
+</li>
+<li>\(x \wedge (y \vee z) \equiv (x \wedge y) \vee (x \wedge z)\)
+
+</li>
+<li>\(x \vee (y \wedge z) \equiv (x \vee y) \wedge (x \vee z)\)
+
+</li>
+<li>\(\neg (x \vee y) \equiv (\neg x) \wedge (\neg y)\)
+
+</li>
+<li>\(\neg (x \wedge y) \equiv (\neg x) \vee (\neg y)\)
+
+</li>
+<li>\(x \vee x \equiv x\)
+
+</li>
+<li>\(x \wedge x \equiv x\)
+
+</li>
+<li>\(\neg \neg x \equiv x\)
+
+</li>
+<li>\(x \wedge (x \vee y) \equiv x\)
+
+</li>
+<li>\(x \vee (x \wedge y) \equiv x\)
+</li>
+</ul>
 
 
 </div>
@@ -137,6 +322,19 @@
 <div id="outline-container-4" class="outline-2">
 <h2 id="sec-4">Examples</h2>
 <div class="outline-text-2" id="text-4">
+
+
+<p>
+Using the above rules, we can simplify complex expressions into
+equivalent simpler expressions:
+</p>
+<ul>
+<li>\(z \vee \neg (y \wedge z) \equiv z \vee (\neg y \vee \neg z) \equiv (z \vee \neg z) \vee \neg y \equiv T \vee \neg y \equiv T\)
+
+</li>
+<li>\(\neg (x \wedge y) \wedge (\neg x \vee y) \wedge (\neg y \vee y) \equiv \neg (x \wedge y) \wedge (\neg x \vee y) \equiv (\neg x \vee \neg y) \wedge (\neg x \vee y) \equiv \neg x \vee (\neg y \wedge y) \equiv \neg x\)
+</li>
+</ul>
 
 
 

@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>First-order logic</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
-<meta name="title" content="First-order logic"/>
+<title>Homework 4</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Homework 4"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-22 15:29:48 EDT"/>
+<meta name="generated" content="2012-03-21 08:09:54 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -92,54 +132,158 @@
 </div>
 
 <div id="content">
-<h1 class="title">First-order logic</h1>
+<h1 class="title">Homework 4</h1>
 
 
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Definition of first-order logic</a></li>
-<li><a href="#sec-2">Why FOL?</a></li>
-<li><a href="#sec-3">Saying something with FOL</a></li>
-<li><a href="#sec-4">Proof procedures</a></li>
+<li><a href="#sec-1">Task (100 pts)</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Definition of first-order logic</h2>
+<h2 id="sec-1">Task (100 pts)</h2>
 <div class="outline-text-2" id="text-1">
 
 
-</div>
+<ol>
+<li>(10pts) Build truth tables for the following formulas:
 
-</div>
+<ol>
+<li>\((A \vee B) \wedge C\)
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Why FOL?</h2>
-<div class="outline-text-2" id="text-2">
+</li>
+<li>\((A \rightarrow B) \vee (B \rightarrow \neg C)\)
 
+</li>
+</ol>
 
-<p>
-(what propositional cannot represent)
+</li>
+<li>(10pts) Find variable assignments that satisfy the following
+     formulas, or state that no such assignment exists:
+
+<ol>
+<li>\((A \wedge \neg B) \vee (\neg A \wedge B \wedge C)\)
+
+</li>
+<li>\(C \rightarrow (\neg C \wedge \neg A)\)
+
+</li>
+</ol>
+
+</li>
+<li>(10pts) Express the following statements in propositional logic:
+
+<ol>
+<li>\(B\) is true whenever \(C\) is false.
+
+</li>
+<li>Either \(X\) is true or \(Z\) is true but not both.
+
+</li>
+<li>At most one of \(R\), \(S\), and \(T\) can be true.
+
+</li>
+<li>The dog only barks when she hears a noise. (Create
+        propositional symbols, and give their definitions.)
+
+</li>
+</ol>
+
+</li>
+<li>(20pts) We have a knowledge base that contains:
+
+<ul>
+<li>\((R \rightarrow S) \wedge Q\)
+
+</li>
+<li>\((J \wedge Q) \rightarrow P\)
+
+</li>
+<li>\(Q \rightarrow Z\)
+
+</li>
+<li>\(P \rightarrow \neg Q\)
+
+</li>
+<li>\((R \rightarrow S) \rightarrow (\neg H \rightarrow J)\)
+
+</li>
+</ul>
+
+<p>     Derive each of the following using inference rules for
+     propositional logic:
 </p>
-</div>
+<ol>
+<li>\(Z\)
 
-</div>
+</li>
+<li>\(\neg P\)
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Saying something with FOL</h2>
-<div class="outline-text-2" id="text-3">
+</li>
+<li>\(\neg (J \wedge Q)\)
 
+</li>
+<li>\(\neg J\)
 
-</div>
+</li>
+<li>\(H\)
 
-</div>
+</li>
+</ol>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Proof procedures</h2>
-<div class="outline-text-2" id="text-4">
+</li>
+<li>(40pts) Rewrite the following statements in predicate logic,
+     stating definitions for the predicates you use. (Note, some of
+     these are <i>hard</i>; make an attempt&hellip;)
+
+<ol>
+<li>James is a dolphin.
+
+</li>
+<li>Dolphins are mammals.
+
+</li>
+<li>Mammals have hair and three middle ear bones.
+
+</li>
+<li>Some mammals have sweat glands and specialized teeth.
+
+</li>
+<li>Vignesh stopped by his house before going to the party.
+
+</li>
+<li>There is no apparent correlation between tobacco use and city
+        of birth.
+
+</li>
+<li>The result of firing a loaded gun at a person is that the
+        person dies.
+
+</li>
+<li>The <i>usual</i> result of firing a loaded gun at a person is that
+        the person dies (unless, the person has a bulletproof vest, or
+        the gun misfires, or&hellip;)
+
+</li>
+<li>Obama will win the 2012 election.
+
+</li>
+<li>There is a chance that Obama will win the 2012 election.
+
+</li>
+<li>I&rsquo;m hungry.
+
+</li>
+<li>This sentence is false.
+</li>
+</ol>
+
+</li>
+</ol>
 
 
 

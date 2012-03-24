@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Uninformed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-21 06:16:52 EDT"/>
+<meta name="generated" content="2012-03-22 15:29:46 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -269,7 +269,7 @@ vertically before it searches horizontally.
 say, BFS, arrives at the solution rather quickly. We see this behavior
 in the 8-puzzle problem because DFS just keeps trying moves that are
 built off prior moves until it either repeats a state (somewhat
-unlikely; there are <code>9! = 362,880</code> states) or finds the goal. If the
+unlikely; there are 9! = 362,880 states) or finds the goal. If the
 true goal is only five moves away from the initial state, then BFS
 will find this goal in less than 1024 checks while DFS may require,
 well, 362,880 checks.
@@ -284,7 +284,7 @@ from any other state), but very &ldquo;deep.&rdquo;
 </p>
 <p>
 To solve the problem of DFS going to &ldquo;deep&rdquo; into &ldquo;never-never-land,&rdquo;
-we can put a limit on the depth of DFS. Step <code>2.ii.</code> is modified so
+we can put a limit on the depth of DFS. Step <code>2.b.ii.</code> is modified so
 that only states that have depth less than some constant are added to
 the &ldquo;tocheck&rdquo; list. The depth is calculated as the number of actions
 that have been applied to the initial state.

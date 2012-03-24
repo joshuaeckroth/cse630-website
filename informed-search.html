@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Informed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-19 13:07:45 EDT"/>
+<meta name="generated" content="2012-03-22 19:13:22 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -101,6 +101,15 @@
 <ul>
 <li><a href="#sec-1">Generic search algorithm</a></li>
 <li><a href="#sec-2">Hill-climbing search</a></li>
+<li><a href="#sec-3">Best-first search</a></li>
+<li><a href="#sec-4">A* search</a></li>
+<li><a href="#sec-5">Comparisons</a>
+<ul>
+<li><a href="#sec-5-1">Number of checked states (time)</a></li>
+<li><a href="#sec-5-2">Length of path (goodness of solutions)</a></li>
+<li><a href="#sec-5-3">Maximum number of states in memory</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -109,7 +118,7 @@
 <h2 id="sec-1">Generic search algorithm</h2>
 <div class="outline-text-2" id="text-1">
 
-<p>Here is that algorithm again, first seen in the <a href="./uinformed-search.html">Uninformed search</a>
+<p>Here is the algorithm again, first seen in the <a href="./uinformed-search.html">Uninformed search</a>
 lecture notes.
 </p>
 
@@ -117,62 +126,49 @@ lecture notes.
 
 <pre class="example">1. create a list called "tocheck" of states to check
    - put the initial state in this list
-2. create a list called "unexpanded" of states whose next states have
-   not been calculated
-   - put the initial state in this list
-3. loop:
+
+2. loop:
    a. if the "tocheck" list is empty:
-      i. if the "unexpanded" list is also empty:
-         - oh no! we have nothing left to check, and we never found a
-           goal state! we'll have to quit with "no solution"
-      ii. otherwise, pull a state from the "unexpanded" list
-         - find the next states accessible from this state
-         - put each next state that we haven't seen before in
-           the "tocheck" and "unexpanded" lists
-   b. otherwise, pull a state from the "tocheck" list
+      - oh no! we have nothing left to check, and we never found a
+        goal state! we'll have to quit with "no solution"
+
+   b. otherwise, pull a state from the "tocheck" list, ensuring that
+      we have not yet checked this state
+
       i. if this state is a goal state, we're done (return this state)
-      ii. otherwise, go back to the top of the loop
+
+      ii. otherwise,
+          - find the next states accessible from this state
+          - put each next state in the "tocheck" list
+          - repeat the loop
 </pre>
 
 
 <p>
 In the uninformed searches, the random search used no particular
-technique for choosing the next state to check or
-expand. Breadth-first search (BFS) checked/expanded the earliest
-expanded state, and depth-first search (DFS) checked/expanded the most
-recently expanded state.
+technique for choosing the next state to check. Breadth-first search
+(BFS) checked the earliest discovered state, and depth-first
+search (DFS) checked the most recently discovered state.
 </p>
 <p>
 BFS is probably the right solution if the goal state is not deep in
-the expansion tree. DFS is probably the right solution if the opposite
+the search graph. DFS is probably the right solution if the opposite
 is the case. Naturally, random search is probably never a good idea.
 </p>
 <p>
 However, many problems do not fit simple descriptions like &ldquo;the goal
-state is not deep in the expansion tree.&rdquo; The goal state may be
-anywhere, and in different occasions may be deep or shallow in the
-expansion tree.
+state is not deep in the graph.&rdquo; The goal state may be anywhere, and
+in different occasions may be deep or shallow in the graph.
 </p>
 <p>
 Rather than choose how to search based solely on breadth-first or
 depth-first, we can often come up with better <i>heuristics</i>. A
 heuristic is a &ldquo;rule of thumb,&rdquo; or some kind of rule that&rsquo;s &ldquo;usually a
 good idea.&rdquo; BFS and DFS have their own heuristics but their heuristics
-(how to choose the next states) do not change depending on the
-problem. Normally, we talk about heuristics as if they are more
-problem-specific.
-</p>
-<p>
-A heuristic we might try in the 8-puzzle is to choose states that are
-closest to the goal, in terms of the number of tokens that are out of
-place.
-</p>
-<p>
-&hellip;
-</p>
-<p>
-There are a variety of ways to use such a heuristic in our search
-algorithm. These lecture notes explore a few of these ways.
+(how to choose the next states to check) do not change depending on
+the problem. Normally, we talk about heuristics in a more
+problem-specific sense. A heuristic would be applied in step <code>2.b.</code>,
+in which we choose the next state to check.
 </p>
 </div>
 
@@ -183,6 +179,84 @@ algorithm. These lecture notes explore a few of these ways.
 <div class="outline-text-2" id="text-2">
 
 
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Best-first search</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+A heuristic we might try in the 8-puzzle is to choose states that are
+closest to the goal, in terms of the number of tokens that are out of
+place. Say we order the &ldquo;tocheck&rdquo; list by this number: how many tokens
+are out of place. At step <code>2.b.</code>, we always check the state that has
+fewest tokens out of place.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">A* search</h2>
+<div class="outline-text-2" id="text-4">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Comparisons</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">Number of checked states (time)</h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/search-checked.png"  alt="./images/search-checked.png" />
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">Length of path (goodness of solutions)</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/search-path.png"  alt="./images/search-path.png" />
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">Maximum number of states in memory</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/search-memory.png"  alt="./images/search-memory.png" />
+</p>
+</div>
+
 
 
 <div style="font-size: 80%;">
@@ -190,6 +264,7 @@ algorithm. These lecture notes explore a few of these ways.
 </div>
 
 
+</div>
 </div>
 </div>
 </div>
