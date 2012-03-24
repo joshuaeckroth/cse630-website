@@ -998,3 +998,6 @@ ul.index-links li {
     list-style-type: none;
 }
 
+div#preamble div#plupperButton a img {
+    margin-top: 5px;
+}
