@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="The Turing test"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-23 11:29:43 EDT"/>
+<meta name="generated" content="2012-03-23 22:31:04 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -110,6 +150,7 @@ strong. Turing&rsquo;s original description can be found in his 1950 paper,
 <ul>
 <li><a href="#sec-1-1">What&rsquo;s happening?</a></li>
 <li><a href="#sec-1-2">Replace the man with a machine!</a></li>
+<li><a href="#sec-1-3">Two philosophical points</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">The Turing test is quite strong</a>
@@ -247,6 +288,62 @@ machine&rsquo;s goal is to beat that figure, not achieve perfect
 convincing. The existence of a machine that can consistently convince
 a judge that it is human and the human is a machine, even though the
 human is begging for mercy, is an amazing thought!
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">Two philosophical points</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+<p>
+Firstly, Descartes somewhat &ldquo;predicted&rdquo; the usefulness of such a test,
+even though he believed machines would never be able to pass it, in
+principle (because he thought machines could never respond to their
+environments):
+</p>
+<blockquote>
+
+<p>If there were machines which bore a resemblance to our bodies and
+imitated our actions as closely as possible for all practical
+purposes, we should still have two very certain means of recognizing
+that they were not real men. The first is that they could never use
+words, or put together signs, as we do in order to declare our
+thoughts to others. For we can certainly conceive of a machine so
+constructed that it utters words, and even utters words that
+correspond to bodily actions causing a change in its organs. … But it
+is not conceivable that such a machine should produce different
+arrangements of words so as to give an appropriately meaningful answer
+to whatever is said in its presence, as the dullest of men can
+do. Secondly, even though some machines might do some things as well
+as we do them, or perhaps even better, they would inevitably fail in
+others, which would reveal that they are acting not from
+understanding, but only from the disposition of their organs. For
+whereas reason is a universal instrument, which can be used in all
+kinds of situations, these organs need some particular action; hence
+it is for all practical purposes impossible for a machine to have
+enough different organs to make it act in all the contingencies of
+life in the way in which our reason makes us act. &mdash; <a href="http://plato.stanford.edu/entries/turing-test/">Source</a>
+</p>
+</blockquote>
+
+
+<p>
+Secondly, Leibniz investigated what he called the &ldquo;identity of
+indiscernibles,&rdquo; (<a href="http://plato.stanford.edu/entries/identity-indiscernible/">source</a>) which is essentially the statement that two
+objects, \(x\) and \(y\), are identical if there does not exist any
+property that \(x\) has but \(y\) does not and vice versa.
+</p>
+<p>
+The Turing test is essentially making a similar, though weaker,
+statement: machine intelligence and human intelligence are equivalent
+if there does not exist any observable property (observable via a
+typewriter, and observable by a singular human interrogator) that
+differentiates machine and human intelligence. In other words, if
+there does not exist any tell-tale question that separates the two
+forms of intelligence, then they are identical.
 </p>
 </div>
 </div>
