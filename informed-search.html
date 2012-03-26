@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Informed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-25 13:53:15 EDT"/>
+<meta name="generated" content="2012-03-25 17:09:31 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -113,14 +153,15 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Generic search algorithm</a></li>
-<li><a href="#sec-2">Hill-climbing search</a></li>
-<li><a href="#sec-3">Best-first search</a></li>
-<li><a href="#sec-4">A* search</a></li>
-<li><a href="#sec-5">Comparisons</a>
+<li><a href="#sec-2">Heuristics for 8-puzzle</a></li>
+<li><a href="#sec-3">Hill-climbing search</a></li>
+<li><a href="#sec-4">Best-first search</a></li>
+<li><a href="#sec-5">A* search</a></li>
+<li><a href="#sec-6">Comparisons</a>
 <ul>
-<li><a href="#sec-5-1">Number of checked states (time)</a></li>
-<li><a href="#sec-5-2">Length of path (goodness of solutions)</a></li>
-<li><a href="#sec-5-3">Maximum number of states in memory</a></li>
+<li><a href="#sec-6-1">Number of checked states (time)</a></li>
+<li><a href="#sec-6-2">Length of path (goodness of solutions)</a></li>
+<li><a href="#sec-6-3">Maximum number of states in memory</a></li>
 </ul>
 </li>
 </ul>
@@ -188,8 +229,32 @@ in which we choose the next state to check.
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Hill-climbing search</h2>
+<h2 id="sec-2">Heuristics for 8-puzzle</h2>
 <div class="outline-text-2" id="text-2">
+
+
+<p>
+Here are some heuristics we might apply to the 8-puzzle problem. Each
+heuristic is a function of a state, i.e., \(h(s) = n\) where \(s\) is a
+state and \(n\) is an integer:
+</p>
+<ul>
+<li>(OP): The number of tokens that are out of place.
+
+</li>
+<li>(MD): The sum of &ldquo;Manhattan-distances&rdquo; of each token and its goal
+  position.
+
+</li>
+<li>(RC): Number of tokens out of row plus number of tokens out of column.
+
+</li>
+<li>Perform a breadth-first search from the state to the goal, counting
+  the number of moves in the shortest path. This &ldquo;heuristic&rdquo; is
+  perfect; but it requires solving the whole problem before choosing
+  to follow that state (which is ridiculous).
+</li>
+</ul>
 
 
 </div>
@@ -197,41 +262,79 @@ in which we choose the next state to check.
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Best-first search</h2>
+<h2 id="sec-3">Hill-climbing search</h2>
 <div class="outline-text-2" id="text-3">
 
 
 <p>
-A heuristic we might try in the 8-puzzle is to choose states that are
-closest to the goal, in terms of the number of tokens that are out of
-place. Say we order the &ldquo;tocheck&rdquo; list by this number: how many tokens
-are out of place. At step <code>2.b.</code>, we always check the state that has
-fewest tokens out of place.
+Imagine the search space as terrain. One or more high points on this
+terrain (tops of hills) are goals. If there is only one goal, then
+there is only one highest point. The idea with hill-climbing search is
+to always &ldquo;climb&rdquo; upwards, toward a high point. Once you find that no
+movement takes you to a higher point, then you are done. Note that you
+may have only found the top of a local hill, not the top of the
+tallest hill.
+</p>
+<p>
+Hill-climbing search does not remember where it was prior to its
+current location in the search space. This makes hill-climbing very
+efficient in terms of memory usage. However, if the search arrives at
+a local maximum rather than a global maximum, it has no way of fixing
+that error.
+</p>
+<p>
+Our general search algorithm can be modified to support hill-climbing
+search by modifying step <code>2.b.ii.</code> so that the entire &ldquo;tocheck&rdquo; list
+is deleted and replaced with only those states accessible from the
+current state. Also, step <code>2.b.</code> is modified to choose the best state
+in terms of the chosen heuristic (&ldquo;climb up the hill&rdquo; means &ldquo;maximize
+the heuristic function&rdquo;).
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">A* search</h2>
+<h2 id="sec-4">Best-first search</h2>
 <div class="outline-text-2" id="text-4">
 
 
+<p>
+Best-first retains a record of every state that has been visited as
+well as the heuristic value of that state. At step <code>2.b.</code>, the best
+state ever visited is retrieved and search continues from there. This
+makes best-first search appear to jump around the search tree, like a
+random search, but of course best-first search is not random. The
+memory requirements for best-first search are worse than hill-climbing
+but not as bad as breadth-first. This is because breadth-first search
+does not use a heuristic to avoid obviously worse states.
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Comparisons</h2>
+<h2 id="sec-5">A* search</h2>
 <div class="outline-text-2" id="text-5">
+
 
 
 
 </div>
 
-<div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1">Number of checked states (time)</h3>
-<div class="outline-text-3" id="text-5-1">
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Comparisons</h2>
+<div class="outline-text-2" id="text-6">
+
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">Number of checked states (time)</h3>
+<div class="outline-text-3" id="text-6-1">
 
 
 
@@ -244,9 +347,9 @@ fewest tokens out of place.
 
 </div>
 
-<div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2">Length of path (goodness of solutions)</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">Length of path (goodness of solutions)</h3>
+<div class="outline-text-3" id="text-6-2">
 
 
 
@@ -259,9 +362,9 @@ fewest tokens out of place.
 
 </div>
 
-<div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3">Maximum number of states in memory</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3">Maximum number of states in memory</h3>
+<div class="outline-text-3" id="text-6-3">
 
 
 
