@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Uninformed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-24 09:31:29 EDT"/>
+<meta name="generated" content="2012-03-27 10:35:25 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -119,7 +119,21 @@ The transition model defines a state space, which can be represented
 as a directed graph (vertices are states, edges are actions).
 </p>
 <p>
-For example, consider 
+For example, consider the 8-puzzle game, which requires that tokens
+are shifted around until a particular goal state is reached.
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/8puzzle-simple.png"  alt="./images/8puzzle-simple.png" />
+</p>
+</div>
+
+<p>
+Each &ldquo;state&rdquo; is a configuration of the puzzle. Each state can be
+followed by at most four other states, resulting from moving a
+neighboring token left, right, up, or down into the space (thus
+shifting the space). If the space is on an edge or in a corner, fewer
+than four movements are possible.
 </p>
 
 <div id="table-of-contents">
