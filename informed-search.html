@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Informed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-02 22:19:11 EDT"/>
+<meta name="generated" content="2012-04-03 10:21:47 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -399,7 +399,10 @@ restriction is met, we call the algorithm A*.
 <p>
 An \(h\) that meets this <i>underestimation</i> criterion is an <i>admissible</i>
 heuristic, and turns the A algorithm into A*, which we call an
-admissible search algorithm.
+admissible search algorithm. Furthermore, A* is the most efficient
+algorithm (called &ldquo;optimally efficient&rdquo;) that uses some particular
+heuristic. This means that any other search algorithm using the same
+heuristic will check no fewer states than A*.
 </p>
 <p>
 How poorly \(h\) estimates the actual cost to the goal makes one \(h\)
@@ -430,6 +433,15 @@ from BFS. So, if a search is higher than the 0 line in these results,
 it performs worse (in all graphs, higher is worse); if it is under the
 0 line, it performs better than BFS.
 </p>
+<p>
+The x-axis in the graphs shows the complexity of the 8-puzzle
+problem. Starting with a solved 8-puzzle, we perform some number of
+random moves. The optimal solution to the puzzle is at most that many
+moves (the moves we made may &ldquo;cancel each other out&rdquo; in some cases, so
+the optimal solution back to the starting state may involve fewer
+moves). Since random search performs so badly, we do not show its
+performance characteristics in the graphs after 10 moves.
+</p>
 
 </div>
 
@@ -444,6 +456,17 @@ it performs worse (in all graphs, higher is worse); if it is under the
 </p>
 </div>
 
+<p>
+We use &ldquo;number of checked states&rdquo; as a proxy for computational
+time. Random is obviously quite bad. Interesting, IDDFS is also bad;
+this is because, at least how our algorithm works, many states are
+checked more than once when the algorithm restarts with greater depth
+limits.
+</p>
+<p>
+Notice A* gets to the goal fastest. This is because A* is &ldquo;optimally
+efficient.&rdquo;
+</p>
 </div>
 
 </div>
@@ -459,6 +482,23 @@ it performs worse (in all graphs, higher is worse); if it is under the
 </p>
 </div>
 
+<p>
+We learned that A* is optimal (with respect to the path cost of the
+solution). Breadth-first search is also optimal since we have a graph
+with edge weights all equal to 1.0. So, A* and BFS perform just as
+well, and nothing performs better.
+</p>
+<p>
+Hill-climbing and best-first search got lost &ldquo;in the weeds,&rdquo; producing
+terrible solutions, because they do not consider the complexity if
+their search path (the depth of their search tree). They just keep
+searching further. DFS would do the same except that we are using
+IDDFS instead (depth-limited DFS); IDDFS finds shorter solutions
+before longer solutions, and thus nearly always finds the optimal
+solution. Interestingly, random search finds near-optimal solutions,
+possibly because it is more likely it will look at a shallow node
+(there are up to four from each state) than a deep node.
+</p>
 </div>
 
 </div>
@@ -474,6 +514,18 @@ it performs worse (in all graphs, higher is worse); if it is under the
 </p>
 </div>
 
+<p>
+&ldquo;Memory&rdquo; is measured as the maximum size ever encountered of the
+&ldquo;tocheck&rdquo; list. Hill-climbing search keeps the &ldquo;tocheck&rdquo; list the
+smallest, overall, because it always deletes the list and creates a
+new list with only the next accessible states.
+</p>
+<p>
+BFS uses a lot of memory because it keeps knowledge of all accessible
+states from every state higher up in the &ldquo;search tree.&rdquo; Other
+algorithms generally prefer keeping knowledge of states accessible
+from only the best states.
+</p>
 
 
 <div style="font-size: 80%;">
