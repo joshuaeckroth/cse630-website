@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Uninformed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-27 10:35:25 EDT"/>
+<meta name="generated" content="2012-04-02 22:39:39 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -148,6 +148,7 @@ than four movements are possible.
 <li><a href="#sec-4-1">Iterative-deepening depth-first search</a></li>
 </ul>
 </li>
+<li><a href="#sec-5">Breadth-first versus depth-first search</a></li>
 </ul>
 </div>
 </div>
@@ -291,7 +292,9 @@ vertically before it searches horizontally.
 <h3 id="sec-4-1">Iterative-deepening depth-first search</h3>
 <div class="outline-text-3" id="text-4-1">
 
-<p>Depending on the search problem, DFS may go off into
+
+<p>
+Depending on the search problem, DFS may go off into
 &ldquo;never-never-land,&rdquo; seemingly never arriving at a goal state, while
 say, BFS, arrives at the solution rather quickly. We see this behavior
 in the 8-puzzle problem because DFS just keeps trying moves that are
@@ -300,14 +303,6 @@ unlikely; there are 9! = 362,880 states) or finds the goal. If the
 true goal is only five moves away from the initial state, then BFS
 will find this goal in less than 1024 checks while DFS may require,
 well, 362,880 checks.
-</p>
-<p>
-Other problems may perform better with DFS than BFS. For example,
-problems in which the &ldquo;width&rdquo; of the search tree (the typical number
-of accessible states from any other state) is very wide, but the
-&ldquo;depth&rdquo; (the typical number of actions required to reach the goal) is
-very shallow. The 8-puzzle is &ldquo;narrow&rdquo; (at most four accessible states
-from any other state), but very &ldquo;deep.&rdquo;
 </p>
 <p>
 To solve the problem of DFS going to &ldquo;deep&rdquo; into &ldquo;never-never-land,&rdquo;
@@ -320,9 +315,52 @@ that have been applied to the initial state.
 Because it is often difficult to know what the correct depth limit is,
 the <i>iterative-deepening depth-first search</i> (IDDFS if you like)
 first tries DFS with depth limit 1; if no goal state is found, DFS is
-run again with depth limit 2; and so on, until the goal state is found.
+run again with depth limit 2; and so on, until the goal state is
+found.
 </p>
+</div>
+</div>
 
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Breadth-first versus depth-first search</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+Breadth-first search is a good choice when you want to evaluate every
+possible choice before moving forward. BFS ensures that the shortest
+path to the goal will be found (shortest in terms of number of moves
+or number of &ldquo;hops&rdquo;), because no path is left unchecked. However, BFS
+suffers when, at each state, there is an enormous number of choices to
+consider.
+</p>
+<p>
+On the other hand, depth-first search seems a bit block-headed and
+just pushes forward whenever it has a next possible move.
+</p>
+<p>
+If we place a robot in a maze, a BFS robot would look around every
+nearby corner before choosing to move forward. A DFS robot would move
+forward as many times as it could (in any direction) before backing up
+even once. If the maze can be solved by many possible paths, perhaps
+the DFS robot is better.
+</p>
+<p>
+But DFS is bad for the 8-puzzle game, because it is much more likely
+that DFS will get further and further from the goal by making more and
+more moves. BFS, on the other hand, is probably good for the 8-puzzle
+game because there are at most only four possible moves and the goal
+is often only a few moves away.
+</p>
+<p>
+Also, it is important to note that if a robot is actually making these
+moves, in the physical world (like driving a car), BFS is a bad
+idea. BFS involves a lot of backtracking, so the robot would have to
+turn around quite often. DFS, on the other hand, typically minimizes
+backtracking.
+</p>
 
 
 <div style="font-size: 80%;">
@@ -330,7 +368,6 @@ run again with depth limit 2; and so on, until the goal state is found.
 </div>
 
 
-</div>
 </div>
 </div>
 </div>
