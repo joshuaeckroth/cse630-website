@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Practice with searching"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-05 22:16:07 EDT"/>
+<meta name="generated" content="2012-04-06 08:18:00 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -123,8 +163,12 @@
 <li><a href="#sec-2">Comparison of searches</a>
 <ul>
 <li><a href="#sec-2-1">Number of checked states (time)</a></li>
-<li><a href="#sec-2-2">Length of path (goodness of solutions)</a></li>
-<li><a href="#sec-2-3">Maximum number of states in memory</a></li>
+<li><a href="#sec-2-2">Maximum number of states in memory</a></li>
+<li><a href="#sec-2-3">Length of path (goodness of solutions)</a>
+<ul>
+<li><a href="#sec-2-3-1">Let&rsquo;s introduce an anomaly</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -338,8 +382,23 @@ a measure of miles between them:
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Length of path (goodness of solutions)</h3>
+<h3 id="sec-2-2">Maximum number of states in memory</h3>
 <div class="outline-text-3" id="text-2-2">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/goodale-memory.png"  alt="./images/goodale-memory.png" />
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Length of path (goodness of solutions)</h3>
+<div class="outline-text-3" id="text-2-3">
 
 
 
@@ -351,16 +410,31 @@ a measure of miles between them:
 
 </div>
 
-</div>
-
-<div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3">Maximum number of states in memory</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1">Let&rsquo;s introduce an anomaly</h4>
+<div class="outline-text-4" id="text-2-3-1">
 
 
+<p>
+Suppose we change the distance from High &amp; 15th to High &amp; 11th to 37
+miles (originally was 0.37 miles). This modification is a proxy for a
+traffic jam between these two intersections or some other similar
+unplanned situation. A* will account for this change because its
+heuristic is the composite heuristic \(f(s) = g(s) + h(s)\), which means
+that \(f\) accounts for both the estimated distance \(h\) between High &amp;
+15th and High &amp; 11th (&ldquo;as the crow flies&rdquo;), and the cost \(g\) of
+traveling that distance (the traffic jam is accounted for here).
+</p>
+<p>
+Best-first search, on the other hand (and hill-climbing for that
+matter) do not take into account \(g\), so they do not plan for the
+traffic jam; they only plan for the &ldquo;as the crow flies&rdquo;
+distance. Thus, best-first and hill-climbing will travel across this
+jammed route and their solution cost will suffer as a result.
+</p>
 
 <div style="text-align: center">
-<p><img src="./images/goodale-memory.png"  alt="./images/goodale-memory.png" />
+<p><img src="./images/goodale-anomaly-path.png"  alt="./images/goodale-anomaly-path.png" />
 </p>
 </div>
 
@@ -372,6 +446,7 @@ a measure of miles between them:
 </div>
 
 
+</div>
 </div>
 </div>
 </div>

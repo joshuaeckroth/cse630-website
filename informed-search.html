@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Informed search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-05 22:16:10 EDT"/>
+<meta name="generated" content="2012-04-06 08:18:02 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -161,8 +161,8 @@
 <li><a href="#sec-7">Comparisons</a>
 <ul>
 <li><a href="#sec-7-1">Number of checked states (time)</a></li>
-<li><a href="#sec-7-2">Length of path (goodness of solutions)</a></li>
-<li><a href="#sec-7-3">Maximum number of states in memory</a></li>
+<li><a href="#sec-7-2">Maximum number of states in memory</a></li>
+<li><a href="#sec-7-3">Length of path (goodness of solutions)</a></li>
 </ul>
 </li>
 </ul>
@@ -472,8 +472,35 @@ efficient.&rdquo;
 </div>
 
 <div id="outline-container-7-2" class="outline-3">
-<h3 id="sec-7-2">Length of path (goodness of solutions)</h3>
+<h3 id="sec-7-2">Maximum number of states in memory</h3>
 <div class="outline-text-3" id="text-7-2">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/search-memory.png"  alt="./images/search-memory.png" />
+</p>
+</div>
+
+<p>
+&ldquo;Memory&rdquo; is measured as the maximum size ever encountered of the
+&ldquo;tocheck&rdquo; list. Hill-climbing search keeps the &ldquo;tocheck&rdquo; list the
+smallest, overall, because it always deletes the list and creates a
+new list with only the next accessible states.
+</p>
+<p>
+BFS uses a lot of memory because it keeps knowledge of all accessible
+states from every state higher up in the &ldquo;search tree.&rdquo; Other
+algorithms generally prefer keeping knowledge of states accessible
+from only the best states.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7-3" class="outline-3">
+<h3 id="sec-7-3">Length of path (goodness of solutions)</h3>
+<div class="outline-text-3" id="text-7-3">
 
 
 
@@ -498,33 +525,6 @@ before longer solutions, and thus nearly always finds the optimal
 solution. Interestingly, random search finds near-optimal solutions,
 possibly because it is more likely it will look at a shallow node
 (there are up to four from each state) than a deep node.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-7-3" class="outline-3">
-<h3 id="sec-7-3">Maximum number of states in memory</h3>
-<div class="outline-text-3" id="text-7-3">
-
-
-
-<div style="text-align: center">
-<p><img src="./images/search-memory.png"  alt="./images/search-memory.png" />
-</p>
-</div>
-
-<p>
-&ldquo;Memory&rdquo; is measured as the maximum size ever encountered of the
-&ldquo;tocheck&rdquo; list. Hill-climbing search keeps the &ldquo;tocheck&rdquo; list the
-smallest, overall, because it always deletes the list and creates a
-new list with only the next accessible states.
-</p>
-<p>
-BFS uses a lot of memory because it keeps knowledge of all accessible
-states from every state higher up in the &ldquo;search tree.&rdquo; Other
-algorithms generally prefer keeping knowledge of states accessible
-from only the best states.
 </p>
 
 
