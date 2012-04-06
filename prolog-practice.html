@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Prolog</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Prolog"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-03-24 09:31:32 EDT"/>
+<meta name="generated" content="2012-04-05 22:16:08 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -133,94 +133,94 @@ start:
 
 
 
-<pre class="src src-prolog"><span style="color: #000000; background-color: #ffffff;">type_of_search</span>(breadth_first_search).
-<span style="color: #000000; background-color: #ffffff;">type_of_search</span>(depth_first_search).
-<span style="color: #000000; background-color: #ffffff;">type_of_search</span>(a_star_search).
+<pre class="src src-prolog"><span style="color: #268bd2;">type_of_search</span>(breadth_first_search).
+<span style="color: #268bd2;">type_of_search</span>(depth_first_search).
+<span style="color: #268bd2;">type_of_search</span>(a_star_search).
 
-<span style="color: #000000; background-color: #ffffff;">uses_heuristic</span>(a_star_search).
+<span style="color: #268bd2;">uses_heuristic</span>(a_star_search).
 
-<span style="color: #000000; background-color: #ffffff;">type_of_heuristic</span>(euclidean_distance).
+<span style="color: #268bd2;">type_of_heuristic</span>(euclidean_distance).
 
-<span style="color: #000000; background-color: #ffffff;">admissible_heuristic</span>(route_finding, euclidean_distance).
+<span style="color: #268bd2;">admissible_heuristic</span>(route_finding, euclidean_distance).
 
-<span style="color: #000000; background-color: #ffffff;">guaranteed_best_solution</span>(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">_</span>, <span style="color: #000000; background-color: #ffffff;">_</span>).
-<span style="color: #000000; background-color: #ffffff;">guaranteed_best_solution</span>(depth_first_search, <span style="color: #000000; background-color: #ffffff;">_</span>, <span style="color: #000000; background-color: #ffffff;">_</span>).
-<span style="color: #000000; background-color: #ffffff;">guaranteed_best_solution</span>(<span style="color: #000000; background-color: #ffffff;">Search</span>, <span style="color: #000000; background-color: #ffffff;">Problem</span>, <span style="color: #000000; background-color: #ffffff;">Heuristic</span>) :-
-    type_of_search(<span style="color: #000000; background-color: #ffffff;">Search</span>),
-    uses_heuristic(<span style="color: #000000; background-color: #ffffff;">Search</span>),
-    type_of_heuristic(<span style="color: #000000; background-color: #ffffff;">Heuristic</span>),
-    admissible_heuristic(<span style="color: #000000; background-color: #ffffff;">Problem</span>, <span style="color: #000000; background-color: #ffffff;">Heuristic</span>).
-
-
-<span style="color: #000000; background-color: #ffffff;">node</span>(a).
-<span style="color: #000000; background-color: #ffffff;">node</span>(b).
-<span style="color: #000000; background-color: #ffffff;">node</span>(c).
-<span style="color: #000000; background-color: #ffffff;">node</span>(d).
-<span style="color: #000000; background-color: #ffffff;">node</span>(e).
-<span style="color: #000000; background-color: #ffffff;">node</span>(f).
-
-<span style="color: #000000; background-color: #ffffff;">parent</span>(a,b).
-<span style="color: #000000; background-color: #ffffff;">parent</span>(a,c).
-<span style="color: #000000; background-color: #ffffff;">parent</span>(a,d).
-<span style="color: #000000; background-color: #ffffff;">parent</span>(b,e).
-<span style="color: #000000; background-color: #ffffff;">parent</span>(b,f).
-
-<span style="color: #000000; background-color: #ffffff;">visited</span>(a).
-<span style="color: #000000; background-color: #ffffff;">visited</span>(b).
-<span style="color: #000000; background-color: #ffffff;">visited</span>(c).
-
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    \+(parent(<span style="color: #000000; background-color: #ffffff;">_</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>)),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>)).
-
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Sibling</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    node(<span style="color: #000000; background-color: #ffffff;">Sibling</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">Sibling</span>),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">Sibling</span>)).
-
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    node(<span style="color: #000000; background-color: #ffffff;">Child</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">Child</span>)),
-    \+(parent(<span style="color: #000000; background-color: #ffffff;">_</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>)).
-
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    node(<span style="color: #000000; background-color: #ffffff;">Child</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">Child</span>)),
-    parent(<span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    \+(next_node(breadth_first_search, <span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">_</span>)).
+<span style="color: #268bd2;">guaranteed_best_solution</span>(breadth_first_search, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>).
+<span style="color: #268bd2;">guaranteed_best_solution</span>(depth_first_search, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>).
+<span style="color: #268bd2;">guaranteed_best_solution</span>(<span style="color: #268bd2;">Search</span>, <span style="color: #268bd2;">Problem</span>, <span style="color: #268bd2;">Heuristic</span>) :-
+    type_of_search(<span style="color: #268bd2;">Search</span>),
+    uses_heuristic(<span style="color: #268bd2;">Search</span>),
+    type_of_heuristic(<span style="color: #268bd2;">Heuristic</span>),
+    admissible_heuristic(<span style="color: #268bd2;">Problem</span>, <span style="color: #268bd2;">Heuristic</span>).
 
 
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(depth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    \+(parent(<span style="color: #000000; background-color: #ffffff;">_</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>)),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>)).
+<span style="color: #268bd2;">node</span>(a).
+<span style="color: #268bd2;">node</span>(b).
+<span style="color: #268bd2;">node</span>(c).
+<span style="color: #268bd2;">node</span>(d).
+<span style="color: #268bd2;">node</span>(e).
+<span style="color: #268bd2;">node</span>(f).
 
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(depth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Sibling</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    node(<span style="color: #000000; background-color: #ffffff;">Sibling</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    parent(<span style="color: #000000; background-color: #ffffff;">Parent</span>, <span style="color: #000000; background-color: #ffffff;">Sibling</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">Child</span>),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">Sibling</span>)).
+<span style="color: #268bd2;">parent</span>(a,b).
+<span style="color: #268bd2;">parent</span>(a,c).
+<span style="color: #268bd2;">parent</span>(a,d).
+<span style="color: #268bd2;">parent</span>(b,e).
+<span style="color: #268bd2;">parent</span>(b,f).
 
-<span style="color: #000000; background-color: #ffffff;">next_node</span>(depth_first_search, <span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>) :-
-    node(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    node(<span style="color: #000000; background-color: #ffffff;">Child</span>),
-    visited(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>),
-    \+(visited(<span style="color: #000000; background-color: #ffffff;">Child</span>)),
-    parent(<span style="color: #000000; background-color: #ffffff;">ThisNode</span>, <span style="color: #000000; background-color: #ffffff;">Child</span>).
+<span style="color: #268bd2;">visited</span>(a).
+<span style="color: #268bd2;">visited</span>(b).
+<span style="color: #268bd2;">visited</span>(c).
+
+<span style="color: #268bd2;">next_node</span>(breadth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">ThisNode</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    \+(parent(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">ThisNode</span>)),
+    \+(visited(<span style="color: #268bd2;">ThisNode</span>)).
+
+<span style="color: #268bd2;">next_node</span>(breadth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Sibling</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    node(<span style="color: #268bd2;">Sibling</span>),
+    visited(<span style="color: #268bd2;">ThisNode</span>),
+    parent(<span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">ThisNode</span>),
+    parent(<span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">Sibling</span>),
+    \+(visited(<span style="color: #268bd2;">Sibling</span>)).
+
+<span style="color: #268bd2;">next_node</span>(breadth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    node(<span style="color: #268bd2;">Child</span>),
+    parent(<span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>),
+    visited(<span style="color: #268bd2;">ThisNode</span>),
+    \+(visited(<span style="color: #268bd2;">Child</span>)),
+    \+(parent(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">ThisNode</span>)).
+
+<span style="color: #268bd2;">next_node</span>(breadth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    node(<span style="color: #268bd2;">Child</span>),
+    visited(<span style="color: #268bd2;">ThisNode</span>),
+    parent(<span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>),
+    \+(visited(<span style="color: #268bd2;">Child</span>)),
+    parent(<span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">ThisNode</span>),
+    \+(next_node(breadth_first_search, <span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">_</span>)).
+
+
+<span style="color: #268bd2;">next_node</span>(depth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">ThisNode</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    \+(parent(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">ThisNode</span>)),
+    \+(visited(<span style="color: #268bd2;">ThisNode</span>)).
+
+<span style="color: #268bd2;">next_node</span>(depth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Sibling</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    node(<span style="color: #268bd2;">Sibling</span>),
+    visited(<span style="color: #268bd2;">ThisNode</span>),
+    parent(<span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>),
+    parent(<span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">ThisNode</span>),
+    parent(<span style="color: #268bd2;">Parent</span>, <span style="color: #268bd2;">Sibling</span>),
+    visited(<span style="color: #268bd2;">Child</span>),
+    \+(visited(<span style="color: #268bd2;">Sibling</span>)).
+
+<span style="color: #268bd2;">next_node</span>(depth_first_search, <span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>) :-
+    node(<span style="color: #268bd2;">ThisNode</span>),
+    node(<span style="color: #268bd2;">Child</span>),
+    visited(<span style="color: #268bd2;">ThisNode</span>),
+    \+(visited(<span style="color: #268bd2;">Child</span>)),
+    parent(<span style="color: #268bd2;">ThisNode</span>, <span style="color: #268bd2;">Child</span>).
 </pre>
 
 
