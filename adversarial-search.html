@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Adversarial search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-09 00:52:28 EDT"/>
+<meta name="generated" content="2012-04-09 07:49:58 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -152,11 +152,12 @@ to &ldquo;play&rdquo; zero-sum games.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">I move, you move, etc.</a></li>
-<li><a href="#sec-2">Minimax algorithm</a>
+<li><a href="#sec-1">Expansion of the search problem</a></li>
+<li><a href="#sec-2">I move, you move, etc.</a></li>
+<li><a href="#sec-3">Minimax algorithm</a>
 <ul>
-<li><a href="#sec-2-1">Python code for minimax</a></li>
-<li><a href="#sec-2-2">Python code for tic-tac-toe components</a></li>
+<li><a href="#sec-3-1">Python code for minimax</a></li>
+<li><a href="#sec-3-2">Python code for tic-tac-toe components</a></li>
 </ul>
 </li>
 </ul>
@@ -164,8 +165,62 @@ to &ldquo;play&rdquo; zero-sum games.
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">I move, you move, etc.</h2>
+<h2 id="sec-1">Expansion of the search problem</h2>
 <div class="outline-text-2" id="text-1">
+
+
+<p>
+The components of a search problem included the following:
+</p>
+<dl>
+<dt>Initial state</dt><dd>some description of the agent&rsquo;s starting situation
+
+</dd>
+<dt>Possible actions</dt><dd>the set of actions (such as chess moves)
+     available to the agent, also called &ldquo;applicable&rdquo; actions; the
+     possible actions depend on the state
+
+</dd>
+<dt>Transition model</dt><dd>some way of figuring out what an action <i>does</i>;
+     in other words, a <code>resultOf(state, action)</code> function which
+     returns a state; the transition model defines a state space,
+     which takes the form of a directed graph (vertices are states,
+     edges are actions)
+</dd>
+</dl>
+
+
+<p>
+Note that we have left out &ldquo;Goal criteria&rdquo; and &ldquo;Path cost.&rdquo; In order
+to support adversarial search, we add the following:
+</p>
+<dl>
+<dt>Players</dt><dd>a list of players (we&rsquo;ll look at 2-player games) and a
+             <code>switch_player(player)</code> function that switches to the
+             player following <code>player</code>
+
+</dd>
+<dt>Terminal tests</dt><dd>a function or functions that test for final states
+                    (winning/losing/tied states)
+
+</dd>
+<dt>Utility function</dt><dd>a function <code>utility(state, player)</code> that returns
+     a real number (or integer) representing the value to <code>player</code> of
+     <code>state</code>; presumably, winning states have the highest utility,
+     losing states the lowest utility, tied states have zero utility,
+     and states that are not terminal have a utility calculated by
+     looking at the utilities of following states
+</dd>
+</dl>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">I move, you move, etc.</h2>
+<div class="outline-text-2" id="text-2">
 
 
 <p>
@@ -195,9 +250,9 @@ our utility (best case, 1.0) and minimizes the opponent&rsquo;s utility
 
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Minimax algorithm</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Minimax algorithm</h2>
+<div class="outline-text-2" id="text-3">
 
 
 <p>
@@ -251,9 +306,9 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
 
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Python code for minimax</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Python code for minimax</h3>
+<div class="outline-text-3" id="text-3-1">
 
 
 
@@ -319,9 +374,9 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
 
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Python code for tic-tac-toe components</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Python code for tic-tac-toe components</h3>
+<div class="outline-text-3" id="text-3-2">
 
 
 <p>
