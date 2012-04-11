@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Adversarial search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-09 08:03:31 EDT"/>
+<meta name="generated" content="2012-04-11 09:37:01 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -160,6 +160,7 @@ to &ldquo;play&rdquo; zero-sum games.
 <li><a href="#sec-3-2">Python code for tic-tac-toe components</a></li>
 </ul>
 </li>
+<li><a href="#sec-4">Alpha-beta pruning</a></li>
 </ul>
 </div>
 </div>
@@ -318,14 +319,14 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
     max_trans = <span style="color: #2aa198;">None</span>
     max_u = <span style="color: #2aa198;">None</span>
     transitions = possible_transitions(state, <span style="color: #2aa198;">'x'</span>)
-    <span style="color: #586e75; font-style: italic;"># Find the transition (move) that provides the maximum</span>
-    <span style="color: #586e75; font-style: italic;"># utility, assuming the opponent also makes a best move</span>
+    <span style="color: #93a1a1; font-style: italic;"># Find the transition (move) that provides the maximum</span>
+    <span style="color: #93a1a1; font-style: italic;"># utility, assuming the opponent also makes a best move</span>
     <span style="color: #859900;">for</span> trans, nextstate <span style="color: #859900;">in</span> transitions.iteritems():
-        <span style="color: #586e75; font-style: italic;"># after making our move, find the best move the</span>
-        <span style="color: #586e75; font-style: italic;"># opponent can make (best for opponent = worse for us;</span>
-        <span style="color: #586e75; font-style: italic;"># if we consider the opponent winning as negative</span>
-        <span style="color: #586e75; font-style: italic;"># utility, we want to find the minimum utility move</span>
-        <span style="color: #586e75; font-style: italic;"># of the opponent's possible moves)</span>
+        <span style="color: #93a1a1; font-style: italic;"># after making our move, find the best move the</span>
+        <span style="color: #93a1a1; font-style: italic;"># opponent can make (best for opponent = worse for us;</span>
+        <span style="color: #93a1a1; font-style: italic;"># if we consider the opponent winning as negative</span>
+        <span style="color: #93a1a1; font-style: italic;"># utility, we want to find the minimum utility move</span>
+        <span style="color: #93a1a1; font-style: italic;"># of the opponent's possible moves)</span>
         u = min_utility(nextstate, <span style="color: #2aa198;">'o'</span>)
         <span style="color: #859900;">if</span> max_u <span style="color: #859900;">is</span> <span style="color: #2aa198;">None</span> <span style="color: #859900;">or</span> u &gt; max_u:
             max_trans = trans
@@ -333,7 +334,7 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
     <span style="color: #859900;">return</span> max_trans
 
 <span style="color: #859900;">def</span> <span style="color: #268bd2;">min_utility</span>(state, player):
-    <span style="color: #586e75; font-style: italic;"># if the current state is a win/loss/tie, stop searching</span>
+    <span style="color: #93a1a1; font-style: italic;"># if the current state is a win/loss/tie, stop searching</span>
     <span style="color: #859900;">if</span> is_winning(state, player) <span style="color: #859900;">or</span> \
             is_winning(state, switch_player(player)) <span style="color: #859900;">or</span> \
             is_tie(state):
@@ -342,16 +343,16 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
         transitions = possible_transitions(state, player)
         min_u = <span style="color: #2aa198;">None</span>
         <span style="color: #859900;">for</span> nextstate <span style="color: #859900;">in</span> transitions.values():
-            <span style="color: #586e75; font-style: italic;"># after making a move (current player is in the</span>
-            <span style="color: #586e75; font-style: italic;"># "player" variable), find the minimum next</span>
-            <span style="color: #586e75; font-style: italic;"># move and return its utility</span>
+            <span style="color: #93a1a1; font-style: italic;"># after making a move (current player is in the</span>
+            <span style="color: #93a1a1; font-style: italic;"># "player" variable), find the minimum next</span>
+            <span style="color: #93a1a1; font-style: italic;"># move and return its utility</span>
             u = max_utility(nextstate, switch_player(player))
             <span style="color: #859900;">if</span> min_u <span style="color: #859900;">is</span> <span style="color: #2aa198;">None</span> <span style="color: #859900;">or</span> u &lt; min_u:
                 min_u = u
         <span style="color: #859900;">return</span> min_u
 
 <span style="color: #859900;">def</span> <span style="color: #268bd2;">max_utility</span>(state, player):
-    <span style="color: #586e75; font-style: italic;"># if the current state is a win/loss/tie, stop searching</span>
+    <span style="color: #93a1a1; font-style: italic;"># if the current state is a win/loss/tie, stop searching</span>
     <span style="color: #859900;">if</span> is_winning(state, player) <span style="color: #859900;">or</span> \
             is_winning(state, switch_player(player)) <span style="color: #859900;">or</span> \
             is_tie(state):
@@ -360,9 +361,9 @@ PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Vers
         transitions = possible_transitions(state, player)
         max_u = <span style="color: #2aa198;">None</span>
         <span style="color: #859900;">for</span> nextstate <span style="color: #859900;">in</span> transitions.values():
-            <span style="color: #586e75; font-style: italic;"># after making a move (current player is in the</span>
-            <span style="color: #586e75; font-style: italic;"># "player" variable), find the maximum next</span>
-            <span style="color: #586e75; font-style: italic;"># move and return its utility</span>
+            <span style="color: #93a1a1; font-style: italic;"># after making a move (current player is in the</span>
+            <span style="color: #93a1a1; font-style: italic;"># "player" variable), find the maximum next</span>
+            <span style="color: #93a1a1; font-style: italic;"># move and return its utility</span>
             u = min_utility(nextstate, switch_player(player))
             <span style="color: #859900;">if</span> max_u <span style="color: #859900;">is</span> <span style="color: #2aa198;">None</span> <span style="color: #859900;">or</span> u &gt; max_u:
                 max_u = u
@@ -426,7 +427,70 @@ shown here, however.
 </div>
 
 
+
 </div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Alpha-beta pruning</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+The minimax search is very costly. Far too many states are
+searched. We can use a very simple, and somewhat obvious, optimization
+to search only a fraction as many states while coming up with the
+exact same answer as minimax.
+</p>
+<p>
+The key insight is that when we are performing the &ldquo;max&rdquo; step (or
+equivalently, the &ldquo;min&rdquo; step), if we find that a certain move gives a
+maximum utility X (by searching its entire subtree), we can avoid any
+searches of subtrees whose minimum value is less than X.
+</p>
+<p>
+To keep track of the maximum and minimum values we know about so far,
+we use the variables &alpha; and &beta;:
+</p>
+<dl>
+<dt>&alpha;</dt><dd>the utility of the best (highest-value) choice we have
+              found so far at any choice point along the path in the
+              &ldquo;max&rdquo; mode of minimax
+
+</dd>
+<dt>&beta;</dt><dd>the utility of the best (lowest-value) choice for the
+             &ldquo;min&rdquo; mode of minimax
+</dd>
+</dl>
+
+
+<p>
+As we search down the tree, we provide the recursive search procedure
+our currently-known best &alpha; and &beta;. If the recursive search
+sees that some subtree cannot give any utility better than &alpha; (or
+worse than &beta;) then we don&rsquo;t bother searching from there.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="right" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="right">Number of x/o tokens on the board</th><th scope="col" class="right">Average minimax states checked</th><th scope="col" class="right">Average &alpha;-&beta; states checked</th></tr>
+</thead>
+<tbody>
+<tr><td class="right">0</td><td class="right">549945.0</td><td class="right">71.0</td></tr>
+<tr><td class="right">2</td><td class="right">7236.0</td><td class="right">41.6</td></tr>
+<tr><td class="right">4</td><td class="right">182.6</td><td class="right">18.8</td></tr>
+<tr><td class="right">6</td><td class="right">7.6</td><td class="right">5.5</td></tr>
+<tr><td class="right">8</td><td class="right">1.0</td><td class="right">1.0</td></tr>
+</tbody>
+</table>
+
+
+
+
 </div>
 </div>
 </div>
