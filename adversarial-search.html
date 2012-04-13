@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Adversarial search"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-12 23:14:47 EDT"/>
+<meta name="generated" content="2012-04-13 08:45:34 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -165,6 +165,8 @@ to &ldquo;play&rdquo; zero-sum games.
 <li><a href="#sec-4-1">Python code for alpha-beta pruning</a></li>
 </ul>
 </li>
+<li><a href="#sec-5">A poor example?</a></li>
+<li><a href="#sec-6">I can&rsquo;t help myself</a></li>
 </ul>
 </div>
 </div>
@@ -426,12 +428,6 @@ shown here, however.
 </pre>
 
 
-<div style="font-size: 80%;">
-<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website">GitHub</a>.
-</div>
-
-
-
 </div>
 </div>
 
@@ -455,8 +451,51 @@ maximum utility X (by searching its entire subtree), we can avoid any
 searches of subtrees whose minimum value is less than X.
 </p>
 <p>
-To keep track of the maximum and minimum values we know about so far,
-we use the variables &alpha; and &beta;:
+Look here, from <code>min_utility</code> (similar code is found in <code>max_utility</code>
+and <code>minimax</code> functions as well):
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #268bd2;">min_u</span> = <span style="color: #2aa198;">None</span>
+<span style="color: #859900;">for</span> nextstate <span style="color: #859900;">in</span> transitions.values():
+    <span style="color: #93a1a1; font-style: italic;"># after making a move (current player is in the</span>
+    <span style="color: #93a1a1; font-style: italic;"># "player" variable), find the minimum next</span>
+    <span style="color: #93a1a1; font-style: italic;"># move and return its utility</span>
+    u = max_utility(nextstate, switch_player(player))
+    <span style="color: #859900;">if</span> min_u <span style="color: #859900;">is</span> <span style="color: #2aa198;">None</span> <span style="color: #859900;">or</span> u &lt; min_u:
+        min_u = u
+<span style="color: #859900;">return</span> min_u
+</pre>
+
+
+<p>
+The variable <code>min_u</code> here will only get smaller. Recall that the
+utility that <code>min_utility</code> returns will be used by the <code>max_utility</code>
+function. So different calls to <code>min_utility</code> will be compared to pick
+out the maximum <code>min_utility</code> value. Suppose the <code>min_utilty</code> function
+was told (via a parameter) that some other call to <code>min_utility</code>
+produced a minimum utility of &alpha;, and that so far, &alpha; is the
+greatest minimum utility found so far (the maximum of the
+minimums).
+</p>
+<p>
+Then if <code>min_u</code> ever goes smaller than &alpha;, there is no reason to
+continue searching the other transitions (game moves), because <code>min_u</code>
+can only go smaller (being a minimum), and any value smaller than
+&alpha; (the previously-found maximum <code>min_u</code> produced by earlier
+function calls) will simply be ignored when maximizing.
+</p>
+<p>
+The same can be said about <code>max_u</code> in the <code>max_utility</code> function; we
+use the &beta; parameter to keep track of the smallest <code>max_u</code> so far
+seen.
+</p>
+<p>
+When maximizing (in <code>max_utility</code>), we will only change &alpha; because
+we want to know the maximum of the minimums (&alpha; is the greatest
+lower bound); when minimizing (in <code>min_utility</code>), we will only change
+&beta;.
 </p>
 <dl>
 <dt>&alpha;</dt><dd>the utility of the best (highest-value) choice we have
@@ -474,7 +513,16 @@ we use the variables &alpha; and &beta;:
 As we search down the tree, we provide the recursive search procedure
 our currently-known best &alpha; and &beta;. If the recursive search
 sees that some subtree cannot give any utility better than &alpha; (or
-worse than &beta;) then we don&rsquo;t bother searching from there.
+worse than &beta;) then we don&rsquo;t bother searching further from there.
+</p>
+<p>
+It&rsquo;s very important to realize that the alpha-beta pruning procedure
+does not produce different answers than minimax. Alpha-beta pruning
+simply does not bother checking subtrees when it is certain those
+subtrees will not change the answer produced by minimax.
+</p>
+<p>
+Alpha-beta pruning performs <i>much</i> better than vanilla minimax:
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
@@ -601,8 +649,53 @@ pruning:
 </pre>
 
 
+</div>
+</div>
 
 </div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">A poor example?</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+Tic-tac-toe is such a simple game that minimax and alpha-beta pruning
+are not really necessary. Apparently, here is optimal play (from
+<a href="http://xkcd.com/832/">xkcd</a>):
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/xkcd-tic_tac_toe.png"  alt="./images/xkcd-tic_tac_toe.png" />
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">I can&rsquo;t help myself</h2>
+<div class="outline-text-2" id="text-6">
+
+
+<p>
+This is also instructive (from <a href="http://xkcd.com/1002/">xkcd</a>):
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/xkcd-game_ais.png"  alt="./images/xkcd-game_ais.png" />
+</p>
+</div>
+
+
+
+
+<div style="font-size: 80%;">
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website">GitHub</a>.
+</div>
+
+
 </div>
 </div>
 </div>

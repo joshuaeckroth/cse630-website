@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Homework 3"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-09 08:56:20 EDT"/>
+<meta name="generated" content="2012-04-13 07:54:59 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -113,7 +113,7 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Task (100 pts)</a></li>
-<li><a href="#sec-2">Extra credit (20 pts)</a></li>
+<li><a href="#sec-2">Extra credit (40 pts)</a></li>
 </ul>
 </div>
 </div>
@@ -128,7 +128,8 @@
     human to play against the computer. Modify it so it prefers moves
     that win sooner. For example, the best move when &lsquo;x&rsquo; is at (0,0)
     and (1,0) and &lsquo;o&rsquo; is at (0,1) and (0,2) should be &lsquo;x&rsquo; at (2,0) to
-    make the win. (Positions are written in (x,y) format.)
+    make the win. (Positions are written in (x,y) format, with (0,0)
+    at the top-left.)
 </li>
 </ul>
 
@@ -138,11 +139,16 @@
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Extra credit (20 pts)</h2>
+<h2 id="sec-2">Extra credit (40 pts)</h2>
 <div class="outline-text-2" id="text-2">
 
 
 <ul>
+<li>Code the alpha-beta pruning algorithm (instead of the minimax
+    algorithm) for the same task described above. This extra credit
+    gives you +20 pts and the 100 pts for the task.
+
+</li>
 <li>Now that you have some experience with search, as a general AI
     technique, can you think of some problems (2-3 problems) for which
     it is difficult if not impossible to solve with search? Hint:
