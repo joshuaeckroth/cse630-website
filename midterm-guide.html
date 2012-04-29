@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Midterm guide"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-25 14:33:03 EDT"/>
+<meta name="generated" content="2012-04-29 16:02:18 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -298,14 +338,45 @@ Find satisfying assignments
 
 
 <p>
-Truth tables
+Build a truth-table for:
+$$\neg A \vee (B \leftrightarrow A)$$
+
+Find a satisfying assignment (if any exists) for:
+$$\neg A \wedge (A \rightarrow (B \wedge C))$$
+
+
+Given,
 </p>
+<ol>
+<li>\((S \vee T) \wedge (A \vee B)\)
+
+</li>
+<li>\(S \rightarrow Q\)
+
+</li>
+<li>\(\neg Q\)
+
+</li>
+<li>\(\neg C \vee Q\)
+</li>
+</ol>
+
+
 <p>
-Find satisfying assignments
+Prove (and state the rules and premises you utilize):
 </p>
-<p>
-Prove certain inferences
-</p>
+<ol>
+<li>\(\neg S\)
+
+</li>
+<li>\(T\)
+
+</li>
+<li>\(\neg C \vee W\)
+</li>
+</ol>
+
+
 </div>
 
 </div>
@@ -316,12 +387,35 @@ Prove certain inferences
 
 
 <p>
-Write FOL statements (using exists, forall)
+Rewrite the following statements in first-order logic:
 </p>
+<ol>
+<li>Tony is a tiger.
+
+</li>
+<li>All tigers have stripes.
+
+</li>
+<li>Some tigers are white.
+
+</li>
+<li>If any tiger is white, then we know it lives in the snow (but not
+     necessarily vice versa).
+
+</li>
+<li>A tiger is not both white and orange.
+</li>
+</ol>
+
+
 <p>
-Write negations of quantified statements
-</p>
-</div>
+Rewrite the following without using \(\forall\) (hint: use negation):
+$$(\forall x)(P(x) \leftrightarrow (A(x) \wedge B(x)))$$
+
+Rewrite the following without using \(\exists\):
+$$(\exists x)(W(x) \vee \neg Q(x))$$
+
+</p></div>
 
 </div>
 
@@ -331,11 +425,65 @@ Write negations of quantified statements
 
 
 <p>
-Write queries, facts, rules.
+Given,
 </p>
+
+
+
+<pre class="src src-prolog"><span style="color: #268bd2;">member</span>(<span style="color: #268bd2;">X</span>, <span style="color: #859900;">[</span><span style="color: #268bd2;">X</span><span style="color: #859900;">|</span><span style="color: #268bd2;">_</span><span style="color: #859900;">]</span>).
+<span style="color: #268bd2;">member</span>(<span style="color: #268bd2;">X</span>, <span style="color: #859900;">[</span><span style="color: #268bd2;">_</span><span style="color: #859900;">|</span><span style="color: #268bd2;">Tail</span><span style="color: #859900;">]</span>) :- member(<span style="color: #268bd2;">X</span>, <span style="color: #268bd2;">Tail</span>).
+
+<span style="color: #268bd2;">foobar</span>(<span style="color: #268bd2;">X</span>, <span style="color: #268bd2;">List</span>) :- member(<span style="color: #268bd2;">Y</span>, <span style="color: #268bd2;">List</span>), <span style="color: #268bd2;">X</span> \= <span style="color: #268bd2;">Y</span>.
+</pre>
+
+
 <p>
-Answer queries given a database.
+What are the values of each of these queries (write &ldquo;true&rdquo; or &ldquo;false&rdquo;,
+or give one value of the variable X)?
 </p>
+
+
+
+<pre class="src src-prolog"><span style="color: #268bd2;">member</span>(5, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>).
+<span style="color: #268bd2;">member</span>(<span style="color: #268bd2;">X</span>, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>).
+<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>).
+<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 1, 1<span style="color: #859900;">]</span>).
+</pre>
+
+
+<p>
+Given,
+</p>
+
+
+
+<pre class="src src-prolog"><span style="color: #268bd2;">family</span>(10392,
+       person(tom, fox, born(7, may, 1960), works(cnn, 152000)),
+       person(ann, fox, born(19, april, 1961), works(nyu, 65000)),
+       <span style="color: #93a1a1; font-style: italic;">% here are the children...</span>
+       <span style="color: #859900;">[</span>person(pat, fox, born(5, october, 1983), unemployed),
+        person(jim, fox, born(1, june, 1986), unemployed),
+        person(amy, fox, born(17, december, 1990), unemployed)<span style="color: #859900;">]</span>).
+
+<span style="color: #268bd2;">exists</span>(<span style="color: #268bd2;">Person</span>) :- family(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Person</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>).
+<span style="color: #268bd2;">exists</span>(<span style="color: #268bd2;">Person</span>) :- family(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Person</span>, <span style="color: #268bd2;">_</span>).
+<span style="color: #268bd2;">exists</span>(<span style="color: #268bd2;">Person</span>) :- family(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Children</span>), member(<span style="color: #268bd2;">Person</span>, <span style="color: #268bd2;">Children</span>).
+</pre>
+
+
+<p>
+What are the values of each of these queries (write &ldquo;true&rdquo; or &ldquo;false&rdquo;,
+or give one value for each of the variables)?
+</p>
+
+
+
+<pre class="src src-prolog"><span style="color: #268bd2;">family</span>(person(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, born(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Year</span>), <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">Year</span> &gt; 1960.
+
+<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">don't forget to give one value for each variable:</span>
+<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">FirstName, LastName, and X</span>
+<span style="color: #268bd2;">exists</span>(person(<span style="color: #268bd2;">FirstName</span>, <span style="color: #268bd2;">LastName</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">X</span>)), <span style="color: #268bd2;">X</span> \= unemployed.
+</pre>
 
 
 <div style="font-size: 80%;">
