@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Midterm guide"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-29 16:02:18 EDT"/>
+<meta name="generated" content="2012-04-30 08:49:01 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -156,12 +156,7 @@
 <li><a href="#sec-2">Search</a>
 <ul>
 <li><a href="#sec-2-1">General search</a></li>
-<li><a href="#sec-2-2">Breadth-first search</a></li>
-<li><a href="#sec-2-3">Depth-first search</a></li>
-<li><a href="#sec-2-4">Hill-climbing search</a></li>
-<li><a href="#sec-2-5">Best-first search</a></li>
-<li><a href="#sec-2-6">A* search</a></li>
-<li><a href="#sec-2-7">Adversarial search</a></li>
+<li><a href="#sec-2-2">Adversarial search</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">Knowledge representation</a>
@@ -182,7 +177,21 @@
 
 
 <p>
-(True/false questions)
+True or false? Turing first described a test between a monkey and a
+human before describing a test between a human and a machine.
+</p>
+<p>
+True or false? The goal of the machine is to convince the judge that
+the human is a machine.
+</p>
+<p>
+True or false? To pass the Turing test, the machine should be expected
+to fool the judge (convince the judge that the machine is a human)
+nearly 100% of the time; or, maybe just 70% of the time.
+</p>
+<p>
+True or false? Dennett thinks that winning a chess championship is
+just as strong a test for computer intelligence as the Turing test.
 </p>
 </div>
 
@@ -202,104 +211,129 @@
 
 
 <p>
-Describe initial state, possible actions, transition model, goal
-criteria, path cost for various kinds of searches.
+Give an initial state, describe possible actions and the transition
+model (i.e., how states connect), and specify a goal criterion for the
+following search problem:
+</p>
+<blockquote>
+
+<p>A robot wants to exit a maze. The maze is represented as a square
+grid; open areas and walls are represented by grid squares.
+</p>
+</blockquote>
+
+
+<p>
+Repeat this exercise for the following search problem:
+</p>
+<blockquote>
+
+<p>Recall from calculus that the derivative is the inverse of the
+integral. Finding the derivative of a formula is easy (no search
+needed). But finding the integral of a formula is often challenging,
+and may require a search procedure. Describe this search procedure.
+</p>
+</blockquote>
+
+
+<p>
+Complete the following table (assume a finite search space):
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Search algorithm</th><th scope="col" class="left">Always complete?</th><th scope="col" class="left">Always optimal?</th><th scope="col" class="left">Uses a heuristic?</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">Breadth-first search</td><td class="left">Yes</td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Depth-first search</td><td class="left"></td><td class="left">No</td><td class="left"></td></tr>
+<tr><td class="left">Hill-climbing search</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">Best-first search</td><td class="left"></td><td class="left"></td><td class="left"></td></tr>
+<tr><td class="left">A* search</td><td class="left"></td><td class="left"></td><td class="left">Yes</td></tr>
+</tbody>
+</table>
+
+
+<p>
+Recall the Goodale route search problem from <a href="./search-practice.html">Practice with searching</a>
+notes. Suppose the <code>checked</code> list contains the following:
+</p>
+
+
+
+<pre class="example">Woodruff &amp; Tuttle, High &amp; Woodruff, Lane &amp; Tuttle, High &amp; 15th
+</pre>
+
+
+<p>
+Answer the following questions for each of breadth-first search,
+depth-first search, best-first search (using distances), hill-climbing
+search, and A* search (using some heuristic like distance &ldquo;as the crow
+flies&rdquo;). Assume we start at <code>Woodruff &amp; Tuttle</code> and the goal is
+<code>Goodale parking lot</code>. For each question, there may be more than one
+correct answer.
+</p>
+<ol>
+<li>Suppose the current state being checked is <code>SR-315 &amp; Lane</code>. What
+     states are in the <code>checked</code> list (excluding the current state
+     <code>SR-315 &amp; Lane</code>)?
+
+</li>
+<li>Same assumptions as in 1. Now, what states are in the <code>tocheck</code>
+     list, before adding the states accessible from <code>SR-315 &amp; Lane</code>?
+
+</li>
+<li>Same assumptions as in 1. Now, what state will be checked next?
+</li>
+</ol>
+
+
+<p>
+True or false? Iterative deepening depth-first search is complete
+whenever regular depth-first search is complete for some search
+problem.
+</p>
+<p>
+True or false? Iterative deepening depth-first search can usually be
+expected to find a shorter path to the goal than regular depth-first
+search.
+</p>
+<p>
+What is the singular requirement for a heuristic to be called
+&ldquo;admissible?&rdquo;
 </p>
 </div>
 
 </div>
 
 <div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Breadth-first search</h3>
+<h3 id="sec-2-2">Adversarial search</h3>
 <div class="outline-text-3" id="text-2-2">
 
 
 <p>
-What happens next&hellip;
+Describe a utility function for an adversarial search procedure (e.g.,
+minimax) for playing chess.
 </p>
 <p>
-Various properties (optimal/complete&hellip;)
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3">Depth-first search</h3>
-<div class="outline-text-3" id="text-2-3">
-
-
-<p>
-What happens next&hellip;
+True or false? Minimax is an appropriate search procedure for
+single-player games (like a solitaire card game or a Rubik&rsquo;s cube)?
 </p>
 <p>
-Various properties
+True or false? Alpha-beta pruning, as applied to the minimax
+procedure, produces more optimal solutions (e.g., produces game moves
+that allow the computer to win in fewer moves).
 </p>
 <p>
-T/F about iterative-deepening search
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-4" class="outline-3">
-<h3 id="sec-2-4">Hill-climbing search</h3>
-<div class="outline-text-3" id="text-2-4">
-
-
-<p>
-What happens next&hellip;
+True or false? Alpha-beta pruning (applied to minimax) uses different
+utility functions than regular minimax.
 </p>
 <p>
-Various properties
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-5" class="outline-3">
-<h3 id="sec-2-5">Best-first search</h3>
-<div class="outline-text-3" id="text-2-5">
-
-
-<p>
-What happens next&hellip;
-</p>
-<p>
-Various properties
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-6" class="outline-3">
-<h3 id="sec-2-6">A* search</h3>
-<div class="outline-text-3" id="text-2-6">
-
-
-<p>
-What happens next&hellip;
-</p>
-<p>
-Definition of an admissible heuristic?
-</p>
-<p>
-Various properties
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-7" class="outline-3">
-<h3 id="sec-2-7">Adversarial search</h3>
-<div class="outline-text-3" id="text-2-7">
-
-
-<p>
-Example utility functions?
-</p>
-<p>
-T/F about alpha-beta
+True or false? Alpha-beta pruning (applied to minimax) is the same
+algorithm as minimax, just faster because irrelevant computations are
+omitted.
 </p>
 </div>
 </div>
@@ -320,15 +354,10 @@ T/F about alpha-beta
 
 
 <p>
-Truth tables
-</p>
-<p>
-Simplify expressions
-</p>
-<p>
-Find satisfying assignments
-</p>
-</div>
+Simplify the following expression using Boole&rsquo;s and De Morgan&rsquo;s laws:
+$$\neg(\neg x \vee \neg y) \wedge (x \wedge (y \vee \neg y))$$
+
+</p></div>
 
 </div>
 
@@ -343,7 +372,6 @@ $$\neg A \vee (B \leftrightarrow A)$$
 
 Find a satisfying assignment (if any exists) for:
 $$\neg A \wedge (A \rightarrow (B \wedge C))$$
-
 
 Given,
 </p>
@@ -438,8 +466,8 @@ Given,
 
 
 <p>
-What are the values of each of these queries (write &ldquo;true&rdquo; or &ldquo;false&rdquo;,
-or give one value of the variable X)?
+What are the values of each of these queries? (Write &ldquo;true&rdquo; or
+&ldquo;false&rdquo;, or give one value of the variable X.)
 </p>
 
 
