@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>NetLogo</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="NetLogo"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-05-10 23:11:33 EDT"/>
+<meta name="author" content="Joshua Eckroth"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/worg.css" type="text/css" media="screen" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+<a href="index.html">Home</a> &nbsp; &nbsp;
+          <!-- Plupper Button -->
+          <div id="plupperButton" style="display: inline;"></div>
+          <!-- End of Plupper Button Code -->
+          <!-- Plupper Tracking Code -->
+          <script src="https://www.google.com/jsapi"></script>
+          <script type="text/javascript"
+                  src="https://static.plupper.com/js/plupper.js"></script>
+          <script type="text/javascript">
+            plupper.init("joshuaeckroth@plupper.com");
+            plupper.enableCobrowsing();
+          </script>
+          <!-- End of Plupper Tracking Code -->
+
+</div>
+
+<div id="content">
+<h1 class="title">NetLogo</h1>
+
+<p>You&rsquo;ll find the <a href="http://ccl.northwestern.edu/netlogo/docs/">NetLogo Manual</a> to be useful.
+</p>
+<p>
+<a href="http://ccl.northwestern.edu/netlogo/5.0.1/">http://ccl.northwestern.edu/netlogo/5.0.1/</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Building the &ldquo;ant brood sorting&rdquo; model</a>
+<ul>
+<li><a href="#sec-1-1">NetLogo code</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Building the &ldquo;ant brood sorting&rdquo; model</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+This model is described in the article <a href="http://ww.perada.eu/documents/articles-perspectives/go-to-the-ants-engineering-principles-from-natural-agent-systems.pdf">&ldquo;Go to the ant&rdquo;: Engineering principles from natural multi-agent systems</a> (PDF) by Parunak (1997).
+</p>
+<p>
+This is the description from the article:
+</p>
+<blockquote>
+
+<p><b>System Behavior</b> An ant hill houses different kinds of things,
+including larvae, eggs, cocoons, and food. The ant colony keeps these
+entities sorted by kind. For example, when an egg hatches, the larva
+does not stay with other eggs, but is moved to the area for
+larvae. Computer scientists have developed a number of algorithms for
+sorting things, but no ant in the ant hill is executing a sorting
+algorithm.
+</p>
+<p>
+<b>Responsibilities</b> The individual ant algorithm that yields
+system-level sorting behavior contains some behaviors similar to those
+in the path-planning problem.
+</p>
+<ol>
+<li>Wander randomly around the nest.
+
+</li>
+<li>Sense nearby objects, and maintain a short memory (about ten
+     steps) of what has been seen.
+
+</li>
+<li>If an ant is not carrying anything when it encounters an object,
+     decide stochastically whether or not to pick up the object. The
+     probability of picking up an object decreases if the ant has
+     recently encountered similar objects.
+
+<p>
+     In the emulation, the probability of picking up an object is <code>P =      (K+ /(K+ + F))^2</code> where <code>F</code> is the fraction of positions in
+     short-term memory occupied by objects of the same type as the
+     object sensed and <code>K+</code> is a constant. As <code>F</code> becomes small
+     compared with <code>K+</code>, the probability that the ant will pick up the
+     object approaches certainty.
+</p>
+</li>
+<li>If an ant is carrying something, at each time step decide
+   stochastically whether or not to drop it, where the probability of
+   dropping a carried object increases if the ant has recently
+   encountered similar items in the environment. In the emulation, <code>P    = (F / (K- + F))^2</code> where <code>F</code> is the fraction of positions in
+   short-term memory occupied by objects of the same type as the
+   object carried, and <code>K-</code> is another constant. As <code>F</code> becomes large
+   compared with <code>K-</code>, the probability that the carried object will be
+   put down approaches certainty.
+</li>
+</ol>
+
+
+<p>
+<b>Integration</b> As in path planning, the Brownian walk eventually brings
+the wandering ants to examine all objects in the nest. Even a random
+scattering of different items in the nest will yield local
+concentrations of similar items that stimulate ants to drop other
+similar items. As concentrations grow, they tend to retain current
+members and attract new ones. The stochastic nature of the pick-up and
+drop behaviors enables multiple concentrations to merge, since ants
+occasionally pick up items from one existing concentration and
+transport them to another.
+</p>
+<p>
+The put-down constant <code>K-</code> must be stronger than the pick-up constant
+<code>K+</code>, or else clusters will dissolve faster than they form. Typically,
+<code>K+</code> is about 1 and <code>K-</code> is about 3. The length of short-term memory
+and the length of the ant&rsquo;s step in each time period determine the
+radius within which the ant compares objects. If the memory is too
+long, the ant sees the entire nest as a single location, and sorting
+will not take place.
+</p>
+</blockquote>
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">NetLogo code</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/netlogo-ant-brood-sorting.png"  alt="./images/netlogo-ant-brood-sorting.png" />
+</p>
+</div>
+
+<p>
+Each turtle will have a <code>seen</code> variable that will be a list.
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">turtles-own</span> [ seen ]
+</pre>
+
+
+<p>
+Each patch will have a <code>barrier?</code> variable that will be true or false
+depending on whether the patch is a barrier.
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">patches-own</span> [ barrier? ]
+</pre>
+
+
+<p>
+The &ldquo;setup&rdquo; button will run this procedure. First, the NetLogo
+procedure <code>clear-all</code> clears the screen. Then, the <code>setup-patches</code> and
+<code>setup-turtles</code> procedures (which we&rsquo;ll create) are executed.
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">setup</span>
+  clear-all
+  setup-patches
+  setup-turtles
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+The patches will have colors or be black if they are blank space. The
+probability of being some color or black depends on sliders. All
+patches by default are not barriers.
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">setup-patches</span>
+  <span style="color: #859900;">ask</span> patches <span style="color: #93a1a1; font-style: italic;">;; make each patch do the following</span>
+  [ <span style="color: #859900;">set</span> barrier? false <span style="color: #93a1a1; font-style: italic;">;; all start as non-barriers</span>
+    <span style="color: #859900;">ifelse</span> random-float 1.0 &lt; red-prob <span style="color: #93a1a1; font-style: italic;">;; possibly turn red</span>
+    [ <span style="color: #859900;">set</span> pcolor red ]
+    [ <span style="color: #859900;">ifelse</span> random-float 1.0 &lt; (red-prob + green-prob) <span style="color: #93a1a1; font-style: italic;">;; possibly turn green</span>
+      [ <span style="color: #859900;">set</span> pcolor green ]
+      [ <span style="color: #859900;">ifelse</span> random-float 1.0 &lt; (red-prob + green-prob + blue-prob) <span style="color: #93a1a1; font-style: italic;">;; possibly turn blue</span>
+        [ <span style="color: #859900;">set</span> pcolor blue ]
+        [ <span style="color: #859900;">set</span> pcolor black ] ] ] ] <span style="color: #93a1a1; font-style: italic;">;; otherwise, not red, green, or blue</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+Now we set up the turtles (ants):
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">setup-turtles</span>
+  <span style="color: #859900;">create-turtles</span> population <span style="color: #93a1a1; font-style: italic;">;; this is a slider variable</span>
+  <span style="color: #859900;">ask</span> turtles 
+  [ setxy 0 0 <span style="color: #93a1a1; font-style: italic;">;; put each turtle (ant) in the middle</span>
+    <span style="color: #859900;">set</span> seen [] <span style="color: #93a1a1; font-style: italic;">;; set its "seen" list to the empty list</span>
+    <span style="color: #859900;">set</span> color white ] <span style="color: #93a1a1; font-style: italic;">;; make it white</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+The &ldquo;go&rdquo; button moves each ant around the space, avoiding barriers
+(how to draw barriers is described below). An ant may choose to pickup
+or drop a colored object if appropriate. But first we &ldquo;look&rdquo; by
+updating the ant&rsquo;s &ldquo;seen&rdquo; list.
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">go</span>
+  <span style="color: #859900;">ask</span> turtles
+  [ look
+    drop
+    pickup
+    avoid-barrier ]
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+This is how the ant &ldquo;looks&rdquo; (note that the <code>memory-size</code> variable is
+set by a slider):
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">look</span>
+  <span style="color: #859900;">if</span> pcolor != black <span style="color: #859900;">and</span> memory-size &gt; 0 <span style="color: #93a1a1; font-style: italic;">;; if the ant is on a color, and it has a memory</span>
+  [ <span style="color: #859900;">if</span> length seen &gt;= memory-size <span style="color: #93a1a1; font-style: italic;">;; if the seen list is full...</span>
+    [ <span style="color: #859900;">set</span> seen but-last seen ] <span style="color: #93a1a1; font-style: italic;">;; drop the last item in the list</span>
+    <span style="color: #859900;">set</span> seen fput pcolor seen ] <span style="color: #93a1a1; font-style: italic;">;; put the item seen now at the front of the list (fput)</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+The ant may choose to &ldquo;pickup&rdquo; an object. Picking up an object
+actually just turns the patch to black, and turns the ant to the color
+that it &ldquo;picked up.&rdquo;
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">pickup</span>
+  <span style="color: #93a1a1; font-style: italic;">;; if the ant is white (not holding an object),</span>
+  <span style="color: #93a1a1; font-style: italic;">;; and the patch color (pcolor) is not black,</span>
+  <span style="color: #93a1a1; font-style: italic;">;; and the patch color is not white (which is a barrier)</span>
+  <span style="color: #859900;">if</span> color = white <span style="color: #859900;">and</span> pcolor != black <span style="color: #859900;">and</span> pcolor != white
+  <span style="color: #93a1a1; font-style: italic;">;; then let f be the value (number of items in 'seen' list matching this color)</span>
+  <span style="color: #93a1a1; font-style: italic;">;; divided by the size of seen list;</span>
+  <span style="color: #93a1a1; font-style: italic;">;; we use 'filter [? = pcolor] seen' to reduce the 'seen' list to only</span>
+  <span style="color: #93a1a1; font-style: italic;">;; those items that equal the patch color</span>
+  [ <span style="color: #859900;">let</span> f (length (filter [? = pcolor] seen)) / (length seen)
+    <span style="color: #93a1a1; font-style: italic;">;; now choose a random number, and see if it is less than</span>
+    <span style="color: #93a1a1; font-style: italic;">;; the value (K+ / (K+ + F))^2 where K+ is a constant set by a slider</span>
+    <span style="color: #859900;">if</span> random-float 1.0 &lt; (k-plus / (k-plus + f)) ^ 2
+    [ <span style="color: #859900;">set</span> color pcolor <span style="color: #93a1a1; font-style: italic;">;; set ant color to patch color</span>
+      <span style="color: #859900;">set</span> pcolor black ] ] <span style="color: #93a1a1; font-style: italic;">;; set patch color to black</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+Dropping is the opposite:
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">drop</span>
+  <span style="color: #93a1a1; font-style: italic;">;; if the ant is not white (i.e., if it is holding an object),</span>
+  <span style="color: #93a1a1; font-style: italic;">;; and the patch color is black</span>
+  <span style="color: #859900;">if</span> color != white <span style="color: #859900;">and</span> pcolor = black
+  <span style="color: #93a1a1; font-style: italic;">;; figure out how many seen objects have the same color as the ant</span>
+  [ <span style="color: #859900;">let</span> f (length (filter [? = color] seen)) / (length seen)
+    <span style="color: #93a1a1; font-style: italic;">;; calculate (F / (K- + F))^2 where K- is a constant set by a slider</span>
+    <span style="color: #859900;">if</span> random-float 1.0 &lt; (f / (k-minus + f)) ^ 2
+    [ <span style="color: #859900;">set</span> pcolor color <span style="color: #93a1a1; font-style: italic;">;; set patch color to color of ant</span>
+      <span style="color: #859900;">set</span> color white ] ] <span style="color: #93a1a1; font-style: italic;">;; change ant color back to white</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+Now we just need to make the ant move:
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">avoid-barrier</span>
+  <span style="color: #93a1a1; font-style: italic;">;; if there exists a patch ahead (in whatever direction the ant is facing)</span>
+  <span style="color: #93a1a1; font-style: italic;">;; and the patch ahead is not a barrier</span>
+  <span style="color: #93a1a1; font-style: italic;">;; (the code ([barrier?] of patch-ahead 1) gets the value of the barrier?</span>
+  <span style="color: #93a1a1; font-style: italic;">;; variable for the patch)</span>
+  <span style="color: #859900;">if</span> (nobody != patch-ahead 1) <span style="color: #859900;">and</span> ([barrier?] of patch-ahead 1)
+    [right 90 + random 180] <span style="color: #93a1a1; font-style: italic;">;; then turn 90-degrees plus a random amount more</span>
+  right random 40 <span style="color: #93a1a1; font-style: italic;">;; turn a random amount</span>
+  forward 1 <span style="color: #93a1a1; font-style: italic;">;; move forward; note, we may have turned towards a different barrier; oh well</span>
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<p>
+The &ldquo;make-barrier&rdquo; and &ldquo;remove-barrier&rdquo; buttons on the interface call
+these two procedures. These procedures figure out where you click your
+mouse and set the <code>barrier?</code> variable to true/false on those patches
+(and turn them white/black):
+</p>
+
+
+
+<pre class="src src-netlogo"><span style="color: #859900;">to</span> <span style="color: #268bd2;">make-barrier</span>
+  <span style="color: #859900;">if</span> mouse-down? <span style="color: #93a1a1; font-style: italic;">;; continually ask if the mouse is being clicked</span>
+  [ <span style="color: #859900;">ask</span> patches <span style="color: #93a1a1; font-style: italic;">;; for all patches that are under the mouse, ...</span>
+    [ <span style="color: #859900;">if</span> ((abs (pxcor - mouse-xcor)) &lt; 1) <span style="color: #859900;">and</span> ((abs (pycor - mouse-ycor)) &lt; 1)
+      [ <span style="color: #859900;">set</span> pcolor white <span style="color: #93a1a1; font-style: italic;">;; turn white</span>
+        <span style="color: #859900;">set</span> barrier? true ] ] ] <span style="color: #93a1a1; font-style: italic;">;; and set barrier? to true</span>
+<span style="color: #859900;">end</span>
+
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">remove-barrier</span>
+  <span style="color: #859900;">if</span> mouse-down?
+  [ <span style="color: #859900;">ask</span> patches
+    [ <span style="color: #859900;">if</span> ((abs (pxcor - mouse-xcor)) &lt; 1) <span style="color: #859900;">and</span> ((abs (pycor - mouse-ycor)) &lt; 1)
+      [ <span style="color: #859900;">set</span> pcolor black
+        <span style="color: #859900;">set</span> barrier? false ] ] ]
+<span style="color: #859900;">end</span>
+</pre>
+
+
+<div style="font-size: 80%;">
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website">GitHub</a>.
+</div>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
