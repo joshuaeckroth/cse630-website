@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>k-nearest neighbor classification</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="k-nearest neighbor classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-14 08:41:04 EDT"/>
+<meta name="generated" content="2012-05-16 00:09:25 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -188,7 +188,7 @@ Given a new set of measurements, perform the following test:
 </p>
 <ol>
 <li>Find (using Euclidean distance, for example), the \(k\) nearest
-     entities from training set. These entities have known labels. The
+     entities from the training set. These entities have known labels. The
      choice of \(k\) is left to us.
 
 </li>
@@ -201,7 +201,7 @@ Given a new set of measurements, perform the following test:
 <p>
 What we have is a voting mechanism, where the most votes
 wins. Sometimes it is a good idea to give each vote a weight, such as
-the inverse of the entity&rsquo;s distance from the unknown entity (so more
+the inverse of the entity&rsquo;s distant from the unknown entity (so more
 distance votes count for less).
 </p>
 
@@ -210,8 +210,15 @@ distance votes count for less).
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Handwritten digit recognition</a></li>
+<li><a href="#sec-2">How to handle noise</a></li>
 </ul>
-</div>
+</li>
+<li><a href="#sec-1">Applet</a>
+<ul>
+<li><a href="#sec-1-1">Example exercise</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Remarks</a></div>
 </div>
 
 <div id="outline-container-1" class="outline-3">
@@ -231,10 +238,10 @@ counted. These counts constitute the 64 features.
 The plot below shows each of the 3823 entities in the testing
 set. Because the feature vector of each entity has 64 dimensions, we
 cannot simply plot the feature vectors themselves. Instead, I reduced
-the dimensionality to two using &ldquo;multidimensional scaling.&rdquo; This
+the dimensionality to 2D using &ldquo;multidimensional scaling.&rdquo; This
 technique calculates the distance from each entity to each other
 entity, creating a 3823x3823 matrix of distances. Then these distances
-are reduce to two dimensions by finding an x,y pair for each entity
+are reduced to two dimensions by finding an x,y pair for each entity
 that respects its distances to the other entities. The scaling is not
 perfect, but generally serves as a good approximation of how
 &ldquo;different&rdquo; each entity is from each other entity.
@@ -287,6 +294,162 @@ values produce the corresponding recognition accuracies:
 <p>
 These are rather high accuracies for such a <i>simple</i> algorithm.
 </p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">How to handle noise</h3>
+<div class="outline-text-3" id="text-2">
+
+
+<blockquote>
+
+<p>Some of the labeled training examples may be surround by the examples
+from the other classes. Such a situation may arise by plenty of
+reasons: (i) as a resut of a random mistake, (ii) because insufficient
+number of traning example of this class (an isolated example appears
+instead of cluster), (iii) because incomplete system of features (the
+classes are separated in other dimensions which we do not know), (iv)
+because there are too many training examples of other classes
+(unbalanced classes) that create too dense &ldquo;hostile&rdquo; background for
+the given small class and many other reasons. (<a href="http://www.math.le.ac.uk/people/ag153/homepage/KNN/KNN3.html">source</a>)
+</p>
+</blockquote>
+
+
+<p>
+We can handle outliers by just removing them from the dataset. They
+won&rsquo;t contribute any useful information for classification. Outliers
+can be detected by defining two values \(q \geq r &gt; 0\) and say that a
+point is an outlier with respect to some class if, among its \(q\)
+nearest neighbors, there are more than \(r\) examples from other
+classes.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Applet</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+From <a href="http://www.math.le.ac.uk/people/ag153/homepage/KNN/KNNexcercise.htm">http://www.math.le.ac.uk/people/ag153/homepage/KNN/KNNexcercise.htm</a>
+</p>
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Example exercise</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+Ensure that the parameters are at default settings
+</p>
+<ol>
+<li>Create a class with green colour by clicking at the top left
+     corner of the work desk and also click on random to create some
+     outliers
+
+</li>
+<li>Create a second class with blue colour by clicking at the bottom
+     right corner of the work desk and also click on random to create
+     some outliers
+
+</li>
+<li>Test a query example at the centre. (Hint: click on handle test
+     menu, ensure the method is KNN and click at the centre of the
+     work desk. Example screen shot is shown below)
+</li>
+</ol>
+
+
+
+<div style="text-align: center">
+<p><img src="./images/knn-applet-screenshot-1.jpg"  alt="./images/knn-applet-screenshot-1.jpg" />
+</p>
+</div>
+
+<ol>
+<li>Classify the test query using different values of \(k\) = 3, 5, 10
+     and 20. (To change \(k\), Go to Parameter menu, change the Number
+     of Nearest Neighbour, click Handle test Menu and click the point
+     you want to classify, i.e., center of the work desk)
+
+</li>
+<li>Does varying the value of \(k\) affect the classification and which
+     \(k\) gives a better classification?
+
+</li>
+<li>Calculate the map at the various \(k\). What can you observe?
+</li>
+</ol>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Remarks</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<blockquote>
+
+<p>What is the inductive bias of k-nearest neighbor? The inductive bias
+corresponds to an assumption that the classification of an instance
+\(x\), will be most similar to the classification of other instances
+that are nearby in Euclidean distance. 
+</p>
+<p>
+One practical issue in applying k-nearest neighbor algorithms is that
+the distance between instances is calculated based on all attributes
+of the instance (i.e., on all axes in the Euclidean space containing
+the instances). This lies in contrast to methods such as rule and
+decision tree learning systems that select only a subset of the
+instance attributes when forming the hypothesis. To see the effect of
+this policy, consider applying k-nearest neighbor to a problem in
+which each instance is described by 20 attributes, but where only 2 of
+these attributes are relevant to determining the classification for
+the particular target function. In this case, instances that have
+identical values for the 2 relevant attributes may nevertheless be
+distant from one another in the 20-dimensional instance space.  As a
+result, the similarity metric used by k-nearest neighbor &mdash; depending
+on all 20 attributes-will be misleading. The distance between
+neighbors will be dominated by the large number of irrelevant
+attributes. This difficulty, which arises when many irrelevant
+attributes are present, is sometimes referred to as the curse of
+dimensionality. Nearest-neighbor approaches are especially sensitive
+to this problem.
+</p>
+<p>
+[&hellip;]
+</p>
+<p>
+One additional practical issue in applying k-nearest neighbor is
+efficient memory indexing. Because this algorithm delays all
+processing until a new query is received, significant computation can
+be required to process each new query. Various methods have been
+developed for indexing the stored training examples so that the
+nearest neighbors can be identified more efficiently at some
+additional cost in memory. One such indexing method is the \(kd\)-tree,
+in which instances are stored at the leaves of a tree, with nearby
+instances stored at the same or nearby nodes. The internal nodes of
+the tree sort the new query \(x_q\), to the relevant leaf by testing
+selected attributes of \(x_q\).
+</p>
+<p>
+&mdash; <i>Machine Learning</i> by Tom Mitchell, page 234.
+</p>
+</blockquote>
+
+
+
 
 
 <div style="font-size: 80%;">

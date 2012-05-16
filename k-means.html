@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>k-means clustering</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="k-means clustering"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-14 08:43:25 EDT"/>
+<meta name="generated" content="2012-05-16 00:09:25 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -195,6 +195,7 @@ the data.
 <li><a href="#sec-2-1">Voronoi diagram</a></li>
 <li><a href="#sec-2-2">Benefits of k-means</a></li>
 <li><a href="#sec-2-3">Drawbacks of k-means</a></li>
+<li><a href="#sec-2-4">How to choose k</a></li>
 </ul>
 </li>
 </ul>
@@ -383,11 +384,27 @@ on others. (<a href="http://en.wikipedia.org/wiki/K-means_clustering">Wikipedia<
 </blockquote>
 
 
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">How to choose k</h3>
+<div class="outline-text-3" id="text-2-4">
+
+
+<p>
+Check out the Wikipedia article about calculating the <a href="http://en.wikipedia.org/wiki/Silhouette_(clustering)">silhouette</a>,
+which is a measure of the average dissimilarity of the clusters. We
+can start at \(k=1\) and increase it until we find a max silhouette (or
+at least a &ldquo;local&rdquo; max).
+</p>
 
 
 <div style="font-size: 80%;">
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website">GitHub</a>.
 </div>
+
 
 
 </div>
