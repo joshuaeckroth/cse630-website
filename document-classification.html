@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Document classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-16 07:33:47 EDT"/>
+<meta name="generated" content="2012-05-18 08:43:57 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -107,11 +147,397 @@
 <div id="content">
 <h1 class="title">Document classification</h1>
 
-<p><a href="./downloads/cse630-ai-articles.zip">Zip file of all AI articles</a>
+<p>The goal is to&hellip;
+</p>
+<p>
+<a href="./downloads/cse630-ai-articles.zip">Zip file of all AI articles</a>
 </p>
 <p>
 <a href="./downloads/cse630-ai-articles-stemmed.zip">Zip file of all AI articles (stemmed documents)</a>
 </p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Evaluation criteria</a></li>
+<li><a href="#sec-2">Word stemming</a></li>
+<li><a href="#sec-3">Feature vectors</a>
+<ul>
+<li><a href="#sec-3-1">Binary features</a></li>
+<li><a href="#sec-3-2">Frequency count features</a></li>
+<li><a href="#sec-3-3">Normalized frequency count features</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">tf-idf</a>
+<ul>
+<li><a href="#sec-4-1">Motivation</a></li>
+<li><a href="#sec-4-2">The math</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">k-nearest neighbor</a>
+<ul>
+<li><a href="#sec-5-1">With binary features</a></li>
+<li><a href="#sec-5-2">With frequency count features</a></li>
+<li><a href="#sec-5-3">With tf-idf</a></li>
+<li><a href="#sec-5-4">Comparing k-nearest neighbor solutions</a></li>
+<li><a href="#sec-5-5">Take-away lessons</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Category centroids</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Evaluation criteria</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<dl>
+<dt>True positive (tp)</dt><dd>chosen categories that are true categories
+
+</dd>
+<dt>False positive (fp)</dt><dd>chosen categories that are not true
+       categories
+
+</dd>
+<dt>False negatives (fn)</dt><dd>true categories that are not chosen
+</dd>
+</dl>
+
+
+<p>
+Since these measures depend on the number of categories (chosen and
+true), and that differs per document, we calculate the following
+normalized scores:
+</p>
+<dl>
+<dt>Precision</dt><dd>\(tp/(tp+fp)\) &mdash; higher precision means the
+                 categories that were chosen were more often true
+                 categories
+
+</dd>
+<dt>Recall</dt><dd>\(tp/(tp+fn)\) &mdash; higher recall means more of the true
+              categories were chosen
+</dd>
+</dl>
+
+
+<p>
+We can achieve very high precision by only choosing categories for
+which we have very high confidence (until we nearly choose no
+categories at all); this would decrease recall, however. We can
+achieve high recall by choosing every category; this would decrease
+precision, however.
+</p>
+<p>
+Best would be high precision and high recall. We can measure this by
+combining precision and recall into a single formula, called the
+&ldquo;F-score&rdquo;:
+</p>
+<dl>
+<dt>F-score</dt><dd>\(2*precision*recall / (precision + recall)\)
+</dd>
+</dl>
+
+
+<p>
+Notice that precision and recall are treated equally in this
+calcuation. Technically, the F-score is the harmonic mean of precision
+and recall.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Word stemming</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<blockquote>
+
+<p>In linguistic morphology and information retrieval, stemming is the
+process for reducing inflected (or sometimes derived) words to their
+stem, base or root form&mdash;generally a written word form. The stem need
+not be identical to the morphological root of the word; it is usually
+sufficient that related words map to the same stem, even if this stem
+is not in itself a valid root.
+</p>
+<p>
+[&hellip;]
+</p>
+<p>
+A stemmer for English, for example, should identify the string &ldquo;cats&rdquo;
+(and possibly &ldquo;catlike&rdquo;, &ldquo;catty&rdquo; etc.) as based on the root &ldquo;cat&rdquo;, and
+&ldquo;stemmer&rdquo;, &ldquo;stemming&rdquo;, &ldquo;stemmed&rdquo; as based on &ldquo;stem&rdquo;. A stemming
+algorithm reduces the words &ldquo;fishing&rdquo;, &ldquo;fished&rdquo;, &ldquo;fish&rdquo;, and &ldquo;fisher&rdquo;
+to the root word, &ldquo;fish&rdquo;. (<a href="http://en.wikipedia.org/wiki/Stemming">Wikipedia</a>)
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Feature vectors</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+A document \(j\) is represented as:
+</p>
+
+
+$$X_j = (x_{j1}, x_{j2}, \dots, x_{jc}),$$
+
+<p>
+where \(c\) is the count of unique words across all documents in the
+database. Thus, all documents have vectors of the same number of
+dimensions (\(c\) dimensions).
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Binary features</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+
+
+$$x_{ji} = \cases{1 & \quad \text{if \(j\) is in $i$} \cr 0 & \quad \text{otherwise}}$$
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Frequency count features</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+
+
+$$x_{ji} = tf_{ji},$$
+
+<p>
+where \(tf_{ji}\) is the frequency (count) of the term in the document.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Normalized frequency count features</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+
+
+$$x_{ji} = \frac{tf_{ji}}{\sum_{k} tf_{ki}},$$
+
+<p>
+where \(\sum_{k} tf_{ki}\) is the number of terms (including repeats) in
+the document.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">tf-idf</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+The document vectors described above all suffer from over-scoring
+common words. A common word like &ldquo;the&rdquo; does not give any evidence that
+one document is closely related to another one just because they both
+contain many instances of that word. So in addition to recording how
+often a term appears in a document, we need to divide out some measure
+of how common is the term across different documents. A term appearing
+in nearly every document is not as relevant as a term appearing in
+few. Additionally, if a rare term appears more often in a document, it
+is even more indicative of the content of that document.
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">Motivation</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+<blockquote>
+
+<p>Suppose we have a set of English text documents and wish to determine
+which document is most relevant to the query &ldquo;the brown cow.&rdquo; A simple
+way to start out is by eliminating documents that do not contain all
+three words &ldquo;the&rdquo;, &ldquo;brown&rdquo;, and &ldquo;cow&rdquo;, but this still leaves many
+documents. To further distinguish them, we might count the number of
+times each term occurs in each document and sum them all together; the
+number of times a term occurs in a document is called its term
+frequency.
+</p>
+<p>
+However, because the term &ldquo;the&rdquo; is so common, this will tend to
+incorrectly emphasize documents which happen to use the word &ldquo;the&rdquo;
+more frequently, without giving enough weight to the more meaningful
+terms &ldquo;brown&rdquo; and &ldquo;cow&rdquo;. The term &ldquo;the&rdquo; is not a good keyword to
+distinguish relevant and non-relevant documents and terms, unlike the
+less common words &ldquo;brown&rdquo; and &ldquo;cow&rdquo;. Hence an inverse document
+frequency factor is incorporated which diminishes the weight of terms
+that occur very frequently in the collection and increases the weight
+of terms that occur rarely. (<a href="http://en.wikipedia.org/wiki/Tf*idf">Wikipedia</a>)
+</p>
+</blockquote>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2">The math</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+<p>
+Every dimension (word) in the document vector has the following value:
+</p>
+
+
+$$x_{ji} = \log(tf_{ji} + 1) \log(n/df_j + 1),$$
+
+<p>
+where \(j\) is the index of a word, \(i\) is the index of a document,
+\(x_{ji}\) is the value in position \(j\) (for word \(j\)) in the vector
+representing document \(i\), \(tf_{ji}\) is the frequency (count) of the
+term \(j\) in the document \(i\), \(n\) is the number of documents in the
+database, and \(df_j\) is the number of documents in the database that
+contain at least one occurrence of the term \(j\).
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/tfidf-graph.png"  alt="./images/tfidf-graph.png" />
+</p>
+</div>
+
+<p>
+This graph shows the tf-idf value for a particular term in a document
+that comes from a database of 1,010 documents. The bottom axis is \(df\)
+(document frequency for that term); the top numbered axis (the &ldquo;depth&rdquo;
+axis) is \(tf\) or (term frequency; the number of times that term
+appears in the document under consideration); the right axis is the
+tf-idf value.
+</p>
+<p>
+We see in the graph that an uncommon term (\(df\) is low) produces a
+higher tf-idf value. However, due to the use of logarithms, the tf-idf
+value grows little as the term appears more often in the document. In
+all, a term that&rsquo;s appears several times in the document and is
+somewhat unique to the document is a strong indicator (of category
+membership, of relevance to a query containing that term, etc.).
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">k-nearest neighbor</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">With binary features</h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+
+
+$$d = \frac{\sum_{i} \hat{x}_{i} x_{ji}}{\sum_{i} \hat{x}_{i}}$$
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">With frequency count features</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+
+
+$$d = \sqrt{\sum_{i} (\hat{x}_{i} - x_{ji})^2}$$
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">With tf-idf</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+
+
+$$d = \sum_{i} \hat{x}_{i} x_{ji}$$
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">Comparing k-nearest neighbor solutions</h3>
+<div class="outline-text-3" id="text-5-4">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5">Take-away lessons</h3>
+<div class="outline-text-3" id="text-5-5">
+
+
+<ul>
+<li>Good choices for what I am calling the &ldquo;algorithm&rdquo; (tf-idf, count
+    with normalization, etc.) depends on the dataset. However, <b>tf-idf     is robust</b> and works best on all datasets represented here. This
+    is a significant result.
+
+</li>
+<li>Using a weighted voting technique is generally a good idea.
+
+</li>
+<li>Increasing \(k\) does not always increase performance.
+
+</li>
+<li>The best value for \(k\) depends on the the dataset and the
+    algorithm.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Category centroids</h2>
+<div class="outline-text-2" id="text-6">
+
+
 
 
 <div style="font-size: 80%;">
@@ -119,6 +545,8 @@
 </div>
 
 
+</div>
+</div>
 </div>
 
 </body>

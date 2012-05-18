@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="k-nearest neighbor classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-16 00:09:25 EDT"/>
+<meta name="generated" content="2012-05-17 23:50:06 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -209,8 +209,9 @@ distance votes count for less).
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Handwritten digit recognition</a></li>
-<li><a href="#sec-2">How to handle noise</a></li>
+<li><a href="#sec-1">Choosing k</a></li>
+<li><a href="#sec-2">Handwritten digit recognition</a></li>
+<li><a href="#sec-3">How to handle noise</a></li>
 </ul>
 </li>
 <li><a href="#sec-1">Applet</a>
@@ -222,8 +223,51 @@ distance votes count for less).
 </div>
 
 <div id="outline-container-1" class="outline-3">
-<h3 id="sec-1">Handwritten digit recognition</h3>
+<h3 id="sec-1">Choosing k</h3>
 <div class="outline-text-3" id="text-1">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/effect-of-k.png"  alt="./images/effect-of-k.png" />
+</p>
+<p>
+From:
+<a href="http://classes.engr.oregonstate.edu/eecs/fall2007/cs434/notes/knn-3.pdf">http://classes.engr.oregonstate.edu/eecs/fall2007/cs434/notes/knn-3.pdf</a>
+</p>
+</div>
+
+<p>
+The article &ldquo;<a href="http://www.sciencedirect.com/science/article/pii/S016786550200394X">Choosing \(k\) for two-class nearest neighbour classifiers with unbalanced classes</a>&ldquo; by Hand and Vinciotti provides more
+information and solutions for choosing \(k\) when performing two-class
+assignment (i.e., Yes/No assignments) when one class is substantially
+larger than the other. They write in their conclusion,
+</p>
+<blockquote>
+
+<p>Nearest neighbour supervised classification methods have many
+attractive properties. However, many of these are based on asymptotic
+arguments. In problems where the classification threshold lies near 0
+or 1, as generally is the case in situations where one class is much
+larger than the other, the fact that \(k\) is finite results in a
+non-monotonic relationship between the proportion of each class
+correctly classified as \(k\) varies. This means that, in general,
+larger \(k\) may not yield better performance than smaller \(k\).
+</p>
+</blockquote>
+
+
+<p>
+An example of how the choice of \(k\) affects performance may be found
+in the <a href="./document-classification.html">document classification</a> notes.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Handwritten digit recognition</h3>
+<div class="outline-text-3" id="text-2">
 
 
 <p>
@@ -298,9 +342,9 @@ These are rather high accuracies for such a <i>simple</i> algorithm.
 
 </div>
 
-<div id="outline-container-2" class="outline-3">
-<h3 id="sec-2">How to handle noise</h3>
-<div class="outline-text-3" id="text-2">
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">How to handle noise</h3>
+<div class="outline-text-3" id="text-3">
 
 
 <blockquote>
