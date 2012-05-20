@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Document classification</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Document classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-18 19:52:33 EDT"/>
+<meta name="generated" content="2012-05-19 23:18:55 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -184,7 +184,13 @@
 <li><a href="#sec-5-5">Take-away lessons</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Category centroids</a></li>
+<li><a href="#sec-6">Category centroids</a>
+<ul>
+<li><a href="#sec-6-1">Benefits of category centroids</a></li>
+<li><a href="#sec-6-2">Drawbacks of category centroids</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">Naïve Bayesian classification</a></li>
 </ul>
 </div>
 </div>
@@ -338,12 +344,8 @@ where \(tf_{ji}\) is the frequency (count) of the term in the document.
 
 
 
-$$x_{ji} = \frac{tf_{ji}}{\sum_{k} tf_{ki}},$$
+$$x_{ji} = \frac{tf_{ji}}{\sqrt{\sum_{k} tf_{ki}^2}}$$
 
-<p>
-where \(\sum_{k} tf_{ki}\) is the number of terms (including repeats) in
-the document.
-</p>
 </div>
 </div>
 
@@ -454,6 +456,14 @@ membership, of relevance to a query containing that term, etc.).
 <div class="outline-text-2" id="text-5">
 
 
+<p>
+Since we have different ways of representing the document vectors, we
+have different &ldquo;distance&rdquo; calculations. Below, take \(\hat{X} =
+(\hat{x}_0, \dots, \hat{x}_m)\) to be the document we want to classify,
+and \(X_j = (x_{j0}, \dots, x_{jn})\) to be a document from the database
+(\(j\) will range so we check the distance to every document in the
+database).
+</p>
 
 </div>
 
@@ -466,6 +476,11 @@ membership, of relevance to a query containing that term, etc.).
 
 $$d = \frac{\sum_{i} \hat{x}_{i} x_{ji}}{\sum_{i} \hat{x}_{i}}$$
 
+<p>
+The numerator of the fraction gives the number of shared words; the
+denominator gives the number of words in the document to be
+classified. Thus, \(0 \leq d \leq 1\).
+</p>
 </div>
 
 </div>
@@ -479,6 +494,10 @@ $$d = \frac{\sum_{i} \hat{x}_{i} x_{ji}}{\sum_{i} \hat{x}_{i}}$$
 
 $$d = \sqrt{\sum_{i} (\hat{x}_{i} - x_{ji})^2}$$
 
+<p>
+This is just Euclidean distance between the two document
+vectors. Thus, \(0 \leq d &lt; \infty\).
+</p>
 </div>
 
 </div>
@@ -490,8 +509,31 @@ $$d = \sqrt{\sum_{i} (\hat{x}_{i} - x_{ji})^2}$$
 
 
 
-$$d = \sum_{i} \hat{x}_{i} x_{ji}$$
+$$d = \sum_{i} \hat{x}_{i} x_{ji},$$
 
+<p>
+assuming the vectors \(\hat{X}\) (the document we are trying to
+classify) and \(X_j\) (each document in the database) have been
+normalized so that each of their Euclidean distances to the origin
+vector (all zeros) is equal to 1.0.
+</p>
+<p>
+The above is a dot-product of two vectors. Because these vectors have
+been normalized, the dot-product can also be called the cosine
+similarity:
+</p>
+
+
+$$\cos \theta = \hat{X} \cdot X_j,$$
+
+<p>
+where \(0 \leq \theta \leq \pi/2\) and \(\theta\) is the angle (from the
+origin) between the two document vectors in the higher-dimensional
+space. More similar documents have a smaller angle between them,
+meaning their cosine similarity is closer to 1.0. Documents with
+absolutely no terms in common have a dot-product equal to 0.0, or
+equivalently, a 90-degree angle between them.
+</p>
 </div>
 
 </div>
@@ -542,6 +584,109 @@ $$d = \sum_{i} \hat{x}_{i} x_{ji}$$
 <div id="outline-container-6" class="outline-2">
 <h2 id="sec-6">Category centroids</h2>
 <div class="outline-text-2" id="text-6">
+
+
+<p>
+To construct the &ldquo;centroid&rdquo; (average, mean) of a category, we gather
+up all the documents that are members of the category, and compute the
+mean of their document vectors:
+</p>
+
+
+$$C_c = \frac{\sum_j X_j^c}{n_c},$$
+
+<p>
+where \(C_c\) is the centroid for category \(c\), \(X_j^c\) is a document
+vector from the category \(c\), and \(n_c\) is the number of documents in
+the category.
+</p>
+<p>
+When we have a new test document that we want to classify, we compute
+its distance from each category centroid. Then, we can either choose
+to take the &ldquo;closest&rdquo; or &ldquo;most similar&rdquo; category, or the best \(n\)
+categories, or all categories that have a distance less than some
+threshold.
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/corpus-mds-centroids.png"  alt="./images/corpus-mds-centroids.png" />
+</p>
+</div>
+
+<p>
+This is a plot (after applying multidimensional scaling) of how
+&ldquo;different&rdquo; each category centroid is from each other. It seems that
+Ethics, AIOverview, and History are quite similar, for example.
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/centroid-fscore-datasets.png"  alt="./images/centroid-fscore-datasets.png" />
+</p>
+</div>
+
+
+<div style="text-align: center">
+<p><img src="./images/centroid-fscore-ai.png"  alt="./images/centroid-fscore-ai.png" />
+</p>
+</div>
+
+
+
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">Benefits of category centroids</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+<ul>
+<li>The centroids are computed ahead of time, and when we get a new
+    document, we only need to compute its distance to a handful of
+    category centroids (rather than compute its distance to every
+    document in the database).
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">Drawbacks of category centroids</h3>
+<div class="outline-text-3" id="text-6-2">
+
+
+<ul>
+<li>An averaged document vector may be distorted due to the presence
+    of outliers (very bizarre documents that are members of the
+    category). Perhaps some category outlier detector can remove these
+    documents from the calculation of the mean.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Naïve Bayesian classification</h2>
+<div class="outline-text-2" id="text-7">
+
+
+
+<div style="text-align: center">
+<p><img src="./images/naivebayes-fscore-datasets.png"  alt="./images/naivebayes-fscore-datasets.png" />
+</p>
+</div>
+
+
+<div style="text-align: center">
+<p><img src="./images/naivebayes-fscore-ai.png"  alt="./images/naivebayes-fscore-ai.png" />
+</p>
+</div>
 
 
 
