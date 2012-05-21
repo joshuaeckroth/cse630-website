@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Bayesian methods</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Bayesian methods"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-05-21 09:17:20 EDT"/>
+<meta name="author" content="Joshua Eckroth"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/worg.css" type="text/css" media="screen" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+
+<div id="preamble">
+<a href="index.html">Home</a> &nbsp; &nbsp;
+          <!-- Plupper Button -->
+          <div id="plupperButton" style="display: inline;"></div>
+          <!-- End of Plupper Button Code -->
+          <!-- Plupper Tracking Code -->
+          <script src="https://www.google.com/jsapi"></script>
+          <script type="text/javascript"
+                  src="https://static.plupper.com/js/plupper.js"></script>
+          <script type="text/javascript">
+            plupper.init("joshuaeckroth@plupper.com");
+            plupper.enableCobrowsing();
+          </script>
+          <!-- End of Plupper Tracking Code -->
+
+</div>
+
+<div id="content">
+<h1 class="title">Bayesian methods</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Basic probability calculus</a></li>
+<li><a href="#sec-2">Bayes&rsquo; insight</a></li>
+<li><a href="#sec-3">Naïve Bayesian classification</a>
+<ul>
+<li><a href="#sec-3-1">Feature vectors</a></li>
+<li><a href="#sec-3-2">Category vectors</a></li>
+<li><a href="#sec-3-3">Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Basic probability calculus</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+We say that the probability of an event occurring is \(P(A)\) where \(A\)
+is the event. Note that \(0 \leq P(A) \leq 1\) by convention. For
+example, the probability of a fair coin landing heads up is \(P(H) =
+0.5\), and perhaps the probability of a lightning storm today is \(P(L)
+= 0.01\). \(P(\neg A)\) is always equal to \(1.0 - P(A)\).
+</p>
+<p>
+Sometimes we want to describe the probability of some event given that
+we know (or are supposing) that some other event occurred. For
+example, the probability of a lightning storm is higher if the sky is
+cloudy, i.e., \(P(L|C) &gt; P(L|\neg C)\) (where \(C\) means the sky is
+cloudy and \(\neg C\) means it is not).
+</p>
+<p>
+If two events \(A\) and \(B\) are independent (e.g., knowing that \(A\)
+occurred tells you nothing about whether \(B\) occurred), then \(P(A, B)
+= P(A)P(B)\).
+</p>
+<p>
+If \(A\) and \(B\) are not independent, then they are conditional, e.g.,
+knowing that \(A\) occurred changes the probability that \(B\)
+occurred. Now we have,
+</p>
+
+
+$$P(A,B) = P(A|B)P(B),$$
+
+<p>
+where \(P(A|B)\) means &ldquo;probability of \(A\) given that \(B\) is known to
+have occurred.&rdquo;
+</p>
+<p>
+Of course, if \(A\) and \(B\) are independent, then \(P(A|B)=P(A)\), so
+we&rsquo;re back to the definiton of independent probabilities.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Bayes&rsquo; insight</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Notice that \(P(A, B) = P(B, A)\) (always), simply because the comma
+doesn&rsquo;t add any meaning, it&rsquo;s just a way of writing &ldquo;\(A\) and \(B\) both
+occurred (and not in some special temporal sequence).&rdquo;
+</p>
+<p>
+Thus, the conditional probability of \(P(B,A)\) is,
+</p>
+
+
+$$P(B,A) = P(B|A)P(A),$$
+
+<p>
+which means,
+</p>
+
+
+$$P(B|A)P(A) = P(A|B)P(B),$$
+
+<p>
+and rewriting we get,
+</p>
+
+
+$$P(B|A) = \frac{P(A|B)P(B)}{P(A)}.$$
+
+<p>
+So who cares? Well, what we just discovered is that the conditional
+probability of \(B\) given \(A\) (i.e., \(P(B|A)\)), depends entirely on the
+conditional probability of \(A\) given \(B\) and the prior probabilities
+of \(A\) and \(B\) (i.e., \(P(A)\) means how often does \(A\) occur with or
+without \(B\) occurring also? same question for \(P(B)\)).
+</p>
+<p>
+If we take \(A\) and \(B\) to be events like &ldquo;\(A\) = your house alarm is
+making noise&rdquo; and &ldquo;\(B\) = a burglar is inside your house,&rdquo; then we have
+that &ldquo;the probability that a burglar is inside your house given that
+you know your house alarm is making noise depends on the chance of
+your house alarm making noise given a burglar being in your house
+(\(P(A|B)\)), the prior probability of being robbed at all (\(P(B)\)), and
+the prior probability of your house alarm making noise from burglars,
+cats, thunder, etc. (\(P(A)\)).&rdquo;
+</p>
+<p>
+<b>Bam!</b> We have a way of calculating the probability of events we&rsquo;re
+not sure about (the chance there is a burglar in my house) given the
+probabilities of events we do know about. This micro insight has
+revolutionized computer science, medicine, pyschology, etc. etc.,
+beginning in the 1980s or so. The person who made these and more
+complex calculations achievable in computer software, Judea Pearl, was
+awarded the Turing Award in 2012. The importance of Bayes&rsquo; micro
+insight cannot be overstated.
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/320px-Bayes_Theorem_MMB_01.jpg"  alt="./images/320px-Bayes_Theorem_MMB_01.jpg" />
+</p>
+<p>
+<a href="http://en.wikipedia.org/wiki/File:Bayes'_Theorem_MMB_01.jpg">Wikipedia</a>
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Naïve Bayesian classification</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Feature vectors</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p>
+Documents are simply word frequency vectors. No tf-idf transformation
+is done. We can write \(X_j = (tf_{j1}, tf_{j2}, \dots, tf_{jk})\).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Category vectors</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>
+Each category vector is represented as a series of probabilities, one
+probability per word (each vector dimension represents a word, just
+like a document feature vector). Each probability means, &ldquo;the
+probability of this word being present in a document that is a member
+of this category.&rdquo; Thus, the category vector has terms \(C_c = (p_{c1},
+p_{c2}, \dots, p_{ck})\), where
+</p>
+
+
+$$p_{ci} = P(w_i|C_c) = \frac{\sum_{j \in C_c} tf_{ji}}{\sum_j
+tf_{ji}},$$
+
+<p>
+in other words, \(p_{ci}\) is the total number of occurrences of word
+\(i\) in documents that are in category \(c\), divided by the total number
+of occurrences of word \(i\) in <i>all</i> documents. Thus, we get a
+probability of word \(i\) occurring in a document that has category
+\(c\). To make calculations more reasonable later, we&rsquo;ll say that
+\(p_{ci} = 0.001\) if word \(i\) never appears in a document from category
+\(c\).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Algorithm</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+<p>
+We assume, for simplicity, that the occurrences of words in documents
+are completely independent. This is patently false since, for
+instance, the words&hellip;
+</p>
+
+<div style="text-align: center">
+<p><img src="./images/naivebayes-fscore-datasets.png"  alt="./images/naivebayes-fscore-datasets.png" />
+</p>
+</div>
+
+
+<div style="text-align: center">
+<p><img src="./images/naivebayes-fscore-ai.png"  alt="./images/naivebayes-fscore-ai.png" />
+</p>
+</div>
+
+
+
+
+<div style="font-size: 80%;">
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">CSE 630 material</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://cse630.artifice.cc" property="cc:attributionName" rel="cc:attributionURL">Joshua Eckroth</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>. Source code for this website available at <a href="https://github.com/joshuaeckroth/cse630-website/tree/gh-pages">GitHub</a>.
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Document classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-19 23:57:59 EDT"/>
+<meta name="generated" content="2012-05-21 08:06:34 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -147,13 +147,39 @@
 <div id="content">
 <h1 class="title">Document classification</h1>
 
-<p>The goal is to&hellip;
+<p>The goal is to take a new text document (an article from a website,
+perhaps) and choose 1, 2, maybe more categories that describe the
+document. These documents and categories relate to artificial
+intelligence; the documents are obtained from searching the web with
+terms like &ldquo;artificial intelligence,&rdquo; &ldquo;robot,&rdquo; and &ldquo;Turing test.&rdquo;
 </p>
 <p>
-<a href="./downloads/cse630-ai-articles.zip">Zip file of all AI articles</a>
+The 19 categories are: <a href="http://aaai.org/AITopics/AIOverview">AIOverview</a>, <a href="http://aaai.org/AITopics/Agents">Agents</a>, <a href="http://aaai.org/AITopics/Applications">Applications</a>,
+<a href="http://aaai.org/AITopics/CognitiveScience">CognitiveScience</a>, <a href="http://aaai.org/AITopics/Education">Education</a>, <a href="http://aaai.org/AITopics/Ethics">Ethics</a>, <a href="http://aaai.org/AITopics/Games">Games</a>, <a href="http://aaai.org/AITopics/History">History</a>, <a href="http://aaai.org/AITopics/Interfaces">Interfaces</a>,
+<a href="http://aaai.org/AITopics/MachineLearning">MachineLearning</a>, <a href="http://aaai.org/AITopics/NaturalLanguage">NaturalLanguage</a>, <a href="http://aaai.org/AITopics/Philosophy">Philosophy</a>, <a href="http://aaai.org/AITopics/Reasoning">Reasoning</a>,
+<a href="http://aaai.org/AITopics/Representation">Representation</a>, <a href="http://aaai.org/AITopics/Robots">Robots</a>, <a href="http://aaai.org/AITopics/ScienceFiction">ScienceFiction</a>, <a href="http://aaai.org/AITopics/Speech">Speech</a>, <a href="http://aaai.org/AITopics/Systems">Systems</a>, <a href="http://aaai.org/AITopics/Vision">Vision</a>. These
+links go to the AITopics website, which provides a news service called
+<i>AI in the News</i> that must solve the problem of categorizing news
+articles into one or more of these 19 categories.
 </p>
 <p>
-<a href="./downloads/cse630-ai-articles-stemmed.zip">Zip file of all AI articles (stemmed documents)</a>
+These notes describe how to do the categorization; obtaining documents
+and their content is beyond our scope. Thus, we will utilize a
+prepared collection of documents. The zip files linked here provide
+about 3000 documents with human-chosen categories. We&rsquo;ll take a
+portion of these, say 90%, and train our categorization tools. The
+remaining 10% will be used for testing purposes. Which 90% and 10% are
+training and testing sets should be set randomly (and differently in
+perhaps 5 or 10 different experiments to ensure a categorizer&rsquo;s
+performance is robust).
+</p>
+<p>
+<a href="./downloads/cse630-ai-articles.zip">Zip file of all AI articles</a> &mdash; these documents have the raw original text.
+</p>
+<p>
+<a href="./downloads/cse630-ai-articles-stemmed.zip">Zip file of all AI articles (stemmed documents)</a> &mdash; these documents
+are the same as above, but every word in the text has been &ldquo;stemmed&rdquo;
+(see below). This is the document set we will be working with.
 </p>
 
 <div id="table-of-contents">
@@ -190,7 +216,6 @@
 <li><a href="#sec-6-2">Drawbacks of category centroids</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">Naïve Bayesian classification</a></li>
 </ul>
 </div>
 </div>
@@ -200,6 +225,13 @@
 <div class="outline-text-2" id="text-1">
 
 
+<p>
+Because each document may belong to more than one category, we cannot
+just count how many categories chosen by our AI algorithm are true
+categories (chosen by a human). This metric would not penalize cases
+where false categories were chosen by the algorithm. We actually have
+three cases:
+</p>
 <dl>
 <dt>True positive (tp)</dt><dd>chosen categories that are true categories
 
@@ -624,13 +656,26 @@ Ethics, AIOverview, and History are quite similar, for example.
 </p>
 </div>
 
+<p>
+Data from 10 experiments are shown in these <a href="http://en.wikipedia.org/wiki/Box_plot">box plots</a>. Performance is
+not great on any dataset.
+</p>
 
 <div style="text-align: center">
 <p><img src="./images/centroid-fscore-ai.png"  alt="./images/centroid-fscore-ai.png" />
 </p>
 </div>
 
-
+<p>
+The AI dataset often has multiple category membership (the other
+datasets always have one category per document), so we have to choose
+how many categories to select. We can use a threshold (choose all
+categories where the similarity of the document with the category
+centroid is greater than a threshold), or we can choose the best \(n\)
+categories. The plot above shows performance for this second approach,
+using various values for \(n\). For all such values, performance is
+quite poor.
+</p>
 
 </div>
 
@@ -662,31 +707,20 @@ Ethics, AIOverview, and History are quite similar, for example.
     of outliers (very bizarre documents that are members of the
     category). Perhaps some category outlier detector can remove these
     documents from the calculation of the mean.
+
+</li>
+<li>When using a dot-product technique, say \(A \cdot B\), if a vector
+    \(B\) has more non-zero terms than another vector \(B'\) then the
+    dot-product \(A \cdot B\) has a good chance of being greater than \(A
+    \cdot B'\). This means that categories with more documents will
+    produce centroids with more non-zero terms (because the documents
+    in the category span more words than a category with fewer
+    documents), and therefore, everything else being equal, larger
+    dot-products. So the category with the most members will be chosen
+    most often. (N.B., this is all conjecture; I have not verified
+    this suspicion.)
 </li>
 </ul>
-
-
-</div>
-</div>
-
-</div>
-
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Naïve Bayesian classification</h2>
-<div class="outline-text-2" id="text-7">
-
-
-
-<div style="text-align: center">
-<p><img src="./images/naivebayes-fscore-datasets.png"  alt="./images/naivebayes-fscore-datasets.png" />
-</p>
-</div>
-
-
-<div style="text-align: center">
-<p><img src="./images/naivebayes-fscore-ai.png"  alt="./images/naivebayes-fscore-ai.png" />
-</p>
-</div>
 
 
 
@@ -696,6 +730,7 @@ Ethics, AIOverview, and History are quite similar, for example.
 </div>
 
 
+</div>
 </div>
 </div>
 </div>
