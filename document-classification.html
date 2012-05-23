@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Document classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-21 08:06:34 EDT"/>
+<meta name="generated" content="2012-05-23 07:38:09 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -216,6 +216,7 @@ are the same as above, but every word in the text has been &ldquo;stemmed&rdquo;
 <li><a href="#sec-6-2">Drawbacks of category centroids</a></li>
 </ul>
 </li>
+<li><a href="#sec-7">Support vector machines</a></li>
 </ul>
 </div>
 </div>
@@ -723,6 +724,49 @@ quite poor.
 </ul>
 
 
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Support vector machines</h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p>
+We will not be learning about support vector machines in this class;
+the topic is too advanced. However, it should be noted that they
+perform <i>very</i> well:
+</p>
+
+<div style="text-align: center">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Dataset (with tfidf)</th><th scope="col" class="right">Average F-score</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">ai</td><td class="right">0.925</td></tr>
+<tr><td class="left">la1</td><td class="right">0.950</td></tr>
+<tr><td class="left">oh10</td><td class="right">0.957</td></tr>
+<tr><td class="left">re0</td><td class="right">0.974</td></tr>
+<tr><td class="left">tr21</td><td class="right">0.953</td></tr>
+<tr><td class="left">wap</td><td class="right">0.981</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+<p>
+However, support vector machine training is very slow: training the
+&ldquo;la1&rdquo; dataset (only 2883 documents and 6 categories) took 2.5 hours on
+a quad-core machine (using all cores). Training with the naïve Bayes
+method (described in <a href="./bayesian-methods.html">Bayesian methods</a> notes) takes only a few seconds.
+</p>
 
 
 <div style="font-size: 80%;">
@@ -730,7 +774,7 @@ quite poor.
 </div>
 
 
-</div>
+
 </div>
 </div>
 </div>

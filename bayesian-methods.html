@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Bayesian methods"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-21 09:17:20 EDT"/>
+<meta name="generated" content="2012-05-23 02:12:08 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -159,6 +159,10 @@
 <li><a href="#sec-3-1">Feature vectors</a></li>
 <li><a href="#sec-3-2">Category vectors</a></li>
 <li><a href="#sec-3-3">Algorithm</a></li>
+<li><a href="#sec-3-4">A problem with tiny values</a></li>
+<li><a href="#sec-3-5">Evaluation</a></li>
+<li><a href="#sec-3-6">Benefits of naïve Bayes</a></li>
+<li><a href="#sec-3-7">Drawbacks of naïve Bayes</a></li>
 </ul>
 </li>
 </ul>
@@ -256,7 +260,15 @@ you know your house alarm is making noise depends on the chance of
 your house alarm making noise given a burglar being in your house
 (\(P(A|B)\)), the prior probability of being robbed at all (\(P(B)\)), and
 the prior probability of your house alarm making noise from burglars,
-cats, thunder, etc. (\(P(A)\)).&rdquo;
+cats, thunder, etc. (\(P(A)\)).&rdquo; Note that the prior probability of the
+alarm making noise (\(P(A)\)) is at least as large as \(P(A|B)P(B)\),
+which is the numerator of this fraction. This is because
+\(P(A)=P(A|B)P(B)+P(A|\neg B)P(\neg B)\), in other words, the
+probability of the alarm making noise is the probability of it making
+noise due to a burglar plus the probability of it making noise due to
+some other cause. We use &ldquo;plus&rdquo; rather than &ldquo;times&rdquo; here because we
+are describing two separate causes for the alarm making noise; these
+causes are not required to happen simultaneously.
 </p>
 <p>
 <b>Bam!</b> We have a way of calculating the probability of events we&rsquo;re
@@ -295,8 +307,8 @@ insight cannot be overstated.
 
 
 <p>
-Documents are simply word frequency vectors. No tf-idf transformation
-is done. We can write \(X_j = (tf_{j1}, tf_{j2}, \dots, tf_{jk})\).
+Documents are simply binary word vectors. No tf-idf transformation is
+done.
 </p>
 </div>
 
@@ -313,21 +325,18 @@ probability per word (each vector dimension represents a word, just
 like a document feature vector). Each probability means, &ldquo;the
 probability of this word being present in a document that is a member
 of this category.&rdquo; Thus, the category vector has terms \(C_c = (p_{c1},
-p_{c2}, \dots, p_{ck})\), where
+p_{c2}, \dots, p_{ck})\), and
 </p>
 
 
-$$p_{ci} = P(w_i|C_c) = \frac{\sum_{j \in C_c} tf_{ji}}{\sum_j
-tf_{ji}},$$
+$$p_{ci} = P(w_i|C_c) = \frac{d_{ci}+1}{d_{i}+|C|},$$
 
 <p>
-in other words, \(p_{ci}\) is the total number of occurrences of word
-\(i\) in documents that are in category \(c\), divided by the total number
-of occurrences of word \(i\) in <i>all</i> documents. Thus, we get a
-probability of word \(i\) occurring in a document that has category
-\(c\). To make calculations more reasonable later, we&rsquo;ll say that
-\(p_{ci} = 0.001\) if word \(i\) never appears in a document from category
-\(c\).
+where \(d_{ci}\) is the number of documents in \(C_c\) that have word \(i\)
+(anywhere in the document, any number of occurrences), \(d_i\) is the
+number of documents in <i>any</i> category that have word \(i\), and \(|C|\) is
+the number of categories. We add 1 and add \(|C|\) so that \(P(w_i|C_c)\)
+is never equal to 0. (This is called <a href="http://en.wikipedia.org/wiki/Additive_smoothing">Laplace smoothing</a>.)
 </p>
 </div>
 
@@ -340,8 +349,103 @@ probability of word \(i\) occurring in a document that has category
 
 <p>
 We assume, for simplicity, that the occurrences of words in documents
-are completely independent. This is patently false since, for
-instance, the words&hellip;
+are completely independent (this is what makes the method
+&ldquo;naïve&rdquo;). This is patently false since, for instance, the words
+&ldquo;vision&rdquo; and &ldquo;image&rdquo; often both appear in documents about computer
+vision; so seeing the word &ldquo;vision&rdquo; suggests that &ldquo;image&rdquo; will also
+appear in the document.
+</p>
+<p>
+We further assume that the order the words appear in the document does
+not matter.
+</p>
+<p>
+Because we make this independence assumption, we can calculate the
+probability of a document being a member of some category quite
+easily:
+</p>
+
+
+$$P(\hat{X}|C_c) = \prod_i P(w_i|C_c),$$
+
+<p>
+where \(P(w_i|C_c) = p_{ci}\) (from the definition above).
+</p>
+<p>
+Now, Bayes&rsquo; theorem gives us:
+</p>
+
+
+$$P(C_c|\hat{X}) = P(\hat{X}|C_c)P(C_c) / P(\hat{X}),$$
+
+<p>
+where \(P(C_c)\) is simply the number of documents in category \(C_c\)
+divided by the total number of documents.
+</p>
+<p>
+Since we want to find the category \(C_c\) that makes the quantity
+maximal, we can ignore \(P(\hat{X})\) because it does not change
+depending on which category we are considering.
+</p>
+<p>
+Thus, we are actually looking for:
+</p>
+
+
+$$\arg\max_{C_c} P(C_c|\hat{X}) = \arg\max_{C_c} P(\hat{X}|C_c)P(C_c)$$
+
+<p>
+We just check all the categories, and choose the single best or top \(N\).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">A problem with tiny values</h3>
+<div class="outline-text-3" id="text-3-4">
+
+
+<p>
+With a lot of unique words, we create very small values by multiplying
+many \(p_{ci}\) terms. On a computer, the values may become so small
+that they may &ldquo;underflow&rdquo; (run out of bits required to represent the
+value). To prevent this, we just throw a logarithm around everything:
+</p>
+
+
+$$\log P(\hat{X}|C_c)P(C_c) = \log P(\hat{X}|C_c) + \log P(C_c),$$
+
+<p>
+and furthermore,
+</p>
+
+
+$$\log P(\hat{X}|C_c) = \log \prod_i P(w_i|C_c) = \sum_i \log P(w_i|C_c)$$
+
+<p>
+So our multiplications turn to sums, and we avoid the underflow
+problem. Rewriting again, we ultimately have this problem:
+</p>
+
+
+$$\arg\max_{C_c} \sum_i \log P(w_i|C_c) + \log P(C_c)$$
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5">Evaluation</h3>
+<div class="outline-text-3" id="text-3-5">
+
+
+<p>
+These graphs show the performance of the naïve Bayes approach on
+various datasets (compare with results from the <a href="./document-classification.html">document classification</a> notes). The calculations described above are
+represented as the &ldquo;binary&rdquo; algorithm in the graphs. The &ldquo;tfidf&rdquo;
+algorithm, as applied in a naïve Bayes context, uses slightly
+different calculations that have not been described in these notes.
 </p>
 
 <div style="text-align: center">
@@ -354,6 +458,72 @@ instance, the words&hellip;
 <p><img src="./images/naivebayes-fscore-ai.png"  alt="./images/naivebayes-fscore-ai.png" />
 </p>
 </div>
+
+<p>
+The book <a href="http://nlp.stanford.edu/IR-book/html/htmledition/irbook.html">Introduction to Information Retrieval</a> gathered some published
+results for classification tasks. We can see that naïve Bayes is
+usually not as good as k-nearest neighbor (which we did learn about)
+nor support vector machines (which we didn&rsquo;t learn about).
+</p>
+
+<div style="text-align: center">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="right" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">Dataset</th><th scope="col" class="right">Naïve Bayes</th><th scope="col" class="right">k-nearest neighbor</th><th scope="col" class="right">Support vector machines</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">earn</td><td class="right">0.96</td><td class="right">0.97</td><td class="right">0.98</td></tr>
+<tr><td class="left">acq</td><td class="right">0.88</td><td class="right">0.92</td><td class="right">0.94</td></tr>
+<tr><td class="left">money-fx</td><td class="right">0.57</td><td class="right">0.78</td><td class="right">0.75</td></tr>
+<tr><td class="left">grain</td><td class="right">0.79</td><td class="right">0.82</td><td class="right">0.95</td></tr>
+<tr><td class="left">crude</td><td class="right">0.80</td><td class="right">0.86</td><td class="right">0.89</td></tr>
+<tr><td class="left">trade</td><td class="right">0.64</td><td class="right">0.77</td><td class="right">0.76</td></tr>
+<tr><td class="left">interest</td><td class="right">0.65</td><td class="right">0.74</td><td class="right">0.78</td></tr>
+<tr><td class="left">ship</td><td class="right">0.85</td><td class="right">0.79</td><td class="right">0.86</td></tr>
+<tr><td class="left">wheat</td><td class="right">0.70</td><td class="right">0.77</td><td class="right">0.92</td></tr>
+<tr><td class="left">corn</td><td class="right">0.65</td><td class="right">0.78</td><td class="right">0.90</td></tr>
+</tbody>
+</table>
+
+
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6">Benefits of naïve Bayes</h3>
+<div class="outline-text-3" id="text-3-6">
+
+
+<ul>
+<li>It is very fast. In the table above, while naïve Bayes does not
+    perform as well, it is significantly more efficient than either
+    k-nearest neighbor or support vector machines. The latter, support
+    vector machines, are <i>painfully</i> slow (at least in the training
+    phase).
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7">Drawbacks of naïve Bayes</h3>
+<div class="outline-text-3" id="text-3-7">
+
+
+<ul>
+<li>Accuracy is low, as seen in the table above.
+</li>
+</ul>
+
 
 
 
