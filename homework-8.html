@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Homework 8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-24 21:01:54 EDT"/>
+<meta name="generated" content="2012-05-25 00:23:53 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -225,6 +225,45 @@ Task 5. Classify each testing document
 - loop: for each testing document:
   - figure out which category (or top 2, top 3, etc.; your choice)
     maximizes the final formula in the Bayesian methods notes...
+</pre>
+
+
+<p>
+This is a chunk of C++ that you may find useful for Task 2:
+</p>
+
+
+
+<pre class="src src-c++"><span style="color: #cb4b16;">#include</span> <span style="color: #2aa198;">&lt;fstream&gt;</span>
+<span style="color: #cb4b16;">#include</span> <span style="color: #2aa198;">&lt;string&gt;</span>
+
+<span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">...</span>
+
+<span style="color: #b58900;">ifstream</span> <span style="color: #268bd2;">f</span>;
+f.open(<span style="color: #2aa198;">"listing.txt"</span>);
+<span style="color: #859900;">while</span>(<span style="color: #dc322f;">!</span>f.eof()) { <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">eof() is true if the file is finished</span>
+    <span style="color: #b58900;">string</span> <span style="color: #268bd2;">docfile</span>;
+    f &gt;&gt; docfile;
+    <span style="color: #b58900;">int</span> <span style="color: #268bd2;">catcount</span>;
+    f &gt;&gt; catcount;
+    <span style="color: #859900;">for</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">i</span> = 0; i &lt; catcount; i++) {
+        <span style="color: #b58900;">string</span> <span style="color: #268bd2;">cat</span>;
+        f &gt;&gt; cat;
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something with cat</span>
+    }
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">open docfile, process it a word at a time</span>
+    <span style="color: #b58900;">ifstream</span> <span style="color: #268bd2;">df</span>;
+    df.open(docfile.c_string()); <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">c_string() is just a funky C++ thing</span>
+    <span style="color: #859900;">while</span>(<span style="color: #dc322f;">!</span>df.eof()) {
+        <span style="color: #b58900;">string</span> <span style="color: #268bd2;">word</span>;
+        df &gt;&gt; word;
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something with word</span>
+    }
+    df.close()
+
+    <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">done with that line of listing.txt</span>
+}
+f.close()
 </pre>
 
 
