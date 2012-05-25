@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Homework 8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-25 00:23:53 EDT"/>
+<meta name="generated" content="2012-05-25 00:32:59 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -244,12 +244,12 @@ f.open(<span style="color: #2aa198;">"listing.txt"</span>);
 <span style="color: #859900;">while</span>(<span style="color: #dc322f;">!</span>f.eof()) { <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">eof() is true if the file is finished</span>
     <span style="color: #b58900;">string</span> <span style="color: #268bd2;">docfile</span>;
     f &gt;&gt; docfile;
-    <span style="color: #b58900;">int</span> <span style="color: #268bd2;">catcount</span>;
-    f &gt;&gt; catcount;
-    <span style="color: #859900;">for</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">i</span> = 0; i &lt; catcount; i++) {
-        <span style="color: #b58900;">string</span> <span style="color: #268bd2;">cat</span>;
-        f &gt;&gt; cat;
-        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something with cat</span>
+    <span style="color: #b58900;">int</span> <span style="color: #268bd2;">category_count</span>;
+    f &gt;&gt; category_count;
+    <span style="color: #859900;">for</span>(<span style="color: #b58900;">int</span> <span style="color: #268bd2;">i</span> = 0; i &lt; category_count; i++) {
+        <span style="color: #b58900;">string</span> <span style="color: #268bd2;">category</span>;
+        f &gt;&gt; category;
+        <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">do something with category</span>
     }
     <span style="color: #93a1a1; font-style: italic;">// </span><span style="color: #93a1a1; font-style: italic;">open docfile, process it a word at a time</span>
     <span style="color: #b58900;">ifstream</span> <span style="color: #268bd2;">df</span>;
