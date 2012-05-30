@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Bayesian methods"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-29 21:51:52 EDT"/>
+<meta name="generated" content="2012-05-29 22:25:09 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -379,8 +379,16 @@ Now, Bayes&rsquo; theorem gives us:
 $$P(C_c|\hat{X}) = P(\hat{X}|C_c)P(C_c) / P(\hat{X}),$$
 
 <p>
-where \(P(C_c)\) is simply the number of documents in category \(C_c\)
-divided by the total number of documents.
+with,
+</p>
+
+
+$$P(C_c) = \frac{n_c + 1}{n + |C|},$$
+
+<p>
+where \(n_c\) is the number of documents in category \(C_c\) and \(n\) is
+the number of documents overall. Again, we use Laplace smoothing; this
+allows us to avoid probabilities equal to 0.0.
 </p>
 <p>
 Since we want to find the category \(C_c\) that makes the quantity
