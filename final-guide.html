@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Final guide</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Final guide"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-25 00:53:00 EDT"/>
+<meta name="generated" content="2012-05-25 08:59:06 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,7 +83,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 
@@ -107,6 +147,340 @@
 <div id="content">
 <h1 class="title">Final guide</h1>
 
+<p>Answers on the bottom. Also, you can <b>bring a notecard</b> (5in x 7in
+max) with notes or whatnot.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Multi-agent systems</a>
+<ul>
+<li><a href="#sec-1-1">Ant intelligence</a></li>
+<li><a href="#sec-1-2">NetLogo</a></li>
+<li><a href="#sec-1-3">Prisoner&rsquo;s dilemma</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Learning</a>
+<ul>
+<li><a href="#sec-2-1">k-means clustering</a></li>
+<li><a href="#sec-2-2">k-nearest neighbor</a></li>
+<li><a href="#sec-2-3">Document classification</a></li>
+<li><a href="#sec-2-4">Probability and Bayesian methods</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">The &ldquo;Chinese room&rdquo; argument</a></li>
+<li><a href="#sec-4">Answers</a>
+<ul>
+<li><a href="#sec-4-1">Multi-agent systems</a>
+<ul>
+<li><a href="#sec-4-1-1">NetLogo</a></li>
+<li><a href="#sec-4-1-2">Ant intelligence</a></li>
+<li><a href="#sec-4-1-3">Prisoner&rsquo;s dilemma</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Multi-agent systems</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Which of the following features are in the &ldquo;ant brood sorting&rdquo; model?
+</p>
+<ul>
+<li>&hellip;
+</li>
+</ul>
+
+
+<p>
+(The question on the Final will ask about ant transport that you read
+about for Homework 7.)
+</p>
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Ant intelligence</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+Why is it important that the chemical ants leave behind when they are
+carrying food slowly evaporates?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">NetLogo</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+<p>
+What is a &ldquo;turtle&rdquo; in NetLogo?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">Prisoner&rsquo;s dilemma</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+<p>
+True or false? &ldquo;Defecting&rdquo; means&hellip;
+</p>
+<p>
+Describe the &ldquo;Jesus&rdquo; strategy.
+</p>
+<p>
+Describe the &ldquo;Lucifer&rdquo; strategy.
+</p>
+<p>
+Describe the &ldquo;Unforgiving&rdquo; strategy.
+</p>
+<p>
+Describe the &ldquo;Tit-for-tat&rdquo; a.k.a. &ldquo;Moses&rdquo; strategy. What is the first
+choice in this strategy? What are all future choices?
+</p>
+<p>
+Which of these three strategies generally performed best across random
+scenarios in the iterated prisoner&rsquo;s dilemma?
+</p>
+<p>
+If two &ldquo;Tit-for-tat&rdquo; strategies face each other in the iterated
+prisoner&rsquo;s dilemma, we will see behavior equivalent to which
+non-Tit-for-tat strategy or strategies facing each other?
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Learning</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Describe the difference between &ldquo;supervised&rdquo; and &ldquo;unsupervised&rdquo;
+learning.
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">k-means clustering</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+<p>
+k-means clustering is an unsupervised or supervised learning strategy?
+</p>
+<p>
+What does the choice of \(k\) represent?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">k-nearest neighbor</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+<p>
+What does k-nearest neighbor allow us to do with a new, unknown data
+point?
+</p>
+<p>
+k-nearest neighbor is an unsupervised or supervised learning strategy?
+</p>
+<p>
+What does the choice of \(k\) represent?
+</p>
+<p>
+What problem may a very small value of \(k\) cause?
+</p>
+<p>
+What problem may a very large value of \(k\) cause?
+</p>
+<p>
+Is there one value for \(k\) that works best for nearly all data sets?
+If so, what is it?
+</p>
+<p>
+Give one benefit of k-nearest neighbor learning.
+</p>
+<p>
+Give one drawback of k-nearest neighbor learning.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Document classification</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+<p>
+What is the goal of document classification?
+</p>
+<p>
+Define true positive (TP). Define false positive (FP). Define false
+negative (FN). Define precision (in terms of TP and/or FP and/or
+FN). Define recall (in terms of TP and/or FP and/or FN). Define
+F-score (in terms of precision and/or recall).
+</p>
+<p>
+Give a possible result of stemming each of the following words:
+&ldquo;linguistic,&rdquo; &ldquo;dog,&rdquo; &ldquo;jumping,&rdquo; &ldquo;philosophy.&rdquo;
+</p>
+<p>
+Describe a &ldquo;binary feature vector&rdquo; for a text document.
+</p>
+<p>
+Why do you suppose tf-idf feature vectors perform better (in terms of
+F-score) than, say, frequency count feature vectors?
+</p>
+<p>
+A common word (common in all documents) would have a high or low
+tf-idf score?
+</p>
+<p>
+What is a centroid (in terms of document vectors)?
+</p>
+<p>
+What is one way a centroid approach to classification is better than
+k-nearest neighbor?
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">Probability and Bayesian methods</h3>
+<div class="outline-text-3" id="text-2-4">
+
+
+<p>
+Describe what \(P(A)\) means (in words).
+</p>
+<p>
+Describe what \(P(A,B)\) means (in words).
+</p>
+<p>
+Describe what \(P(A|B)\) means (in words).
+</p>
+<p>
+If events \(A\) and \(B\) are independent, and \(P(A) = 0.25\), \(P(B) =
+0.10\), what is \(P(A,B)\)? What is \(P(B,A)\)?
+</p>
+<p>
+Write Bayes&rsquo; theorem.
+</p>
+<p>
+Suppose I know the probabilities&hellip; What is \(P(A|B)\)?
+</p>
+<p>
+As described in the naïve Bayesian classification notes, what does
+\(d_i\) represent for some word \(i\)? What does \(d_{ci}\) represent for
+some word \(i\) and category \(c\)?
+</p>
+<p>
+Why do we use logarithms for naïve Bayesian classification
+calculations?
+</p>
+<p>
+What is the outcome of computing \(\arg\max x P(x)\) where \(x\) is an
+event? (If \(\arg\max x P(x)\) was a function, what would the output of
+the function be?) Describe in English.
+</p>
+<p>
+Give one benefit of naïve Bayesian classification (as compared to
+other classification methods like k-nearest neighbor).
+</p>
+<p>
+Give one drawback of naïve Bayesian classification (as compared to
+other classification methods like support vector machines).
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">The &ldquo;Chinese room&rdquo; argument</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+What is the essential goal of &ldquo;strong AI?&rdquo;
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Answers</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">Multi-agent systems</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+
+</div>
+
+<div id="outline-container-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1">NetLogo</h4>
+<div class="outline-text-4" id="text-4-1-1">
+
+
+<p>
+A turtle is a single agent that acts independently of all other
+turtles (agents).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2">Ant intelligence</h4>
+<div class="outline-text-4" id="text-4-1-2">
+
+
+<p>
+Need to forget&hellip;
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-1-3" class="outline-4">
+<h4 id="sec-4-1-3">Prisoner&rsquo;s dilemma</h4>
+<div class="outline-text-4" id="text-4-1-3">
+
+
+
 
 
 
@@ -115,6 +489,11 @@
 </div>
 
 
+
+</div>
+</div>
+</div>
+</div>
 </div>
 
 </body>

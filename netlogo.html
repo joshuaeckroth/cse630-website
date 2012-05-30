@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="NetLogo"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-25 00:52:52 EDT"/>
+<meta name="generated" content="2012-05-25 08:19:21 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -132,82 +132,8 @@
 
 
 <p>
-This model is described in the article <a href="http://ww.perada.eu/documents/articles-perspectives/go-to-the-ants-engineering-principles-from-natural-agent-systems.pdf">&ldquo;Go to the ant&rdquo;: Engineering principles from natural multi-agent systems</a> (PDF) by Parunak (1997).
+The model is described in the <a href="./ant-intelligence.html">Ant intelligence</a> notes.
 </p>
-<p>
-This is the description from the article:
-</p>
-<blockquote>
-
-<p><b>System Behavior</b> An ant hill houses different kinds of things,
-including larvae, eggs, cocoons, and food. The ant colony keeps these
-entities sorted by kind. For example, when an egg hatches, the larva
-does not stay with other eggs, but is moved to the area for
-larvae. Computer scientists have developed a number of algorithms for
-sorting things, but no ant in the ant hill is executing a sorting
-algorithm.
-</p>
-<p>
-<b>Responsibilities</b> The individual ant algorithm that yields
-system-level sorting behavior contains some behaviors similar to those
-in the path-planning problem.
-</p>
-<ol>
-<li>Wander randomly around the nest.
-
-</li>
-<li>Sense nearby objects, and maintain a short memory (about ten
-     steps) of what has been seen.
-
-</li>
-<li>If an ant is not carrying anything when it encounters an object,
-     decide stochastically whether or not to pick up the object. The
-     probability of picking up an object decreases if the ant has
-     recently encountered similar objects.
-
-<p>
-     In the emulation, the probability of picking up an object is <code>P =      (K+ /(K+ + F))^2</code> where <code>F</code> is the fraction of positions in
-     short-term memory occupied by objects of the same type as the
-     object sensed and <code>K+</code> is a constant. As <code>F</code> becomes small
-     compared with <code>K+</code>, the probability that the ant will pick up the
-     object approaches certainty.
-</p>
-</li>
-<li>If an ant is carrying something, at each time step decide
-   stochastically whether or not to drop it, where the probability of
-   dropping a carried object increases if the ant has recently
-   encountered similar items in the environment. In the emulation, <code>P    = (F / (K- + F))^2</code> where <code>F</code> is the fraction of positions in
-   short-term memory occupied by objects of the same type as the
-   object carried, and <code>K-</code> is another constant. As <code>F</code> becomes large
-   compared with <code>K-</code>, the probability that the carried object will be
-   put down approaches certainty.
-</li>
-</ol>
-
-
-<p>
-<b>Integration</b> As in path planning, the Brownian walk eventually brings
-the wandering ants to examine all objects in the nest. Even a random
-scattering of different items in the nest will yield local
-concentrations of similar items that stimulate ants to drop other
-similar items. As concentrations grow, they tend to retain current
-members and attract new ones. The stochastic nature of the pick-up and
-drop behaviors enables multiple concentrations to merge, since ants
-occasionally pick up items from one existing concentration and
-transport them to another.
-</p>
-<p>
-The put-down constant <code>K-</code> must be stronger than the pick-up constant
-<code>K+</code>, or else clusters will dissolve faster than they form. Typically,
-<code>K+</code> is about 1 and <code>K-</code> is about 3. The length of short-term memory
-and the length of the ant&rsquo;s step in each time period determine the
-radius within which the ant compares objects. If the memory is too
-long, the ant sees the entire nest as a single location, and sorting
-will not take place.
-</p>
-</blockquote>
-
-
 
 </div>
 
