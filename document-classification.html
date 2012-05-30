@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Document classification"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-23 07:38:09 EDT"/>
+<meta name="generated" content="2012-05-29 22:51:31 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -285,6 +285,12 @@ combining precision and recall into a single formula, called the
 Notice that precision and recall are treated equally in this
 calcuation. Technically, the F-score is the harmonic mean of precision
 and recall.
+</p>
+<p>
+We typically have multiple documents to classify (possibly each into
+multiple categories). So the global precision/recall/f-score is
+calculated at the end, after adding the TP/FP/FN values per document
+into a global TP/FP/FN.
 </p>
 </div>
 
