@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Midterm guide"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-30 09:36:38 EDT"/>
+<meta name="generated" content="2012-06-01 00:07:44 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -499,7 +499,7 @@ Given,
 <pre class="src src-prolog"><span style="color: #268bd2;">family</span>(10392,
        person(tom, fox, born(7, may, 1960), works(cnn, 152000)),
        person(ann, fox, born(19, april, 1961), works(nyu, 65000)),
-       <span style="color: #93a1a1; font-style: italic;">% here are the children...</span>
+       <span style="color: #586e75; font-style: italic;">% here are the children...</span>
        <span style="color: #859900;">[</span>person(pat, fox, born(5, october, 1983), unemployed),
         person(jim, fox, born(1, june, 1986), unemployed),
         person(amy, fox, born(17, december, 1990), unemployed)<span style="color: #859900;">]</span>).
@@ -519,8 +519,8 @@ or give one value for each of the variables)?
 
 <pre class="src src-prolog"><span style="color: #268bd2;">family</span>(person(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, born(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Year</span>), <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">Year</span> &gt; 1960.
 
-<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">don't forget to give one value for each variable:</span>
-<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">FirstName, LastName, and X</span>
+<span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">don't forget to give one value for each variable:</span>
+<span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">FirstName, LastName, and X</span>
 <span style="color: #268bd2;">exists</span>(person(<span style="color: #268bd2;">FirstName</span>, <span style="color: #268bd2;">LastName</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">X</span>)), <span style="color: #268bd2;">X</span> \= unemployed.
 </pre>
 
@@ -1090,10 +1090,10 @@ What are the values of each of these queries? (Write &ldquo;true&rdquo; or
 
 
 
-<pre class="src src-prolog"><span style="color: #268bd2;">member</span>(5, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #93a1a1; font-style: italic;">% --&gt; false</span>
-<span style="color: #268bd2;">member</span>(<span style="color: #268bd2;">X</span>, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #93a1a1; font-style: italic;">% --&gt; X = 1 or 2 or 3</span>
-<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #93a1a1; font-style: italic;">% --&gt; true</span>
-<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 1, 1<span style="color: #859900;">]</span>). <span style="color: #93a1a1; font-style: italic;">% --&gt; false</span>
+<pre class="src src-prolog"><span style="color: #268bd2;">member</span>(5, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #586e75; font-style: italic;">% --&gt; false</span>
+<span style="color: #268bd2;">member</span>(<span style="color: #268bd2;">X</span>, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #586e75; font-style: italic;">% --&gt; X = 1 or 2 or 3</span>
+<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 2, 3<span style="color: #859900;">]</span>). <span style="color: #586e75; font-style: italic;">% --&gt; true</span>
+<span style="color: #268bd2;">foobar</span>(1, <span style="color: #859900;">[</span>1, 1, 1<span style="color: #859900;">]</span>). <span style="color: #586e75; font-style: italic;">% --&gt; false</span>
 </pre>
 
 
@@ -1106,7 +1106,7 @@ Given,
 <pre class="src src-prolog"><span style="color: #268bd2;">family</span>(10392,
        person(tom, fox, born(7, may, 1960), works(cnn, 152000)),
        person(ann, fox, born(19, april, 1961), works(nyu, 65000)),
-       <span style="color: #93a1a1; font-style: italic;">% here are the children...</span>
+       <span style="color: #586e75; font-style: italic;">% here are the children...</span>
        <span style="color: #859900;">[</span>person(pat, fox, born(5, october, 1983), unemployed),
         person(jim, fox, born(1, june, 1986), unemployed),
         person(amy, fox, born(17, december, 1990), unemployed)<span style="color: #859900;">]</span>).
@@ -1125,15 +1125,15 @@ or give one value for each of the variables)?
 
 
 <pre class="src src-prolog"><span style="color: #268bd2;">family</span>(person(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, born(<span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">Year</span>), <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">_</span>), <span style="color: #268bd2;">Year</span> &gt; 1960.
-<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">answer: false</span>
+<span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">answer: false</span>
 </pre>
 
 
 
-<pre class="src src-prolog"><span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">don't forget to give one value for each variable:</span>
-<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">FirstName, LastName, and X</span>
+<pre class="src src-prolog"><span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">don't forget to give one value for each variable:</span>
+<span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">FirstName, LastName, and X</span>
 <span style="color: #268bd2;">exists</span>(person(<span style="color: #268bd2;">FirstName</span>, <span style="color: #268bd2;">LastName</span>, <span style="color: #268bd2;">_</span>, <span style="color: #268bd2;">X</span>)), <span style="color: #268bd2;">X</span> \= unemployed.
-<span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">one answer: FirstName = tom, LastName = fox, X = works(cnn, 152000)</span>
+<span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">one answer: FirstName = tom, LastName = fox, X = works(cnn, 152000)</span>
 </pre>
 
 

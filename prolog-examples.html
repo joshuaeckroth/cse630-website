@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Prolog examples"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-30 09:36:35 EDT"/>
+<meta name="generated" content="2012-06-01 00:07:41 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -145,45 +145,45 @@ Now, we define all the possible moves (a bit laboriously):
 
 
 
-<pre class="src src-prolog"><span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">From: http://www-module.cs.york.ac.uk/lpa/prac2009/prolog-lab-3.pdf</span>
+<pre class="src src-prolog"><span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">From: http://www-module.cs.york.ac.uk/lpa/prac2009/prolog-lab-3.pdf</span>
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move left in the top row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move left in the top row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,0,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span>0,<span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,0, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,0,<span style="color: #268bd2;">X2</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move left in the middle row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move left in the middle row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X6</span>,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X6</span>,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,0,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move left in the bottom row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move left in the bottom row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,0,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, 0,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,0<span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,0,<span style="color: #268bd2;">X8</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move right in the top row </span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move right in the top row </span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span>0,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X2</span>,0,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,0,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X3</span>,0, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move right in the middle row </span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move right in the middle row </span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X5</span>,0,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X6</span>,0, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move right in the bottom row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move right in the bottom row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>,0,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>,<span style="color: #268bd2;">X8</span>,0,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>,<span style="color: #268bd2;">X7</span>,0,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>,<span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X9</span>,0<span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move up from the middle row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move up from the middle row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span>0,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
@@ -191,7 +191,7 @@ Now, we define all the possible moves (a bit laboriously):
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,0, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,0, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move up from the bottom row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move up from the bottom row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,0,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,0<span style="color: #859900;">]</span>,
@@ -199,7 +199,7 @@ Now, we define all the possible moves (a bit laboriously):
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, 0,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move up from the top row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move up from the top row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span>0,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,0,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
@@ -207,7 +207,7 @@ Now, we define all the possible moves (a bit laboriously):
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,0, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X4</span>,<span style="color: #268bd2;">X5</span>,0, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 
-<span style="color: #93a1a1; font-style: italic;">%% </span><span style="color: #93a1a1; font-style: italic;">move down from the middle row</span>
+<span style="color: #586e75; font-style: italic;">%% </span><span style="color: #586e75; font-style: italic;">move down from the middle row</span>
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, 0,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
      <span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X5</span>,<span style="color: #268bd2;">X6</span>, 0,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>).
 <span style="color: #268bd2;">move</span>(<span style="color: #859900;">[</span><span style="color: #268bd2;">X1</span>,<span style="color: #268bd2;">X2</span>,<span style="color: #268bd2;">X3</span>, <span style="color: #268bd2;">X4</span>,0,<span style="color: #268bd2;">X6</span>, <span style="color: #268bd2;">X7</span>,<span style="color: #268bd2;">X8</span>,<span style="color: #268bd2;">X9</span><span style="color: #859900;">]</span>,
@@ -279,11 +279,11 @@ predicate:
 <pre class="src src-prolog"><span style="color: #268bd2;">dfs</span>(<span style="color: #268bd2;">S</span>, <span style="color: #268bd2;">Path</span>, <span style="color: #268bd2;">Path</span>) :- goal(<span style="color: #268bd2;">S</span>).
 
 <span style="color: #268bd2;">dfs</span>(<span style="color: #268bd2;">S</span>, <span style="color: #268bd2;">Checked</span>, <span style="color: #268bd2;">Path</span>) :-
-    <span style="color: #93a1a1; font-style: italic;">% try a move</span>
+    <span style="color: #586e75; font-style: italic;">% try a move</span>
     move(<span style="color: #268bd2;">S</span>, <span style="color: #268bd2;">S2</span>),
-    <span style="color: #93a1a1; font-style: italic;">% ensure the resulting state is new</span>
+    <span style="color: #586e75; font-style: italic;">% ensure the resulting state is new</span>
     \+member(<span style="color: #268bd2;">S2</span>, <span style="color: #268bd2;">Checked</span>),
-    <span style="color: #93a1a1; font-style: italic;">% and that this state leads to the goal</span>
+    <span style="color: #586e75; font-style: italic;">% and that this state leads to the goal</span>
     dfs(<span style="color: #268bd2;">S2</span>, <span style="color: #859900;">[</span><span style="color: #268bd2;">S2</span><span style="color: #859900;">|</span><span style="color: #268bd2;">Checked</span><span style="color: #859900;">]</span>, <span style="color: #268bd2;">Path</span>).
 </pre>
 
@@ -366,11 +366,11 @@ printed:
 
 
 
-<pre class="src src-prolog"><span style="color: #93a1a1; font-style: italic;">% </span><span style="color: #93a1a1; font-style: italic;">this predicate has no inputs</span>
+<pre class="src src-prolog"><span style="color: #586e75; font-style: italic;">% </span><span style="color: #586e75; font-style: italic;">this predicate has no inputs</span>
 <span style="color: #268bd2;">print_location</span> :-
     current_room(<span style="color: #268bd2;">Current</span>),
     room(<span style="color: #268bd2;">Current</span>, <span style="color: #268bd2;">Name</span>, <span style="color: #268bd2;">Description</span>),
-    <span style="color: #93a1a1; font-style: italic;">% nl means </span><span style="color: #93a1a1; font-style: italic;">"newline"</span>
+    <span style="color: #586e75; font-style: italic;">% nl means </span><span style="color: #586e75; font-style: italic;">"newline"</span>
     print(<span style="color: #268bd2;">Name</span>), nl, print(<span style="color: #268bd2;">Description</span>), nl.    
 </pre>
 
@@ -434,7 +434,7 @@ word &ldquo;go&rdquo; followed by a direction:
     strip_punctuation(<span style="color: #268bd2;">Tail</span>, <span style="color: #268bd2;">Result</span>).
 
 <span style="color: #268bd2;">read_sentence</span>(<span style="color: #268bd2;">Input</span>) :-
-    <span style="color: #93a1a1; font-style: italic;">% this is a special predicate from the readln library</span>
+    <span style="color: #586e75; font-style: italic;">% this is a special predicate from the readln library</span>
     readln(<span style="color: #268bd2;">Input1</span>, <span style="color: #268bd2;">_</span>, <span style="color: #2aa198;">".!?"</span>, <span style="color: #2aa198;">"_0123456789"</span>, lowercase),
     strip_punctuation(<span style="color: #268bd2;">Input1</span>, <span style="color: #268bd2;">Input</span>).
 
@@ -526,9 +526,9 @@ We&rsquo;ll also add support for typing &ldquo;toggle switch15&rdquo; or whateve
 
 <pre class="src src-prolog"><span style="color: #268bd2;">process_input</span>(<span style="color: #859900;">[</span>toggle, <span style="color: #268bd2;">Switch</span><span style="color: #859900;">]</span>) :-
     toggle(<span style="color: #268bd2;">Switch</span>),
-    <span style="color: #93a1a1; font-style: italic;">% retrieve a set of switches that have been toggled</span>
+    <span style="color: #586e75; font-style: italic;">% retrieve a set of switches that have been toggled</span>
     setof(<span style="color: #268bd2;">X</span>, toggled(<span style="color: #268bd2;">X</span>), <span style="color: #268bd2;">Switches</span>),
-    <span style="color: #93a1a1; font-style: italic;">% print these</span>
+    <span style="color: #586e75; font-style: italic;">% print these</span>
     print(<span style="color: #2aa198;">'Toggled switches: '</span>), print(<span style="color: #268bd2;">Switches</span>), nl.
 
 <span style="color: #268bd2;">process_input</span>(<span style="color: #859900;">[</span>toggle, <span style="color: #268bd2;">_</span><span style="color: #859900;">]</span>) :-

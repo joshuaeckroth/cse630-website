@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Genetic algorithms"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-05-30 09:36:43 EDT"/>
+<meta name="generated" content="2012-06-01 00:07:50 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -186,28 +186,28 @@ approach.
 
 
 <pre class="src src-python"><span style="color: #859900;">for</span> generation <span style="color: #859900;">in</span> <span style="color: #859900;">range</span>(MAX_GENERATIONS):
-    <span style="color: #93a1a1; font-style: italic;"># calculate fitness values and put these values, along with</span>
-    <span style="color: #93a1a1; font-style: italic;"># the individuals, in a new "weighted" list</span>
+    <span style="color: #586e75; font-style: italic;"># calculate fitness values and put these values, along with</span>
+    <span style="color: #586e75; font-style: italic;"># the individuals, in a new "weighted" list</span>
     weighted_population = []
     <span style="color: #859900;">for</span> individual <span style="color: #859900;">in</span> population:
         fitness_val = fitness(individual)
         weighted_population.append((individual, fitness_val))
 
-    <span style="color: #93a1a1; font-style: italic;"># select two individuals to breed; individuals with higher</span>
-    <span style="color: #93a1a1; font-style: italic;"># fitness values are more likely to be selected</span>
+    <span style="color: #586e75; font-style: italic;"># select two individuals to breed; individuals with higher</span>
+    <span style="color: #586e75; font-style: italic;"># fitness values are more likely to be selected</span>
     ind1 = weighted_choice(weighted_population)
     ind2 = weighted_choice(weighted_population)
 
-    ind3 = crossover(ind1, ind2) <span style="color: #93a1a1; font-style: italic;"># breed, creating a new individual</span>
-    mutate(ind3) <span style="color: #93a1a1; font-style: italic;"># do some random mutating</span>
+    ind3 = crossover(ind1, ind2) <span style="color: #586e75; font-style: italic;"># breed, creating a new individual</span>
+    mutate(ind3) <span style="color: #586e75; font-style: italic;"># do some random mutating</span>
     population.append(ind3)
 
-    <span style="color: #93a1a1; font-style: italic;"># maybe the parents die? this is just one of many parameters in a</span>
-    <span style="color: #93a1a1; font-style: italic;"># GA algorithm</span>
+    <span style="color: #586e75; font-style: italic;"># maybe the parents die? this is just one of many parameters in a</span>
+    <span style="color: #586e75; font-style: italic;"># GA algorithm</span>
     population.remove(ind1)
     population.remove(ind2)
 
-<span style="color: #93a1a1; font-style: italic;"># generations are completed; find maximum fitness individual</span>
+<span style="color: #586e75; font-style: italic;"># generations are completed; find maximum fitness individual</span>
 <span style="color: #268bd2;">max_fit</span> = fitness(population[0])
 <span style="color: #268bd2;">max_fit_individual</span> = population[0]
 <span style="color: #859900;">for</span> individual <span style="color: #859900;">in</span> population:
