@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="The prisoner&rsquo;s dilemma"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-06-01 00:07:42 EDT"/>
+<meta name="generated" content="2012-06-01 08:33:20 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -296,45 +296,45 @@ Wikipedia says this about how to find an optimal strategy for IPD:
 
 
 
-<pre class="src src-netlogo"><span style="color: #586e75; font-style: italic;">;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #586e75; font-style: italic;">;;; Strategies ;;;</span>
-<span style="color: #586e75; font-style: italic;">;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-netlogo"><span style="color: #93a1a1; font-style: italic;">;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #93a1a1; font-style: italic;">;;; Strategies ;;;</span>
+<span style="color: #93a1a1; font-style: italic;">;;;;;;;;;;;;;;;;;;</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">act-randomly</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">act-randomly</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">ifelse</span> (random 2 = 0)
     [<span style="color: #859900;">set</span> defect-now? false]
     [<span style="color: #859900;">set</span> defect-now? true]
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">cooperate</span>  <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">cooperate</span>  <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">set</span> defect-now? false
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">defect</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">defect</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">set</span> defect-now? true
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">tit-for-tat</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">tit-for-tat</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">ifelse</span> partner-defected?
     [ <span style="color: #859900;">set</span> defect-now? true ]
     [ <span style="color: #859900;">set</span> defect-now? false ]
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">tit-for-two-tats</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">tit-for-two-tats</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">ifelse</span> (partner-defected? <span style="color: #859900;">and</span> partner-defected-past?)
     [<span style="color: #859900;">set</span> defect-now? true]
     [<span style="color: #859900;">set</span> defect-now? false]
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">unforgiving</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">unforgiving</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
   <span style="color: #859900;">ifelse</span> (partner-defected? <span style="color: #859900;">or</span> defect-now?)
     [<span style="color: #859900;">set</span> defect-now? true]
     [<span style="color: #859900;">set</span> defect-now? false]
 <span style="color: #859900;">end</span>
 
-<span style="color: #859900;">to</span> <span style="color: #268bd2;">custom-strategy</span> <span style="color: #586e75; font-style: italic;">;;Turtle Procedure</span>
-  <span style="color: #586e75; font-style: italic;">;;Currently defaults to tit-for-tat.  Can you do better?</span>
-  <span style="color: #859900;">ifelse</span> partner-defected? <span style="color: #586e75; font-style: italic;">;;partner defected stores your partner's action last round</span>
+<span style="color: #859900;">to</span> <span style="color: #268bd2;">custom-strategy</span> <span style="color: #93a1a1; font-style: italic;">;;Turtle Procedure</span>
+  <span style="color: #93a1a1; font-style: italic;">;;Currently defaults to tit-for-tat.  Can you do better?</span>
+  <span style="color: #859900;">ifelse</span> partner-defected? <span style="color: #93a1a1; font-style: italic;">;;partner defected stores your partner's action last round</span>
     [<span style="color: #859900;">set</span> defect-now? true]
     [<span style="color: #859900;">set</span> defect-now? false]
 <span style="color: #859900;">end</span>

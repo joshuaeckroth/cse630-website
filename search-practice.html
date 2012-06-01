@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Practice with searching"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-06-01 00:07:37 EDT"/>
+<meta name="generated" content="2012-06-01 08:33:14 EDT"/>
 <meta name="author" content="Joshua Eckroth"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -320,34 +320,34 @@ a measure of miles between them:
 
 
 
-<pre class="src src-python"><span style="color: #586e75; font-style: italic;"># from: http://www.johndcook.com/python_longitude_latitude.html</span>
+<pre class="src src-python"><span style="color: #93a1a1; font-style: italic;"># from: http://www.johndcook.com/python_longitude_latitude.html</span>
 <span style="color: #859900;">def</span> <span style="color: #268bd2;">dist</span>((long1, lat1), (long2, lat2)):
-    <span style="color: #586e75; font-style: italic;"># Convert latitude and longitude to </span>
-    <span style="color: #586e75; font-style: italic;"># spherical coordinates in radians.</span>
+    <span style="color: #93a1a1; font-style: italic;"># Convert latitude and longitude to </span>
+    <span style="color: #93a1a1; font-style: italic;"># spherical coordinates in radians.</span>
     degrees_to_radians = math.pi/180.0
 
-    <span style="color: #586e75; font-style: italic;"># phi = 90 - latitude</span>
+    <span style="color: #93a1a1; font-style: italic;"># phi = 90 - latitude</span>
     phi1 = (90.0 - lat1)*degrees_to_radians
     phi2 = (90.0 - lat2)*degrees_to_radians
 
-    <span style="color: #586e75; font-style: italic;"># theta = longitude</span>
+    <span style="color: #93a1a1; font-style: italic;"># theta = longitude</span>
     theta1 = long1*degrees_to_radians
     theta2 = long2*degrees_to_radians
 
-    <span style="color: #586e75; font-style: italic;"># Compute spherical distance from spherical coordinates.</span>
+    <span style="color: #93a1a1; font-style: italic;"># Compute spherical distance from spherical coordinates.</span>
 
-    <span style="color: #586e75; font-style: italic;"># For two locations in spherical coordinates </span>
-    <span style="color: #586e75; font-style: italic;"># (1, theta, phi) and (1, theta, phi)</span>
-    <span style="color: #586e75; font-style: italic;"># cosine( arc length ) = </span>
-    <span style="color: #586e75; font-style: italic;">#    sin phi sin phi' cos(theta-theta') + cos phi cos phi'</span>
-    <span style="color: #586e75; font-style: italic;"># distance = rho * arc length</span>
+    <span style="color: #93a1a1; font-style: italic;"># For two locations in spherical coordinates </span>
+    <span style="color: #93a1a1; font-style: italic;"># (1, theta, phi) and (1, theta, phi)</span>
+    <span style="color: #93a1a1; font-style: italic;"># cosine( arc length ) = </span>
+    <span style="color: #93a1a1; font-style: italic;">#    sin phi sin phi' cos(theta-theta') + cos phi cos phi'</span>
+    <span style="color: #93a1a1; font-style: italic;"># distance = rho * arc length</span>
 
     cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
            math.cos(phi1)*math.cos(phi2))
     arc = math.acos( cos )
 
-    <span style="color: #586e75; font-style: italic;"># Remember to multiply arc by the radius of the earth </span>
-    <span style="color: #586e75; font-style: italic;"># in your favorite set of units to get length.</span>
+    <span style="color: #93a1a1; font-style: italic;"># Remember to multiply arc by the radius of the earth </span>
+    <span style="color: #93a1a1; font-style: italic;"># in your favorite set of units to get length.</span>
     <span style="color: #859900;">return</span> (arc * 3960.0)
 </pre>
 
